@@ -1,0 +1,398 @@
+[
+  {
+    "source": "topview",
+    "sourceHash": "3ec03981dafb21a8c28052b57be03b79",
+    "name": "Untitled Template",
+    "description": "",
+    "contentType": "general",
+    "contentGroup": "general",
+    "outputType": "video",
+    "aspectRatio": "16:9",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": null,
+    "negativePrompt": "",
+    "i18nPrompts": {
+      "ar": null
+    },
+    "i18nSeo": {},
+    "supportedModels": [
+      "seedance_2.0"
+    ],
+    "recommendedModel": "seedance_2.0",
+    "modelParameters": {
+      "inputImageMode": "none",
+      "nativeAudio": false,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        5,
+        10,
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 2000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 6000,
+        "minWidth": 300,
+        "maxWidth": 6000,
+        "maxFileSizeBytes": 31457280,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "seedance_2.0",
+        "creditsPer720s": 1,
+        "creditsPer480s": 0.5,
+        "creditsWithAudio": 0
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "brand_name",
+        "type": "text",
+        "title": "Brand Name",
+        "required": false,
+        "maxLength": 100
+      }
+    ],
+    "requiresProductImage": false,
+    "requiresAvatar": false,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "general"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook",
+      "youtube"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "topview",
+    "sourceHash": "3ec03981dafb21a8c28052b57be03b79",
+    "name": "Untitled Template",
+    "description": "",
+    "contentType": "general",
+    "contentGroup": "general",
+    "outputType": "video",
+    "aspectRatio": "16:9",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": null,
+    "negativePrompt": "",
+    "i18nPrompts": {
+      "ar": null
+    },
+    "i18nSeo": {},
+    "supportedModels": [
+      "seedance_2.0"
+    ],
+    "recommendedModel": "seedance_2.0",
+    "modelParameters": {
+      "inputImageMode": "none",
+      "nativeAudio": false,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        5,
+        10,
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 2000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 6000,
+        "minWidth": 300,
+        "maxWidth": 6000,
+        "maxFileSizeBytes": 31457280,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "seedance_2.0",
+        "creditsPer720s": 1,
+        "creditsPer480s": 0.5,
+        "creditsWithAudio": 0
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "brand_name",
+        "type": "text",
+        "title": "Brand Name",
+        "required": false,
+        "maxLength": 100
+      }
+    ],
+    "requiresProductImage": false,
+    "requiresAvatar": false,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "general"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook",
+      "youtube"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "topview",
+    "sourceHash": "3ec03981dafb21a8c28052b57be03b79",
+    "name": "Untitled Template",
+    "description": "",
+    "contentType": "general",
+    "contentGroup": "general",
+    "outputType": "video",
+    "aspectRatio": "16:9",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": null,
+    "negativePrompt": "",
+    "i18nPrompts": {
+      "ar": null
+    },
+    "i18nSeo": {},
+    "supportedModels": [
+      "seedance_2.0"
+    ],
+    "recommendedModel": "seedance_2.0",
+    "modelParameters": {
+      "inputImageMode": "none",
+      "nativeAudio": false,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        5,
+        10,
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 2000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 6000,
+        "minWidth": 300,
+        "maxWidth": 6000,
+        "maxFileSizeBytes": 31457280,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "seedance_2.0",
+        "creditsPer720s": 1,
+        "creditsPer480s": 0.5,
+        "creditsWithAudio": 0
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "brand_name",
+        "type": "text",
+        "title": "Brand Name",
+        "required": false,
+        "maxLength": 100
+      }
+    ],
+    "requiresProductImage": false,
+    "requiresAvatar": false,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "general"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook",
+      "youtube"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "topview",
+    "sourceHash": "3ec03981dafb21a8c28052b57be03b79",
+    "name": "Untitled Template",
+    "description": "",
+    "contentType": "general",
+    "contentGroup": "general",
+    "outputType": "video",
+    "aspectRatio": "16:9",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": null,
+    "negativePrompt": "",
+    "i18nPrompts": {
+      "ar": null
+    },
+    "i18nSeo": {},
+    "supportedModels": [
+      "seedance_2.0"
+    ],
+    "recommendedModel": "seedance_2.0",
+    "modelParameters": {
+      "inputImageMode": "none",
+      "nativeAudio": false,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        5,
+        10,
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 2000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 6000,
+        "minWidth": 300,
+        "maxWidth": 6000,
+        "maxFileSizeBytes": 31457280,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "seedance_2.0",
+        "creditsPer720s": 1,
+        "creditsPer480s": 0.5,
+        "creditsWithAudio": 0
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "brand_name",
+        "type": "text",
+        "title": "Brand Name",
+        "required": false,
+        "maxLength": 100
+      }
+    ],
+    "requiresProductImage": false,
+    "requiresAvatar": false,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "general"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook",
+      "youtube"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  }
+]

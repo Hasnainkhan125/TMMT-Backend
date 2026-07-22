@@ -1,0 +1,53 @@
+{
+  "source": "mock",
+  "query": "energy drink ad aesthetic",
+  "note": "Replace with Apify Pinterest actor output in production.",
+  "templates": [
+    {
+      "id": "pin-mock-1",
+      "title": "Bold product hero — neon edge",
+      "mood": "high-energy",
+      "paletteHint": [
+        "#0a0a0a",
+        "#ff3366",
+        "#f5f5f5"
+      ],
+      "imageUrl": "https://placehold.co/1080x1350/0a0a0a/ff3366/png?text=Mock+Pinterest+Ref+1",
+      "pinUrl": "https://www.pinterest.com/pin/mock-board/1",
+      "source": "mock_pinterest",
+      "searchQuery": "energy drink ad aesthetic",
+      "rank": 1
+    },
+    {
+      "id": "pin-mock-2",
+      "title": "Lifestyle pour — soft daylight",
+      "mood": "trust",
+      "paletteHint": [
+        "#e8dfd0",
+        "#2c2c2c",
+        "#7d6b52"
+      ],
+      "imageUrl": "https://placehold.co/1080x1350/e8dfd0/2c2c2c/png?text=Mock+Pinterest+Ref+2",
+      "pinUrl": "https://www.pinterest.com/pin/mock-board/2",
+      "source": "mock_pinterest",
+      "searchQuery": "energy drink ad aesthetic",
+      "rank": 2
+    },
+    {
+      "id": "pin-mock-3",
+      "title": "UGC selfie + packshot split",
+      "mood": "authentic",
+      "paletteHint": [
+        "#ffffff",
+        "#111111",
+        "#00c853"
+      ],
+      "imageUrl": "https://placehold.co/1080x1920/ffffff/111111/png?text=Mock+Pinterest+Ref+9:16",
+      "pinUrl": "https://www.pinterest.com/pin/mock-board/3",
+      "source": "mock_pinterest",
+      "searchQuery": "energy drink ad aesthetic",
+      "rank": 3
+    }
+  ],
+  "fetchedAt": "2026-04-27T22:24:07.601Z"
+}

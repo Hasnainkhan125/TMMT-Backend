@@ -1,0 +1,774 @@
+'use strict';
+
+/**
+ * seedAiModels — populate the AiModel collection with the models the
+ * Studio frontend's ModelSelector + the backend modelRouter both depend on.
+ *
+ * Idempotent: re-running upserts on the `id` slug. Run with:
+ *
+ *   node scripts/seedAiModels.js
+ *
+ * After this seeds, the API can route generations and the frontend's
+ * /studio/models endpoint returns a non-empty list.
+ *
+ * IMPORTANT: every entry here must point at a CURRENT fal.ai slug. Fal
+ * deprecates endpoints frequently and a stale slug surfaces as a "fal.ai
+ * could not find this model" toast on the user's screen. When upgrading,
+ * cross-check the catalogue at https://fal.ai/explore/search.
+ */
+
+require('dotenv').config();
+const mongoose = require('mongoose');
+const AiModel = require('../model/schema/aiModel');
+
+// Single fallback so the schema's `required: true` on logoUrl never bites
+// when we add a model before its art is shipped. The picker falls back to
+// a generic chip when the URL doesn't resolve.
+const FALLBACK_LOGO = 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png';
+
+export const AI_MODELS = [
+  // ─── Image models ─────────────────────────────────────────────────────
+  {
+    id: 'flux_schnell',
+    label: 'Flux Schnell',
+    shortLabel: 'Flux',
+    description: 'Fast, cinematic photoreal images. Great for static ads.',
+    provider: 'fal',
+    falModelId: 'fal-ai/flux/schnell',
+    kind: 'image',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    maxResolution: 1024,
+    creditsPerImage: 1,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png',
+    badge: 'Fast',
+    sortOrder: 10,
+    isDefault: true,
+    isActive: true,
+  },
+  {
+    id: 'flux_dev',
+    label: 'Flux Dev',
+    shortLabel: 'Flux Dev',
+    description: 'Higher fidelity general-purpose photoreal model.',
+    provider: 'fal',
+    falModelId: 'fal-ai/flux/dev',
+    kind: 'image',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    maxResolution: 1536,
+    creditsPerImage: 3,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png',
+    badge: 'Dev',
+    sortOrder: 15,
+    isActive: true,
+  },
+  {
+    id: 'flux_pro_v11',
+    label: 'Flux Pro 1.1',
+    shortLabel: 'Flux Pro',
+    description: 'Top-tier composition + detail. Lifestyle/product photography grade.',
+    provider: 'fal',
+    falModelId: 'fal-ai/flux-pro/v1.1',
+    kind: 'image',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    maxResolution: 2048,
+    creditsPerImage: 5,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png',
+    badge: 'HD',
+    sortOrder: 20,
+    isActive: true,
+  },
+  {
+    id: 'flux_2_pro',
+    label: 'Flux 2 Pro',
+    shortLabel: 'Flux 2',
+    description: 'Newest BFL release. Maximum photorealism, very strong text rendering.',
+    provider: 'fal',
+    falModelId: 'fal-ai/flux-2-pro',
+    kind: 'image',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    maxResolution: 2048,
+    creditsPerImage: 6,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png',
+    badge: 'New',
+    sortOrder: 22,
+    isActive: true,
+  },
+  {
+    id: 'flux_kontext_pro',
+    label: 'Flux Kontext Pro',
+    shortLabel: 'Kontext',
+    description: 'Reference-aware edits. Send a photo + instruction, get a targeted change.',
+    provider: 'fal',
+    falModelId: 'fal-ai/flux-pro/kontext',
+    kind: 'image',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    creditsPerImage: 5,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png',
+    badge: 'Edit',
+    sortOrder: 24,
+    isActive: true,
+  },
+  {
+    id: 'nano_banana_pro',
+    label: 'Nano Banana Pro',
+    shortLabel: 'Nano Pro',
+    description: "Google's flagship image model. Strong typography, photoreal, brand-safe.",
+    provider: 'fal',
+    falModelId: 'fal-ai/nano-banana-pro',
+    kind: 'image',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    creditsPerImage: 4,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_nano_banana.png',
+    badge: 'Pro',
+    sortOrder: 28,
+    isActive: true,
+  },
+  {
+    id: 'nano_banana_pro_edit',
+    label: 'Nano Banana Pro · Edit',
+    shortLabel: 'Nano Edit',
+    description: 'Reference-driven edits — backgrounds, props, style swaps.',
+    provider: 'fal',
+    falModelId: 'fal-ai/nano-banana-pro/edit',
+    kind: 'image',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    creditsPerImage: 4,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_nano_banana.png',
+    badge: 'Edit',
+    sortOrder: 29,
+    isActive: true,
+  },
+  {
+    id: 'nano_banana_2',
+    label: 'Nano Banana 2',
+    shortLabel: 'Nano 2',
+    description: "Google's newest fast text-to-image. Sharper, faster than the original.",
+    provider: 'fal',
+    falModelId: 'fal-ai/nano-banana-2',
+    kind: 'image',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    creditsPerImage: 3,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_nano_banana.png',
+    badge: 'New',
+    sortOrder: 32,
+    isActive: true,
+  },
+  {
+    id: 'nano_banana_2_edit',
+    label: 'Nano Banana 2 · Edit',
+    shortLabel: 'Nano 2 Edit',
+    description: 'Fast natural-language image edits via Google Nano Banana 2.',
+    provider: 'fal',
+    falModelId: 'fal-ai/nano-banana-2/edit',
+    kind: 'image',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    creditsPerImage: 3,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_nano_banana.png',
+    badge: 'Edit',
+    sortOrder: 33,
+    isActive: true,
+  },
+  {
+    id: 'gpt_image_2',
+    label: 'GPT Image 1.5 · Edit',
+    shortLabel: 'GPT Image',
+    description: "OpenAI's high-fidelity image edit model. Strong adherence + composition.",
+    provider: 'fal',
+    falModelId: 'fal-ai/gpt-image-1.5/edit',
+    kind: 'image',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4', '4:3'],
+    creditsPerImage: 4,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_gpt_image.png',
+    badge: 'OpenAI',
+    sortOrder: 35,
+    isActive: true,
+  },
+  {
+    id: 'seedream_v45_edit',
+    label: 'Seedream 4.5 · Edit',
+    shortLabel: 'Seedream 4.5',
+    description: 'ByteDance Seedream 4.5 — unified gen + edit, character-consistent.',
+    provider: 'fal',
+    falModelId: 'fal-ai/bytedance/seedream/v4.5/edit',
+    kind: 'image',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4'],
+    creditsPerImage: 3,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_seedream.png',
+    badge: 'Edit',
+    sortOrder: 38,
+    isActive: true,
+  },
+  {
+    id: 'seedream_v4',
+    label: 'Seedream 4',
+    shortLabel: 'Seedream',
+    description: 'Aesthetic + character control. Great for cinematic stills.',
+    provider: 'fal',
+    falModelId: 'fal-ai/bytedance/seedream/v4/text-to-image',
+    kind: 'image',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4'],
+    creditsPerImage: 3,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_seedream.png',
+    badge: null,
+    sortOrder: 40,
+    isActive: true,
+  },
+  // Legacy id used by existing templates / scene recipes (`seedream_5_0`).
+  // Mark inactive in the picker but route requests to the active v4 endpoint
+  // so historical templates keep working.
+  {
+    id: 'seedream_5_0',
+    label: 'Seedream 5.0',
+    shortLabel: 'Seedream',
+    description: 'Aesthetic + character control.',
+    provider: 'fal',
+    falModelId: 'fal-ai/bytedance/seedream/v4/text-to-image',
+    kind: 'image',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['1:1', '9:16', '16:9', '4:5', '3:4'],
+    creditsPerImage: 3,
+    minPlan: 'free',
+    sortOrder: 41,
+    isActive: false,
+  },
+  {
+    id: 'qumak_upscale',
+    label: 'Qumak Upscale',
+    shortLabel: 'Upscale',
+    description: 'Sharpen any Qumak image to 4K.',
+    provider: 'fal',
+    falModelId: 'fal-ai/clarity-upscaler',
+    kind: 'image',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['*'],
+    creditsPerImage: 2,
+    minPlan: 'free',
+    sortOrder: 50,
+    isActive: true,
+  },
+
+  // ─── Video models ─────────────────────────────────────────────────────
+  // NOTE: Fal model ids deprecate frequently — keep in sync with the
+  // catalogue at https://fal.ai/models. As of 2026Q2 the working slugs are:
+  //   - Kling 3.0 Pro  → fal-ai/kling-video/v3/pro/image-to-video
+  //   - Kling 2.6 Pro  → fal-ai/kling-video/v2.6/pro/image-to-video
+  //   - Kling 2.5 turbo standard / pro (text-to-video) → still serving
+  //   - Seedance 2.0 (text-to-video, fast tier, image-to-video) → working
+  //   - PixVerse C1 (text-to-video, image-to-video, transition) → working
+  // NOTE (2026-04): Seedance 2.0 is paid-only on most Fal accounts and
+  // returns 401 "Cannot access application" on free keys. All four slugs
+  // now carry the `fal-ai/` prefix (Fal's SDK needs it — without it the
+  // client mangles the path to `fal-ai/seedance-2` and 401s). Default
+  // moved OFF Seedance onto Kling v2.5-turbo so fresh accounts aren't
+  // paywalled. falService also auto-falls-back to Kling at runtime if a
+  // forbidden 401 is returned — belt-and-braces.
+  {
+    id: 'seedance_2_0_fast',
+    label: 'Seedance 2.0 · Fast',
+    shortLabel: 'Seedance Fast',
+    description: 'ByteDance Seedance 2.0 fast tier. Cinematic, native audio, multi-shot. Requires Fal credits.',
+    provider: 'fal',
+    falModelId: 'fal-ai/bytedance/seedance-2.0/fast/text-to-video',
+    falVideoModelId: 'fal-ai/bytedance/seedance-2.0/fast/text-to-video',
+    kind: 'video',
+    videoVariant: 't2v',
+    i2vSibling: 'seedance_2_0_fast_i2v',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    capabilities: {
+      audio: { supportsNativeAudio: true, audioParamKey: 'generate_audio' },
+    },
+    creditsPerSecondVideo: 5,
+    baseCreditsForVideo: 0,
+    minPlan: 'starter',
+    logoUrl: 'https://fal.media/files/bytedance/seedance-logo.png',
+    badge: 'Fast',
+    sortOrder: 55,
+    isDefault: false,
+    isActive: true,
+  },
+  {
+    id: 'seedance_2_0_fast_i2v',
+    label: 'Seedance 2.0 · Fast i2v',
+    shortLabel: 'Seedance Fast i2v',
+    description: 'Fast-tier image-to-video: start + end frame, cinematic motion, native audio.',
+    provider: 'fal',
+    falModelId: 'fal-ai/bytedance/seedance-2.0/fast/image-to-video',
+    falVideoModelId: 'fal-ai/bytedance/seedance-2.0/fast/image-to-video',
+    kind: 'video',
+    videoVariant: 'i2v',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    capabilities: {
+      supportsEndFrame:      true,
+      supportsMotionControl: true,
+      requiredFields:        ['referenceImageUrl'],
+      audio: { supportsNativeAudio: true, audioParamKey: 'generate_audio' },
+    },
+    creditsPerSecondVideo: 5,
+    baseCreditsForVideo: 0,
+    minPlan: 'starter',
+    logoUrl: 'https://fal.media/files/bytedance/seedance-logo.png',
+    badge: 'Fast i2v',
+    sortOrder: 56,
+    isActive: true,
+  },
+  {
+    id: 'seedance_2_0',
+    label: 'Seedance 2.0',
+    shortLabel: 'Seedance',
+    description: 'ByteDance Seedance 2.0. Director-level camera control, native audio. Requires Fal credits.',
+    provider: 'fal',
+    falModelId: 'fal-ai/bytedance/seedance-2.0/text-to-video',
+    falVideoModelId: 'fal-ai/bytedance/seedance-2.0/text-to-video',
+    kind: 'video',
+    videoVariant: 't2v',
+    i2vSibling: 'seedance_2_0_i2v',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    capabilities: {
+      audio: { supportsNativeAudio: true, audioParamKey: 'generate_audio' },
+    },
+    creditsPerSecondVideo: 8,
+    baseCreditsForVideo: 0,
+    minPlan: 'starter',
+    logoUrl: 'https://fal.media/files/bytedance/seedance-logo.png',
+    badge: 'Pro',
+    sortOrder: 57,
+    isActive: true,
+  },
+  {
+    id: 'seedance_2_0_i2v',
+    label: 'Seedance 2.0 · Image to Video',
+    shortLabel: 'Seedance i2v',
+    description: 'Animate stills with start+end frame control and motion prompts.',
+    provider: 'fal',
+    falModelId: 'fal-ai/bytedance/seedance-2.0/image-to-video',
+    falVideoModelId: 'fal-ai/bytedance/seedance-2.0/image-to-video',
+    kind: 'video',
+    videoVariant: 'i2v',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    capabilities: {
+      supportsEndFrame:      true,
+      supportsMotionControl: true,
+      requiredFields:        ['referenceImageUrl'],
+      audio: { supportsNativeAudio: true, audioParamKey: 'generate_audio' },
+    },
+    creditsPerSecondVideo: 7,
+    baseCreditsForVideo: 0,
+    minPlan: 'starter',
+    logoUrl: 'https://fal.media/files/bytedance/seedance-logo.png',
+    badge: 'i2v',
+    sortOrder: 58,
+    isActive: true,
+  },
+  {
+    id: 'kling_v3_pro',
+    videoVariant: 'i2v',
+    label: 'Kling 3.0 Pro',
+    shortLabel: 'Kling 3',
+    description: 'Top-tier cinematic image-to-video with native audio + custom elements.',
+    provider: 'fal',
+    falModelId: 'fal-ai/kling-video/v3/pro/image-to-video',
+    falVideoModelId: 'fal-ai/kling-video/v3/pro/image-to-video',
+    kind: 'video',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    capabilities: {
+      // Kling v3 i2v: MUST receive a start frame (image_url). End frame
+      // supported for custom start→end animation.
+      supportsEndFrame:      true,
+      supportsMotionControl: false,
+      requiredFields:        ['referenceImageUrl'],
+    },
+    creditsPerSecondVideo: 9,
+    baseCreditsForVideo: 0,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png',
+    badge: 'Pro',
+    sortOrder: 60,
+    isActive: true,
+  },
+  {
+    id: 'kling_v2_6_pro',
+    videoVariant: 'i2v',
+    label: 'Kling 2.6 Pro',
+    shortLabel: 'Kling 2.6',
+    description: 'Cinematic image-to-video. Excellent motion + native audio.',
+    provider: 'fal',
+    falModelId: 'fal-ai/kling-video/v2.6/pro/image-to-video',
+    falVideoModelId: 'fal-ai/kling-video/v2.6/pro/image-to-video',
+    kind: 'video',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    capabilities: {
+      // Kling v2.6 pro i2v: image_url required, tail_image_url optional.
+      supportsEndFrame:      true,
+      supportsMotionControl: false,
+      requiredFields:        ['referenceImageUrl'],
+    },
+    creditsPerSecondVideo: 7,
+    baseCreditsForVideo: 0,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png',
+    sortOrder: 61,
+    isActive: true,
+  },
+  {
+    // id kept as `kling_v2_standard` for backward compatibility with existing
+    // DB rows + frontend references, but the underlying Fal slug now points
+    // at v1.6/standard — Fal retired v2.5-turbo/standard and v2/* in 2026Q1.
+    id: 'kling_v2_standard',
+    label: 'Kling 1.6 Standard',
+    shortLabel: 'Kling',
+    description: 'Cinematic text-to-video, 5–10s. Free-tier default.',
+    provider: 'fal',
+    falModelId: 'fal-ai/kling-video/v1.6/standard/text-to-video',
+    falVideoModelId: 'fal-ai/kling-video/v1.6/standard/text-to-video',
+    kind: 'video',
+    videoVariant: 't2v',
+    i2vSibling: 'kling_v2_6_pro',   // nearest live i2v variant
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    creditsPerSecondVideo: 4,
+    baseCreditsForVideo: 0,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png',
+    sortOrder: 50,             // bump to the top of the video list
+    isDefault: true,            // free-tier default (was Seedance)
+    isActive: true,
+  },
+  {
+    id: 'kling_v2_pro',
+    label: 'Kling 2.5 Pro',
+    shortLabel: 'Kling Pro',
+    description: 'Higher motion fidelity, better adherence to constraints.',
+    provider: 'fal',
+    falModelId: 'fal-ai/kling-video/v2.5-turbo/pro/text-to-video',
+    falVideoModelId: 'fal-ai/kling-video/v2.5-turbo/pro/text-to-video',
+    kind: 'video',
+    videoVariant: 't2v',
+    i2vSibling: 'kling_v2_6_pro',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    creditsPerSecondVideo: 6,
+    baseCreditsForVideo: 0,
+    minPlan: 'free',
+    logoUrl: 'https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png',
+    sortOrder: 65,
+    isActive: true,
+  },
+  {
+    id: 'pixverse_c1_t2v',
+    label: 'PixVerse C1',
+    shortLabel: 'PixVerse',
+    description: 'Film-grade text-to-video with native audio, 1080p, up to 15s.',
+    provider: 'fal',
+    falModelId: 'fal-ai/pixverse/c1/text-to-video',
+    falVideoModelId: 'fal-ai/pixverse/c1/text-to-video',
+    kind: 'video',
+    videoVariant: 't2v',
+    i2vSibling: 'pixverse_c1_i2v',
+    supportsReferenceImage: false,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 8, 15],
+    creditsPerSecondVideo: 5,
+    baseCreditsForVideo: 0,
+    minPlan: 'free',
+    badge: '1080p',
+    sortOrder: 68,
+    isActive: true,
+  },
+  {
+    id: 'pixverse_c1_i2v',
+    label: 'PixVerse C1 · i2v',
+    shortLabel: 'PixVerse i2v',
+    description: 'Animate stills cinematically with PixVerse C1, 1080p, native audio.',
+    provider: 'fal',
+    falModelId: 'fal-ai/pixverse/c1/image-to-video',
+    falVideoModelId: 'fal-ai/pixverse/c1/image-to-video',
+    kind: 'video',
+    videoVariant: 'i2v',
+    supportsReferenceImage: true,
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 8],
+    capabilities: {
+      // PixVerse i2v endpoint rejects requests without image_url.
+      supportsEndFrame: false,
+      requiredFields:   ['referenceImageUrl'],
+    },
+    creditsPerSecondVideo: 5,
+    baseCreditsForVideo: 0,
+    minPlan: 'free',
+    badge: 'i2v',
+    sortOrder: 69,
+    isActive: true,
+  },
+  // ─── Legacy slugs ─────────────────────────────────────────────────────
+  // Older templates / scene recipes still reference these ids. We map them
+  // to the closest active endpoint so historical jobs keep working.
+  {
+    id: 'kling_3.0',
+    label: 'Kling 3.0 (legacy alias)',
+    shortLabel: 'Kling',
+    description: 'Legacy alias — routes to Kling 2.5 standard.',
+    provider: 'fal',
+    falModelId: 'fal-ai/kling-video/v2.5-turbo/standard/text-to-video',
+    falVideoModelId: 'fal-ai/kling-video/v2.5-turbo/standard/text-to-video',
+    kind: 'video',
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    creditsPerSecondVideo: 4,
+    baseCreditsForVideo: 0,
+    minPlan: 'free',
+    sortOrder: 90,
+    isActive: false,
+  },
+  {
+    id: 'seedance_2.0',
+    label: 'Seedance (legacy alias)',
+    shortLabel: 'Soul',
+    description: 'Legacy alias — routes to Seedance 2.0 fast.',
+    provider: 'fal',
+    falModelId: 'bytedance/seedance-2.0/fast/text-to-video',
+    falVideoModelId: 'bytedance/seedance-2.0/fast/text-to-video',
+    kind: 'video',
+    supportedAspectRatios: ['16:9', '9:16', '1:1'],
+    supportedDurations: [5, 10],
+    creditsPerSecondVideo: 4,
+    baseCreditsForVideo: 0,
+    minPlan: 'free',
+    sortOrder: 91,
+    isActive: false,
+  },
+
+  {
+    id: 'gpt_image_1_mini',
+    provider: 'openai',
+    providerModelId: 'gpt-image-1-mini',
+    kind: 'image',
+    label: 'GPT Image Mini',
+    description: 'OpenAI\'s cheapest image model. Great for quick iteration.',
+    capabilities: { text2img: true, img2img: true, edit: true, multiShot: false },
+    creditsPerImage: 2, // at medium quality
+    defaultQuality: 'medium',
+    isDefault: false, isActive: true, planLevel: 'free',
+    aspectRatios: ['1:1', '3:4', '4:5', '9:16', '16:9', '4:3'],
+  },
+  {
+    id: 'gpt_image_1',
+    provider: 'openai',
+    providerModelId: 'gpt-image-1',
+    kind: 'image',
+    label: 'GPT Image 1',
+    description: 'OpenAI flagship image model. Strong text rendering, complex scenes.',
+    capabilities: { text2img: true, img2img: true, edit: true, multiShot: false },
+    creditsPerImage: 6,
+    defaultQuality: 'medium',
+    isDefault: false, isActive: true, planLevel: 'pro',
+    aspectRatios: ['1:1', '3:4', '16:9'],
+  },
+  {
+    id: 'gpt_image_1_5',
+    provider: 'openai',
+    providerModelId: 'gpt-image-1.5',
+    kind: 'image',
+    label: 'GPT Image 1.5',
+    description: 'Latest OpenAI model. Better text rendering, faster than 1.0.',
+    capabilities: { text2img: true, img2img: true, edit: true, multiShot: false },
+    creditsPerImage: 5,
+    defaultQuality: 'medium',
+    isDefault: false, isActive: true, planLevel: 'pro',
+    aspectRatios: ['1:1', '3:4', '16:9'],
+  },
+ 
+  // ── Google Gemini (Nano Banana) family ────────────────────────────────
+  {
+    id: 'gemini_flash_image',
+    provider: 'gemini',
+    providerModelId: 'gemini-2.5-flash-image',
+    kind: 'image',
+    label: 'Gemini Nano Banana',
+    description: 'Google\'s fast multimodal image model. Excellent for multi-image fusion.',
+    capabilities: { text2img: true, img2img: true, edit: true, multiShot: true },
+    creditsPerImage: 5,
+    isDefault: false, isActive: true, planLevel: 'starter',
+    aspectRatios: ['1:1', '9:16', '16:9'],
+  },
+  {
+    id: 'gemini_nano_banana_pro',
+    provider: 'gemini',
+    providerModelId: 'gemini-3-pro-image-preview',
+    kind: 'image',
+    label: 'Nano Banana Pro',
+    description: 'Gemini 3 Pro Image. Best quality, advanced reasoning, renders text cleanly.',
+    capabilities: { text2img: true, img2img: true, edit: true, multiShot: true },
+    creditsPerImage: 15,
+    isDefault: false, isActive: true, planLevel: 'pro',
+    aspectRatios: ['1:1', '9:16', '16:9'],
+  }
+];
+
+// async function run() {
+//   const DATABASE_URL = process.env.DB_URL || 'mongodb://127.0.0.1:27017';
+//   const DATABASE = process.env.DB || 'qumak';
+//   await mongoose.connect(`${DATABASE_URL}/${DATABASE}`);
+//   console.log(`[seedAiModels] connected to ${DATABASE}`);
+
+//   let upserts = 0;
+//   for (const raw of MODELS) {
+//     const m = { ...raw, logoUrl: raw.logoUrl || FALLBACK_LOGO };
+//     await AiModel.updateOne(
+//       { id: m.id },
+//       // $set everything in the seed (so stale fields like a broken falModelId
+//       // get overwritten), but allow Mongo to keep its own _id / timestamps.
+//       { $set: m },
+//       { upsert: true }
+//     );
+//     upserts += 1;
+//     console.log(`  ✓ ${m.id.padEnd(22)} ${m.kind.padEnd(6)} ${m.label}`);
+//   }
+
+//   // Sweep any rows in the DB whose `id` isn't in this seed and force them
+//   // inactive — so retired slugs don't keep appearing in the picker.
+//   const seededIds = MODELS.map((m) => m.id);
+//   const sweep = await AiModel.updateMany(
+//     { id: { $nin: seededIds } },
+//     { $set: { isActive: false } }
+//   );
+//   if (sweep.modifiedCount) {
+//     console.log(`[seedAiModels] deactivated ${sweep.modifiedCount} stale rows`);
+//   }
+
+//   console.log(`[seedAiModels] upserted ${upserts} models`);
+//   await mongoose.disconnect();
+// }
+
+// if (require.main === module) {
+//   run().catch((err) => {
+//     console.error('[seedAiModels] failed:', err);
+//     process.exit(1);
+//   });
+// }
+
+// module.exports = { run, MODELS };
+
+
+
+/**
+ * Derive a capability manifest for a model row. Called for every seed entry
+ * so adding a new model doesn't require hand-writing the manifest — the
+ * defaults match ~90% of cases; override per-row only when a provider does
+ * something unusual (e.g. Nano Banana Pro edit wants `image_urls` array).
+ */
+function deriveCapabilities(m) {
+  const id = (m.id || '').toLowerCase();
+  const fal = (m.falModelId || '').toLowerCase();
+  const isVideo = m.kind === 'video' || m.kind === 'both';
+  const isI2V = /image-to-video|i2v/.test(fal) || /_i2v|_edit/.test(id);
+  const isEdit = /edit|kontext/.test(fal) || /_edit/.test(id);
+
+  // Which providers want an array-style reference field?
+  const wantsImageUrlsArray = /nano-banana(?:-pro)?\/edit|seedream\/v4\.5\/edit|gpt-image-1\.5\/edit/.test(fal);
+
+  return {
+    supportsEndFrame:       isVideo && /seedance|pixverse\/.+\/transition/.test(fal),
+    supportsNegativePrompt: isVideo || /flux|stable/.test(fal),
+    supportsSeed:           true,
+    supportsMotionControl:  isVideo && !/pixverse/.test(fal),
+    supportsMultiShot:      /seedance-2\.0\/(?!fast)/.test(fal),
+    supportedResolutions:   isVideo ? ['720p', '1080p'] : undefined,
+    providerParamMap: {
+      referenceImageUrl: wantsImageUrlsArray ? 'image_urls' : 'image_url',
+      endFrameUrl:       'end_image_url',
+      duration:          'duration',
+      motion:            'motion_bucket_id',
+      negativePrompt:    'negative_prompt',
+    },
+    // If the model IS an image-to-video endpoint (Kling i2v, Seedance i2v,
+    // PixVerse i2v), the reference image is mandatory — without it the
+    // provider returns a 400 that we'd rather catch at our boundary.
+    requiredFields: isI2V || isEdit ? ['referenceImageUrl'] : [],
+  };
+}
+
+async function seed() {
+  require('dotenv').config();
+  const mongoose = require('mongoose');
+  const AiModel = require('../model/schema/aiModel');
+ 
+  const url = process.env.DB_URL || 'mongodb://127.0.0.1:27017';
+  const db = process.env.DB || 'qumak';
+  await mongoose.connect(`${url}/${db}`);
+  console.log('[seedAiModels] connected');
+ 
+  let added = 0, updated = 0;
+  for (const raw of AI_MODELS) {
+    const capabilities = raw.capabilities
+      ? { ...deriveCapabilities(raw), ...raw.capabilities }
+      : deriveCapabilities(raw);
+    const m = { ...raw, logoUrl: raw.logoUrl || FALLBACK_LOGO, capabilities };
+
+    const existing = await AiModel.findOne({ id: m.id });
+    if (existing) {
+      await AiModel.updateOne({ id: m.id }, { $set: m });
+      updated++;
+    } else {
+      await AiModel.create(m);
+      added++;
+    }
+  }
+  console.log(`[seedAiModels] added=${added} updated=${updated} total=${AI_MODELS.length}`);
+ 
+  // Deactivate any model in the DB that's not in this file (soft delete)
+  const ids = AI_MODELS.map(m => m.id);
+  const result = await AiModel.updateMany({ id: { $nin: ids } }, { $set: { isActive: false } });
+  if (result.modifiedCount > 0) {
+    console.log(`[seedAiModels] deactivated ${result.modifiedCount} stale models`);
+  }
+ 
+  await mongoose.disconnect();
+  console.log('[seedAiModels] done');
+}
+ 
+if (require.main === module) {
+  seed().catch(err => {
+    console.error('[seedAiModels] failed:', err);
+    process.exit(1);
+  });
+}
+ 
+module.exports = { AI_MODELS, seed };
+ 

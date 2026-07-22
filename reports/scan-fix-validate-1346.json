@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-04-26T09:49:28.303Z",
+  "env": {
+    "hasApifyToken": true,
+    "hasAnthropic": true,
+    "db": "qumak"
+  },
+  "args": {
+    "limit": null,
+    "only": "afghan",
+    "concurrency": 1,
+    "threshold": 0.7,
+    "timeout": 180000,
+    "json": "reports/scan-fix-validate-1346.json",
+    "dryRun": false
+  },
+  "summary": {
+    "total": 1,
+    "evaluated": 1,
+    "passed": 0,
+    "errored": 0,
+    "passRate": 0,
+    "failureMix": {
+      "handles": 1,
+      "moneyMath": 1,
+      "competitors": 1
+    }
+  },
+  "records": [
+    {
+      "url": "https://www.afghanpalace.ae",
+      "category": "restaurant",
+      "country": "AE",
+      "durationMs": 205850,
+      "scanId": "69eddeda89bb86d82bb34e9e",
+      "status": "scanning",
+      "error": null,
+      "evalResult": {
+        "checks": {
+          "handles": {
+            "pass": false,
+            "detail": "none resolved"
+          },
+          "businessProfile": {
+            "pass": true,
+            "detail": "restaurant (conf=0.88)"
+          },
+          "moneyMath": {
+            "pass": false,
+            "detail": "vertical=? cpl=? roasHigh=false src=?"
+          },
+          "competitors": {
+            "pass": false,
+            "detail": "0/0 competitors returned ads, 0/0 ads have media"
+          }
+        },
+        "summary": {
+          "overallPass": false,
+          "failedCount": 3
+        }
+      }
+    }
+  ]
+}

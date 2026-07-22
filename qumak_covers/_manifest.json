@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-06-13T21:48:52.950Z",
+  "total": 10,
+  "succeeded": 10,
+  "covers": [
+    {
+      "id": 1,
+      "name": "Founder at Desk",
+      "file": "instagram_0015.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0015.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 2,
+      "name": "Competitor Intel",
+      "file": "instagram_0016.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0016.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 3,
+      "name": "Gulf Skyline",
+      "file": "instagram_0202.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0202.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 4,
+      "name": "URL to Ads",
+      "file": "instagram_0023.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0023.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 5,
+      "name": "Agency Owner",
+      "file": "instagram_0037.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0037.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 6,
+      "name": "Brand Roast",
+      "file": "instagram_0044.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0044.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 7,
+      "name": "Arabic First",
+      "file": "instagram_0216.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0216.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 8,
+      "name": "Autonomous",
+      "file": "instagram_0243.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0243.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 9,
+      "name": "The Numbers",
+      "file": "instagram_0172.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0172.jpg",
+      "styleRef": null
+    },
+    {
+      "id": 10,
+      "name": "Cinematic Launch",
+      "file": "instagram_0271.jpg",
+      "success": true,
+      "filepath": "qumak_covers/instagram_0271.jpg",
+      "styleRef": null
+    }
+  ]
+}
