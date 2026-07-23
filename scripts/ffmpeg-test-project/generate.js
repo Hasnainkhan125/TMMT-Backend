@@ -5,7 +5,10 @@
 
 const fs = require("fs");
 const OpenAI = require("openai");
-const client = new OpenAI({ apiKey: "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" });
+// ✅ Using environment variable
+const client = new OpenAI({ 
+  apiKey: process.env.OPENAI_API_KEY 
+});
 
 const DIR = __dirname;
 const p = (f) => `${DIR}/${f}`;
