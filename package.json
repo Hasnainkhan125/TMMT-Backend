@@ -1,18 +1,18 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Qumak Backend API",
   "main": "index.js",
   "engines": {
     "node": ">=20.11.0",
     "npm": ">=10"
   },
   "scripts": {
-    "deploy-all": "npx hardhat run scripts/STSuite/DeployIdentityFactory.js --network sepolia && npx hardhat run scripts/STSuite/DeployTrexLogicSuite.js --network sepolia && npx hardhat run scripts/STSuite/deployImplementationAuthority.js --network sepolia && npx hardhat run scripts/STSuite/proxyImplementationContracts.js --network sepolia",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "webpack",
-    "vercel-build": "echo hello",
+    "build": "echo 'Build completed'",
+    "vercel-build": "npm install --legacy-peer-deps",
+    "deploy-all": "npx hardhat run scripts/STSuite/DeployIdentityFactory.js --network sepolia && npx hardhat run scripts/STSuite/DeployTrexLogicSuite.js --network sepolia && npx hardhat run scripts/STSuite/deployImplementationAuthority.js --network sepolia && npx hardhat run scripts/STSuite/proxyImplementationContracts.js --network sepolia",
     "test": "npx hardhat test",
     "test:identity": "npx hardhat test test/identity/**.js",
     "test:api": "npx hardhat test test/api-integration/**.js",
@@ -115,7 +115,7 @@
     "uuid": "^8.3.2",
     "ws": "^8.18.3",
     "xml2js": "^0.6.2",
-    "zod": "^4.3.6"
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
