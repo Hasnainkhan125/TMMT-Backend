@@ -1,13 +1,15 @@
-const path = require('path');
-const fs = require('fs').promises;
-const VisaApplication = require('../../model/schema/visaApplication');
-const Notification = require('../../model/schema/notification');
-const AuditLog = require('../../model/schema/auditLog');
-const catchAsync = require('../../utills/catchAsync');
-const AppError = require('../../utills/appError');
-const { Types } = require('mongoose');
-const User = require('../../model/schema/user');
-const { upload: s3Upload, getFileUrl } = require('../../middleware/s3Upload');
+  const path = require('path');
+  const fs = require('fs').promises;
+  const fsSync = require('fs');
+  const VisaApplication = require('../../model/schema/visaApplication');
+  const Notification = require('../../model/schema/notification');
+  const AuditLog = require('../../model/schema/auditLog');
+  const catchAsync = require('../../utills/catchAsync');
+  const AppError = require('../../utills/appError');
+  const { Types } = require('mongoose');
+  const User = require('../../model/schema/user');
+  const { upload: s3Upload, getFileUrl } = require('../../middleware/s3Upload');
+  const multer = require('multer');
 
 // Upload middleware — sets folder to visa-documents/<applicationId>
 const setVisaFolder = (req, _res, next) => {
@@ -18,19 +20,19 @@ const setVisaFolder = (req, _res, next) => {
 exports.uploadApplicationFiles = [setVisaFolder, ...s3Upload.any()];
 
 exports.createApplication = catchAsync(async (req, res, next) => {
-  console.log(req.user,"here is req.user");
+  console.log(req.user, "here is req.user");
   // Normalize inputs
   const body = req.body || {};
   const requiredDocuments = Array.isArray(body.requiredDocuments) ? body.requiredDocuments : [];
   let applicationType = body.applicationType;
   let relationship = body?.sponsored?.relationship;
   if (typeof relationship === 'string') relationship = relationship.toLowerCase();
-  
+
   // Handle service data from services.json
   const serviceData = body.serviceData || {};
   const serviceName = serviceData.name || '';
   const serviceId = serviceData.id;
-  
+
   // Derive family_visa sub-type if generic provided
   if (applicationType === 'family_visa' && relationship) {
     if (relationship === 'spouse') applicationType = 'family_visa_spouse';
@@ -62,7 +64,8 @@ exports.createApplication = catchAsync(async (req, res, next) => {
     },
     history: [
       { action: 'created', by: req.user._id?.toString?.() || 'user', note: `Application created (${applicationType})` }
-    ]
+    ],
+    receipts: [] // Initialize receipts array
   };
 
   // Only add sponsored data if provided (for family visas)
@@ -88,14 +91,13 @@ exports.createApplication = catchAsync(async (req, res, next) => {
       result: 'success',
       metadata: { requiredDocuments: requiredDocuments }
     });
-  } catch (e) {}
+  } catch (e) { }
 });
-
 
 function normalizeDocType(fieldName) {
   const map = {
     "Sponsor ID Copy": "sponsor_emirates_id",
-    "Applicant Entry Permit": "sponsor_visa", // or "entry_permit" if you add that
+    "Applicant Entry Permit": "sponsor_visa",
     "Applicant Passport Copy": "sponsored_passport_front",
     "Trade Licence + MOA (Memorandum of Association)": "sponsor_trade_license",
     "Establishment Card (Immigration Card) Copy": "sponsor_establishment_card",
@@ -108,14 +110,15 @@ function normalizeDocType(fieldName) {
     "Police Clearance": "police_clearance",
     "Other": "other"
   };
-  return map[fieldName] || "other"; // fallback to "other"
+  return map[fieldName] || "other";
 }
+
 exports.uploadDocuments = catchAsync(async (req, res, next) => {
   const application = await VisaApplication.findById(req.params.applicationId);
   if (!application) {
     return next(new AppError('No application found with that ID', 404));
   }
-console.log(req.user,"here is req.user");
+  console.log(req.user, "here is req.user");
   // Check if user is the sponsor
   if (application.sponsor.userId.toString() !== req.user._id.toString()) {
     return next(new AppError('You are not authorized to upload documents for this application', 403));
@@ -172,7 +175,6 @@ console.log(req.user,"here is req.user");
     data: { attachments },
   });
 });
-
 
 exports.getApplication = catchAsync(async (req, res, next) => {
   const application = await VisaApplication.findById(req.params.applicationId)
@@ -236,7 +238,7 @@ exports.getApplicationsByUserObjectId = catchAsync(async (req, res, next) => {
           ...application.sponsor,
           name: `${userDetails.firstName} ${userDetails.lastName}`,
           email: userDetails.email,
-          phone: userDetails.phoneNumber, // note: in your schema it's `phoneNumber`, not `phone`
+          phone: userDetails.phoneNumber,
           emiratesId: userDetails.emiratesId
         }
       })),
@@ -246,11 +248,10 @@ exports.getApplicationsByUserObjectId = catchAsync(async (req, res, next) => {
   });
 });
 
-
 // Delete a document attachment
 exports.deleteAttachment = catchAsync(async (req, res, next) => {
   const { applicationId, attachmentId } = req.params;
-  
+
   // Find the application
   const application = await VisaApplication.findById(applicationId);
   if (!application) {
@@ -261,13 +262,13 @@ exports.deleteAttachment = catchAsync(async (req, res, next) => {
   // Only the sponsor who owns the application can delete their documents
   const userId = req.user?.userId || req.user?._id?.toString();
   const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
-  
+
   // Allow: sponsor of the application OR admin/amer officers
-  const isAuthorized = 
-    userId === sponsorId || 
-    req.user.role === 'admin' || 
+  const isAuthorized =
+    userId === sponsorId ||
+    req.user.role === 'admin' ||
     req.user.role === 'amer';
-  
+
   if (!isAuthorized) {
     return next(new AppError('You are not authorized to delete this document', 403));
   }
@@ -275,12 +276,12 @@ exports.deleteAttachment = catchAsync(async (req, res, next) => {
   // Find the attachment in the attachments array
   let attachmentIndex = -1;
   let attachment = null;
-  
+
   // Search in attachments
   attachmentIndex = application.attachments.findIndex(
     a => a._id.toString() === attachmentId || String(a._id) === String(attachmentId)
   );
-  
+
   if (attachmentIndex !== -1) {
     attachment = application.attachments[attachmentIndex];
     // Remove from attachments array
@@ -290,7 +291,7 @@ exports.deleteAttachment = catchAsync(async (req, res, next) => {
     attachmentIndex = application.resultDocuments.findIndex(
       a => a._id.toString() === attachmentId || String(a._id) === String(attachmentId)
     );
-    
+
     if (attachmentIndex !== -1) {
       attachment = application.resultDocuments[attachmentIndex];
       // Remove from resultDocuments array
@@ -337,12 +338,12 @@ exports.deleteAttachment = catchAsync(async (req, res, next) => {
       entity: { type: 'visa_document', id: String(attachmentId), description: 'Delete document' },
       request_id: req.headers['x-request-id'] || (Date.now().toString()),
       result: 'success',
-      metadata: { 
+      metadata: {
         applicationId: applicationId,
         documentName: attachment?.originalName || attachment?.filename
       }
     });
-  } catch (e) {}
+  } catch (e) { }
 
   res.status(200).json({
     status: 'success',
@@ -353,8 +354,6 @@ exports.deleteAttachment = catchAsync(async (req, res, next) => {
     }
   });
 });
-
-
 
 exports.updateApplicationStatus = catchAsync(async (req, res, next) => {
   // Only Amer officers can update status
@@ -369,7 +368,7 @@ exports.updateApplicationStatus = catchAsync(async (req, res, next) => {
   }
 
   application.status = req.body.status;
-  
+
   if (req.body.status === 'approved' || req.body.status === 'rejected') {
     application.metadata.completedAt = new Date();
   }
@@ -392,7 +391,7 @@ exports.updateApplicationStatus = catchAsync(async (req, res, next) => {
       request_id: req.headers['x-request-id'] || (Date.now().toString()),
       result: 'success'
     });
-  } catch (e) {}
+  } catch (e) { }
 
   // Notify sponsor via WebSocket if available
   try {
@@ -600,7 +599,7 @@ exports.updateApplicationDetails = catchAsync(async (req, res, next) => {
       request_id: req.headers['x-request-id'] || (Date.now().toString()),
       result: 'success'
     });
-  } catch {}
+  } catch { }
 
   res.status(200).json({ status: 'success', data: { application: updated } });
 });
@@ -611,7 +610,7 @@ exports.getStats = catchAsync(async (req, res, next) => {
     VisaApplication.aggregate([{ $group: { _id: '$metadata.govStage', count: { $sum: 1 } } }]),
     VisaApplication.aggregate([{ $unwind: { path: '$fraudAlerts', preserveNullAndEmptyArrays: true } }, { $group: { _id: '$fraudAlerts.severity', count: { $sum: 1 } } }]),
     VisaApplication.aggregate([
-      { $match: { createdAt: { $gte: new Date(Date.now() - 1000*60*60*24*90) } } },
+      { $match: { createdAt: { $gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 90) } } },
       { $group: { _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } }, count: { $sum: 1 } } },
       { $sort: { _id: 1 } }
     ])
@@ -667,7 +666,7 @@ exports.requestDocuments = catchAsync(async (req, res, next) => {
     at: new Date()
   });
   await application.save();
-  
+
   try {
     await AuditLog.createEntry({
       action: 'OTHER',
@@ -677,13 +676,13 @@ exports.requestDocuments = catchAsync(async (req, res, next) => {
       request_id: req.headers['x-request-id'] || (Date.now().toString()),
       result: 'success'
     });
-  } catch (e) {}
+  } catch (e) { }
 
   try {
     const app = require('../../index');
     const wsServer = app.get('wsServer');
     const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
-    
+
     // Send WebSocket notification with document_requested event
     wsServer?.sendToUser(sponsorId, 'document_requested', {
       type: 'warning',
@@ -693,7 +692,7 @@ exports.requestDocuments = catchAsync(async (req, res, next) => {
       requestedDocuments: requestedDocs,
       note: note
     });
-    
+
     // Persist notification
     await Notification.create({
       userId: sponsorId,
@@ -725,10 +724,10 @@ exports.reviewAttachment = catchAsync(async (req, res, next) => {
   if (!application) return next(new AppError('Application not found', 404));
   const attachment = application.attachments.id(attachmentId) || application.attachments.find(a => String(a._id) === String(attachmentId));
   if (!attachment) return next(new AppError('Attachment not found', 404));
-  
+
   const oldStatus = attachment.status;
   attachment.status = status;
-  
+
   if (status === 'approved') {
     attachment.approvedAt = new Date();
     attachment.approvedBy = req.user._id;
@@ -741,18 +740,18 @@ exports.reviewAttachment = catchAsync(async (req, res, next) => {
     attachment.rejectionReason = rejectionReason || comment;
     attachment.approvedAt = undefined;
     attachment.approvedBy = undefined;
-    
+
     // Also mark as requested for re-upload
     attachment.isRequested = true;
     attachment.requestedAt = new Date();
     attachment.requestedBy = req.user._id;
   }
-  
+
   if (comment) {
     attachment.comments = attachment.comments || [];
     attachment.comments.push({ userId: req.user._id, comment, timestamp: new Date() });
   }
-  
+
   await application.save();
 
   // Send notification to user if document was rejected
@@ -764,10 +763,10 @@ exports.reviewAttachment = catchAsync(async (req, res, next) => {
         type: 'document_rejected',
         title: 'Document Rejected',
         message: `Your ${attachment.type.replace('_', ' ')} document was rejected. Please re-upload: ${rejectionReason || 'Document does not meet requirements'}`,
-        metadata: { 
+        metadata: {
           attachmentId: attachment._id,
           documentType: attachment.type,
-          rejectionReason: rejectionReason || comment 
+          rejectionReason: rejectionReason || comment
         }
       });
 
@@ -780,17 +779,17 @@ exports.reviewAttachment = catchAsync(async (req, res, next) => {
         message: `Document rejected: ${attachment.type.replace('_', ' ')}`,
         applicationId: application._id.toString(),
         timestamp: new Date(),
-        metadata: { 
+        metadata: {
           attachmentId: attachment._id,
           documentType: attachment.type,
-          rejectionReason: rejectionReason || comment 
+          rejectionReason: rejectionReason || comment
         }
       });
     } catch (e) {
       // non-blocking
     }
   }
-  
+
   try {
     await AuditLog.createEntry({
       action: 'OTHER',
@@ -800,7 +799,7 @@ exports.reviewAttachment = catchAsync(async (req, res, next) => {
       request_id: req.headers['x-request-id'] || (Date.now().toString()),
       result: 'success'
     });
-  } catch (e) {}
+  } catch (e) { }
   res.json({ status: 'success', data: { attachment } });
 });
 
@@ -812,7 +811,7 @@ exports.setGovStage = catchAsync(async (req, res, next) => {
   const application = await VisaApplication.findById(req.params.applicationId);
   if (!application) return next(new AppError('Application not found', 404));
   const { stage } = req.body || {};
-  application.metadata.govStage = stage; // e.g., 'mohre_pending', 'gdrfa_pending', 'icp_pending'
+  application.metadata.govStage = stage;
   await application.save();
   try {
     const app = require('../../index');
@@ -820,7 +819,7 @@ exports.setGovStage = catchAsync(async (req, res, next) => {
     const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
     wsServer?.sendToUser(sponsorId, 'notification', { type: 'info', message: `Status updated: ${stage}`, applicationId: application._id.toString(), timestamp: new Date() });
     await Notification.create({ userId: sponsorId, applicationId: application._id, type: 'status_update', title: 'Status Update', message: `Your application stage changed to ${stage}` });
-  } catch {}
+  } catch { }
   res.json({ status: 'success', data: { application } });
 });
 
@@ -857,7 +856,7 @@ exports.downloadResultDocument = catchAsync(async (req, res, next) => {
 
 exports.downloadAnyDocument = catchAsync(async (req, res, next) => {
   const { attachmentId } = req.params;
-  
+
   const filePath = path.join(__dirname, '../../uploads/applications', attachmentId);
   try {
     await fs.access(filePath);
@@ -869,10 +868,11 @@ exports.downloadAnyDocument = catchAsync(async (req, res, next) => {
   res.setHeader('Content-Length', 1000);
   res.sendFile(filePath);
 });
+
 // Download document attachment
 exports.downloadAttachment = catchAsync(async (req, res, next) => {
   const { applicationId, attachmentId } = req.params;
-  
+
   const application = await VisaApplication.findById(applicationId);
   if (!application) {
     return next(new AppError('Application not found', 404));
@@ -886,11 +886,11 @@ exports.downloadAttachment = catchAsync(async (req, res, next) => {
   ) {
     return next(new AppError('You are not authorized to download this document', 403));
   }
-  
-  const attachment = application.attachments.id(attachmentId)
-  || application.attachments.find(a => String(a._id) === String(attachmentId))
-  || application.resultDocuments.id(attachmentId)
-  || application.resultDocuments.find(a => String(a._id) === String(attachmentId))
+
+  const attachment = application.attachments.id(attachmentId) ||
+    application.attachments.find(a => String(a._id) === String(attachmentId)) ||
+    application.resultDocuments.id(attachmentId) ||
+    application.resultDocuments.find(a => String(a._id) === String(attachmentId));
 
   if (!attachment) {
     return next(new AppError('Attachment not found', 404));
@@ -983,7 +983,7 @@ exports.uploadResultDocuments = catchAsync(async (req, res, next) => {
   }
 
   application.resultDocuments.push(...resultDocuments);
-  
+
   // Add to history
   application.history.push({
     action: 'result_documents_uploaded',
@@ -1002,7 +1002,7 @@ exports.uploadResultDocuments = catchAsync(async (req, res, next) => {
       type: 'result_available',
       title: 'Application Results Available',
       message: `${resultDocuments.length} result document(s) have been uploaded for your application.`,
-      metadata: { 
+      metadata: {
         documentCount: resultDocuments.length,
         documents: resultDocuments.map(a => ({ name: a.label, type: a.type }))
       }
@@ -1038,7 +1038,7 @@ exports.requestOTP = catchAsync(async (req, res, next) => {
 
   const { phone, minutes = 5, purpose = 'verification' } = req.body;
   const applicationId = req.params.applicationId;
-  
+
   const application = await VisaApplication.findById(applicationId);
   if (!application) {
     return next(new AppError('Application not found', 404));
@@ -1082,7 +1082,7 @@ exports.requestOTP = catchAsync(async (req, res, next) => {
     const app = require('../../index');
     const wsServer = app.get('wsServer');
     const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
-    
+
     wsServer?.sendToUser(sponsorId, 'otp_requested', {
       type: 'otp_request',
       message: `OTP verification requested for ${phone}`,
@@ -1120,8 +1120,8 @@ exports.requestOTP = catchAsync(async (req, res, next) => {
 // Priority Boost
 exports.priorityBoost = catchAsync(async (req, res, next) => {
   const applicationId = req.params.applicationId;
-  const { type, amount } = req.body; // type: 'free' or 'paid'
-  
+  const { type, amount } = req.body;
+
   const application = await VisaApplication.findById(applicationId);
   if (!application) {
     return next(new AppError('Application not found', 404));
@@ -1149,8 +1149,6 @@ exports.priorityBoost = catchAsync(async (req, res, next) => {
     if (!amount || amount < 10) {
       return next(new AppError('Payment amount must be at least AED 10', 400));
     }
-    // In production, integrate with payment gateway here
-    // For now, we'll just mark as paid
     application.metadata.paidBoosts = (application.metadata.paidBoosts || 0) + 1;
   } else {
     return next(new AppError('Invalid boost type. Use "free" or "paid"', 400));
@@ -1165,8 +1163,8 @@ exports.priorityBoost = catchAsync(async (req, res, next) => {
     action: type === 'free' ? 'free_boost_activated' : 'paid_boost_activated',
     at: new Date(),
     by: req.user._id,
-    note: type === 'free' 
-      ? `Free boost activated (${application.metadata.boostCount}/3)` 
+    note: type === 'free'
+      ? `Free boost activated (${application.metadata.boostCount}/3)`
       : `Paid boost activated (AED ${amount})`
   });
 
@@ -1188,8 +1186,8 @@ exports.priorityBoost = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       application,
-      message: type === 'free' 
-        ? `Priority boost activated! ${3 - application.metadata.boostCount} free boost(s) remaining` 
+      message: type === 'free'
+        ? `Priority boost activated! ${3 - application.metadata.boostCount} free boost(s) remaining`
         : 'Paid priority boost activated!'
     }
   });
@@ -1199,7 +1197,7 @@ exports.priorityBoost = catchAsync(async (req, res, next) => {
 exports.uploadAdditionalDocument = catchAsync(async (req, res, next) => {
   const applicationId = req.params.applicationId;
   const application = await VisaApplication.findById(applicationId);
-  
+
   if (!application) {
     return next(new AppError('Application not found', 404));
   }
@@ -1259,5 +1257,365 @@ exports.uploadAdditionalDocument = catchAsync(async (req, res, next) => {
       documents: uploadedDocs,
       message: 'Documents uploaded successfully'
     }
+  });
+});
+// ─── ✅ RECEIPT FUNCTIONS ──────────────────────────────────────────────────────
+
+// ─── Multer Config for Receipt Upload ──────────────────────────────────────
+const receiptStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    try {
+      // Get applicationId from params
+      const appId = req.params.applicationId || req.params.id || 'new';
+      const uploadDir = path.join('uploads', 'applications', appId, 'receipts');
+      
+      // Use fsSync (already imported) to create directory
+      if (!fsSync.existsSync(uploadDir)) {
+        fsSync.mkdirSync(uploadDir, { recursive: true });
+      }
+      cb(null, uploadDir);
+    } catch (err) {
+      console.error('❌ Error creating receipt directory:', err);
+      cb(err, null);
+    }
+  },
+  filename: function (req, file, cb) {
+    try {
+      const timestamp = Date.now();
+      const ext = path.extname(file.originalname);
+      const base = path.basename(file.originalname, ext);
+      cb(null, `receipt-${base}-${timestamp}${ext}`);
+    } catch (err) {
+      console.error('❌ Error generating receipt filename:', err);
+      cb(err, null);
+    }
+  }
+});
+
+const receiptUpload = multer({
+  storage: receiptStorage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only JPEG, PNG, and PDF are allowed.'));
+    }
+  }
+});
+
+exports.uploadReceiptMiddleware = receiptUpload.single('receipt');
+
+// ─── Upload Receipt ──────────────────────────────────────────────────────────
+exports.uploadReceipt = catchAsync(async (req, res, next) => {
+  try {
+    // Get applicationId from params
+    const applicationId = req.params.applicationId || req.params.id;
+    
+    console.log('📥 Receipt upload request:', {
+      applicationId,
+      hasFile: !!req.file,
+      fileSize: req.file?.size,
+      fileName: req.file?.originalname,
+      fileMimeType: req.file?.mimetype,
+      params: req.params,
+      user: req.user?._id
+    });
+
+    // Validate file
+    if (!req.file) {
+      return res.status(400).json({ 
+        success: false,
+        message: 'No receipt file uploaded. Please select a file to upload.' 
+      });
+    }
+
+    // Validate applicationId
+    if (!applicationId) {
+      return res.status(400).json({ 
+        success: false,
+        message: 'Application ID is required. Please refresh and try again.' 
+      });
+    }
+
+    // Find the application
+    const application = await VisaApplication.findById(applicationId);
+    if (!application) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'Application not found. Please check the application ID.' 
+      });
+    }
+
+    // Create receipt object with unique ID
+    const receipt = {
+      _id: new Types.ObjectId(),
+      filename: req.file.filename,
+      originalName: req.file.originalname,
+      path: req.file.path,
+      size: req.file.size,
+      mimeType: req.file.mimetype,
+      uploadedAt: new Date(),
+      uploadedBy: req.user?._id || req.user?.userId,
+      uploadedByRole: req.user?.role || 'user',
+      status: 'pending_verification'
+    };
+
+    // Initialize receipts array if it doesn't exist
+    if (!application.receipts) {
+      application.receipts = [];
+    }
+
+    // Add receipt to application
+    application.receipts.push(receipt);
+
+    // Update status if needed
+    const statusUpdate = ['pending_payment', 'draft', 'submitted'];
+    if (statusUpdate.includes(application.status)) {
+      application.status = 'payment_received';
+    }
+
+    // Add to history
+    if (!application.history) {
+      application.history = [];
+    }
+    application.history.push({
+      action: 'receipt_uploaded',
+      by: req.user?._id || req.user?.userId,
+      byRole: req.user?.role || 'user',
+      note: `Receipt uploaded: ${req.file.originalname}`,
+      at: new Date()
+    });
+
+    await application.save();
+
+    // Send notification to sponsor (non-blocking)
+    try {
+      const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
+      
+      // Try to get WebSocket server
+      let wsServer = null;
+      try {
+        const app = require('../../index');
+        wsServer = app.get('wsServer');
+      } catch (e) {
+        console.warn('⚠️ WebSocket server not available:', e.message);
+      }
+      
+      // WebSocket notification
+      if (wsServer && sponsorId) {
+        wsServer.sendToUser(sponsorId, 'notification', {
+          type: 'success',
+          message: 'Payment receipt uploaded successfully!',
+          applicationId: application._id.toString(),
+          timestamp: new Date(),
+          metadata: { receiptId: receipt._id }
+        });
+      }
+
+      // Persist notification (non-blocking)
+      try {
+        await Notification.create({
+          userId: sponsorId,
+          applicationId: application._id,
+          type: 'receipt_uploaded',
+          title: 'Receipt Uploaded',
+          message: 'Your payment receipt has been uploaded and is being verified.',
+          metadata: { receiptId: receipt._id, filename: req.file.originalname }
+        });
+      } catch (notifErr) {
+        console.warn('⚠️ Failed to create notification (non-blocking):', notifErr.message);
+      }
+    } catch (e) {
+      console.warn('⚠️ Notification error (non-blocking):', e.message);
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Receipt uploaded successfully',
+      data: {
+        receipt: receipt,
+        application: application
+      }
+    });
+
+  } catch (err) {
+    console.error('❌ Upload receipt error:', err);
+    return res.status(500).json({ 
+      success: false,
+      message: 'Failed to upload receipt. Please try again.',
+      error: err.message 
+    });
+  }
+});
+
+// ─── Get Receipts ──────────────────────────────────────────────────────────
+exports.getReceipts = catchAsync(async (req, res, next) => {
+  try {
+    const applicationId = req.params.applicationId || req.params.id;
+    
+    if (!applicationId) {
+      return res.status(400).json({ 
+        success: false,
+        message: 'Application ID is required' 
+      });
+    }
+
+    const application = await VisaApplication.findById(applicationId);
+    if (!application) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'Application not found' 
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        receipts: application.receipts || [],
+        applicationId: application._id,
+        total: application.receipts?.length || 0
+      }
+    });
+  } catch (err) {
+    console.error('❌ Get receipts error:', err);
+    return res.status(500).json({ 
+      success: false,
+      message: 'Failed to fetch receipts',
+      error: err.message 
+    });
+  }
+});
+
+// ─── Delete Receipt ──────────────────────────────────────────────────────────
+exports.deleteReceipt = catchAsync(async (req, res, next) => {
+  try {
+    const applicationId = req.params.applicationId || req.params.id;
+    const receiptId = req.params.receiptId;
+
+    // Validate IDs
+    if (!applicationId || !receiptId) {
+      return res.status(400).json({ 
+        success: false,
+        message: 'Application ID and Receipt ID are required' 
+      });
+    }
+
+    // Only admin or amer can delete receipts
+    if (req.user.role !== 'amer' && req.user.role !== 'admin') {
+      return res.status(403).json({ 
+        success: false,
+        message: 'You are not authorized to delete receipts' 
+      });
+    }
+
+    const application = await VisaApplication.findById(applicationId);
+    if (!application) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'Application not found' 
+      });
+    }
+
+    // Find the receipt
+    const receiptIndex = application.receipts.findIndex(r => r._id.toString() === receiptId);
+    if (receiptIndex === -1) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'Receipt not found' 
+      });
+    }
+
+    // Remove receipt from array
+    const removedReceipt = application.receipts[receiptIndex];
+    application.receipts.splice(receiptIndex, 1);
+
+    // Delete the file from disk
+    try {
+      if (removedReceipt.path && fsSync.existsSync(removedReceipt.path)) {
+        fsSync.unlinkSync(removedReceipt.path);
+        console.log(`✅ Deleted receipt file: ${removedReceipt.path}`);
+      }
+    } catch (fileErr) {
+      console.warn('⚠️ Failed to delete receipt file (non-blocking):', fileErr.message);
+    }
+
+    // Add to history
+    application.history.push({
+      action: 'receipt_deleted',
+      by: req.user._id || req.user.userId,
+      byRole: req.user.role || 'admin',
+      note: `Receipt deleted: ${removedReceipt.originalName}`,
+      at: new Date()
+    });
+
+    await application.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Receipt deleted successfully',
+      data: { 
+        receipts: application.receipts,
+        deleted: true 
+      }
+    });
+
+  } catch (err) {
+    console.error('❌ Delete receipt error:', err);
+    return res.status(500).json({ 
+      success: false,
+      message: 'Failed to delete receipt',
+      error: err.message 
+    });
+  }
+});
+// ─── END RECEIPT FUNCTIONS ──────────────────────────────────────────────────
+
+exports.deleteApplication = catchAsync(async (req, res, next) => {
+  if (!req.user || (req.user.role !== 'amer' && req.user.role !== 'admin')) {
+    return next(new AppError('You are not authorized to delete applications', 403));
+  }
+
+  const applicationId = req.params.applicationId;
+  const application = await VisaApplication.findById(applicationId);
+  if (!application) {
+    return next(new AppError('No application found with that ID', 404));
+  }
+
+  // Optional: prevent deletion of completed/approved apps
+  // if (application.status === 'approved' || application.status === 'completed') {
+  //   return next(new AppError('Cannot delete a completed application', 400));
+  // }
+
+  await application.deleteOne();
+
+  // Audit log
+  try {
+    await AuditLog.createEntry({
+      action: 'DELETE',
+      actor: { type: req.user.role, id: String(req.user._id) },
+      entity: { type: 'visa_application', id: String(applicationId), description: 'Delete application' },
+      request_id: req.headers['x-request-id'] || Date.now().toString(),
+      result: 'success'
+    });
+  } catch (e) {}
+
+  // Optional WebSocket notification
+  try {
+    const app = require('../../index');
+    const wsServer = app.get('wsServer');
+    const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
+    wsServer?.sendToUser(sponsorId, 'notification', {
+      type: 'info',
+      message: 'Your application has been deleted.',
+      applicationId: applicationId,
+      timestamp: new Date()
+    });
+  } catch (e) {}
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Application deleted successfully'
   });
 });
