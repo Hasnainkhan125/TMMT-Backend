@@ -64,15 +64,10 @@ router.delete('/:applicationId/receipt/:receiptId',
 // Get application (must be last)
 router.get('/:applicationId', visaApplicationController.getApplication);
 
-router.delete('/:applicationId', auth.requireRole('amer', 'admin'), visaApplicationController.deleteApplication);
-
-// Get application (must be last)
-
-// Legacy routes
+router.delete('/:id', auth, visaApplicationController.deleteApplication);// Legacy routes
 router.patch('/:applicationId/status', auth.requireRole('amer', 'admin'), visaApplicationController.updateApplicationStatus);
 router.post('/:applicationId/fraud-alerts', auth.requireRole('amer', 'admin'), visaApplicationController.addFraudAlert);
 router.post('/:applicationId/penalties', auth.requireRole('amer', 'admin'), visaApplicationController.issuePenalty);
-
 router.get('/uploads/applications/:attachmentId', visaApplicationController.downloadAnyDocument);
 
 module.exports = router;

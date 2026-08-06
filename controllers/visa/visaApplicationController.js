@@ -1571,49 +1571,63 @@ exports.deleteReceipt = catchAsync(async (req, res, next) => {
   }
 });
 // ─── END RECEIPT FUNCTIONS ──────────────────────────────────────────────────
-
 exports.deleteApplication = catchAsync(async (req, res, next) => {
-  if (!req.user || (req.user.role !== 'amer' && req.user.role !== 'admin')) {
-    return next(new AppError('You are not authorized to delete applications', 403));
-  }
+  // 1. Get the ID from params (matches route ':id')
+  const applicationId = req.params.id;   // <-- change from applicationId to id
 
-  const applicationId = req.params.applicationId;
+  // 2. Find the application
   const application = await VisaApplication.findById(applicationId);
   if (!application) {
     return next(new AppError('No application found with that ID', 404));
   }
 
-  // Optional: prevent deletion of completed/approved apps
+  // 3. Authorization: check if user is admin/amer OR the application owner
+  const isAdminOrAmer = req.user && (req.user.role === 'admin' || req.user.role === 'amer');
+  
+  // Get the sponsor's userId from the application
+  const sponsorId = application.sponsor?.userId?.toString?.() || application.sponsor?.userId;
+  const userId = req.user._id?.toString?.() || req.user.userId;
+
+  const isOwner = userId && sponsorId && userId === sponsorId;
+
+  if (!isAdminOrAmer && !isOwner) {
+    return next(new AppError('You are not authorized to delete this application', 403));
+  }
+
+  // 4. Optional: prevent deletion of completed/approved applications
   // if (application.status === 'approved' || application.status === 'completed') {
   //   return next(new AppError('Cannot delete a completed application', 400));
   // }
 
+  // 5. Delete the application
   await application.deleteOne();
 
-  // Audit log
+  // 6. Audit log (non-blocking)
   try {
     await AuditLog.createEntry({
       action: 'DELETE',
-      actor: { type: req.user.role, id: String(req.user._id) },
+      actor: { type: req.user.role || 'user', id: String(req.user._id) },
       entity: { type: 'visa_application', id: String(applicationId), description: 'Delete application' },
       request_id: req.headers['x-request-id'] || Date.now().toString(),
       result: 'success'
     });
   } catch (e) {}
 
-  // Optional WebSocket notification
+  // 7. WebSocket notification (non-blocking)
   try {
     const app = require('../../index');
     const wsServer = app.get('wsServer');
-    const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
-    wsServer?.sendToUser(sponsorId, 'notification', {
-      type: 'info',
-      message: 'Your application has been deleted.',
-      applicationId: applicationId,
-      timestamp: new Date()
-    });
+    if (wsServer) {
+      wsServer.sendToUser(sponsorId, 'notification', {
+        type: 'info',
+        message: 'Your application has been deleted.',
+        applicationId: applicationId,
+        timestamp: new Date()
+      });
+    }
   } catch (e) {}
 
+  // 8. Send success response
   res.status(200).json({
     status: 'success',
     message: 'Application deleted successfully'
