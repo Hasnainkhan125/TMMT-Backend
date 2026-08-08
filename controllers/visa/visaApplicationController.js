@@ -1,15 +1,16 @@
-  const path = require('path');
-  const fs = require('fs').promises;
-  const fsSync = require('fs');
-  const VisaApplication = require('../../model/schema/visaApplication');
-  const Notification = require('../../model/schema/notification');
-  const AuditLog = require('../../model/schema/auditLog');
-  const catchAsync = require('../../utills/catchAsync');
-  const AppError = require('../../utills/appError');
-  const { Types } = require('mongoose');
-  const User = require('../../model/schema/user');
-  const { upload: s3Upload, getFileUrl } = require('../../middleware/s3Upload');
-  const multer = require('multer');
+const path = require('path');
+const fs = require('fs').promises;
+const fsSync = require('fs');
+const VisaApplication = require('../../model/schema/visaApplication');
+const Notification = require('../../model/schema/notification');
+const AuditLog = require('../../model/schema/auditLog');
+const catchAsync = require('../../utills/catchAsync');
+const AppError = require('../../utills/appError');
+const { Types } = require('mongoose');
+const User = require('../../model/schema/user');
+const { upload: s3Upload, getFileUrl } = require('../../middleware/s3Upload');
+const multer = require('multer');
+
 
 // Upload middleware — sets folder to visa-documents/<applicationId>
 const setVisaFolder = (req, _res, next) => {
@@ -1260,16 +1261,11 @@ exports.uploadAdditionalDocument = catchAsync(async (req, res, next) => {
   });
 });
 // ─── ✅ RECEIPT FUNCTIONS ──────────────────────────────────────────────────────
-
-// ─── Multer Config for Receipt Upload ──────────────────────────────────────
 const receiptStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     try {
-      // Get applicationId from params
       const appId = req.params.applicationId || req.params.id || 'new';
       const uploadDir = path.join('uploads', 'applications', appId, 'receipts');
-      
-      // Use fsSync (already imported) to create directory
       if (!fsSync.existsSync(uploadDir)) {
         fsSync.mkdirSync(uploadDir, { recursive: true });
       }
@@ -1294,179 +1290,169 @@ const receiptStorage = multer.diskStorage({
 
 const receiptUpload = multer({
   storage: receiptStorage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
   fileFilter: (req, file, cb) => {
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error('Invalid file type. Only JPEG, PNG, and PDF are allowed.'));
+      cb(new Error('Invalid file type. Only JPEG, PNG, and PDF are allowed.'), false);
     }
   }
 });
 
 exports.uploadReceiptMiddleware = receiptUpload.single('receipt');
 
-// ─── Upload Receipt ──────────────────────────────────────────────────────────
-exports.uploadReceipt = catchAsync(async (req, res, next) => {
-  try {
-    // Get applicationId from params
-    const applicationId = req.params.applicationId || req.params.id;
-    
-    console.log('📥 Receipt upload request:', {
-      applicationId,
-      hasFile: !!req.file,
-      fileSize: req.file?.size,
-      fileName: req.file?.originalname,
-      fileMimeType: req.file?.mimetype,
-      params: req.params,
-      user: req.user?._id
-    });
-
-    // Validate file
-    if (!req.file) {
-      return res.status(400).json({ 
-        success: false,
-        message: 'No receipt file uploaded. Please select a file to upload.' 
-      });
+// ─── Multer Error Handler ──────────────────────────────────────────────────
+exports.handleMulterError = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    // A Multer error occurred when uploading.
+    let message = 'File upload error';
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      message = 'File is too large. Maximum size is 10MB.';
+    } else if (err.code === 'LIMIT_FILE_TYPE') {
+      message = 'Invalid file type. Only JPEG, PNG, and PDF are allowed.';
+    } else if (err.code === 'LIMIT_UNEXPECTED_FILE') {
+      message = 'Unexpected field. Please use the field name "receipt".';
+    } else {
+      message = err.message;
     }
-
-    // Validate applicationId
-    if (!applicationId) {
-      return res.status(400).json({ 
-        success: false,
-        message: 'Application ID is required. Please refresh and try again.' 
-      });
-    }
-
-    // Find the application
-    const application = await VisaApplication.findById(applicationId);
-    if (!application) {
-      return res.status(404).json({ 
-        success: false,
-        message: 'Application not found. Please check the application ID.' 
-      });
-    }
-
-    // Create receipt object with unique ID
-    const receipt = {
-      _id: new Types.ObjectId(),
-      filename: req.file.filename,
-      originalName: req.file.originalname,
-      path: req.file.path,
-      size: req.file.size,
-      mimeType: req.file.mimetype,
-      uploadedAt: new Date(),
-      uploadedBy: req.user?._id || req.user?.userId,
-      uploadedByRole: req.user?.role || 'user',
-      status: 'pending_verification'
-    };
-
-    // Initialize receipts array if it doesn't exist
-    if (!application.receipts) {
-      application.receipts = [];
-    }
-
-    // Add receipt to application
-    application.receipts.push(receipt);
-
-    // Update status if needed
-    const statusUpdate = ['pending_payment', 'draft', 'submitted'];
-    if (statusUpdate.includes(application.status)) {
-      application.status = 'payment_received';
-    }
-
-    // Add to history
-    if (!application.history) {
-      application.history = [];
-    }
-    application.history.push({
-      action: 'receipt_uploaded',
-      by: req.user?._id || req.user?.userId,
-      byRole: req.user?.role || 'user',
-      note: `Receipt uploaded: ${req.file.originalname}`,
-      at: new Date()
-    });
-
-    await application.save();
-
-    // Send notification to sponsor (non-blocking)
-    try {
-      const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
-      
-      // Try to get WebSocket server
-      let wsServer = null;
-      try {
-        const app = require('../../index');
-        wsServer = app.get('wsServer');
-      } catch (e) {
-        console.warn('⚠️ WebSocket server not available:', e.message);
-      }
-      
-      // WebSocket notification
-      if (wsServer && sponsorId) {
-        wsServer.sendToUser(sponsorId, 'notification', {
-          type: 'success',
-          message: 'Payment receipt uploaded successfully!',
-          applicationId: application._id.toString(),
-          timestamp: new Date(),
-          metadata: { receiptId: receipt._id }
-        });
-      }
-
-      // Persist notification (non-blocking)
-      try {
-        await Notification.create({
-          userId: sponsorId,
-          applicationId: application._id,
-          type: 'receipt_uploaded',
-          title: 'Receipt Uploaded',
-          message: 'Your payment receipt has been uploaded and is being verified.',
-          metadata: { receiptId: receipt._id, filename: req.file.originalname }
-        });
-      } catch (notifErr) {
-        console.warn('⚠️ Failed to create notification (non-blocking):', notifErr.message);
-      }
-    } catch (e) {
-      console.warn('⚠️ Notification error (non-blocking):', e.message);
-    }
-
-    res.status(200).json({
-      success: true,
-      message: 'Receipt uploaded successfully',
-      data: {
-        receipt: receipt,
-        application: application
-      }
-    });
-
-  } catch (err) {
-    console.error('❌ Upload receipt error:', err);
-    return res.status(500).json({ 
+    return res.status(400).json({
       success: false,
-      message: 'Failed to upload receipt. Please try again.',
-      error: err.message 
+      message: message,
+      code: err.code,
     });
   }
+  // If it's not a Multer error, pass it to the next middleware.
+  next(err);
+};
+
+// ─── Upload Receipt ──────────────────────────────────────────────────────────
+exports.uploadReceipt = catchAsync(async (req, res, next) => {
+  const applicationId = req.params.applicationId || req.params.id;
+
+  console.log('📥 Receipt upload request:', {
+    applicationId,
+    hasFile: !!req.file,
+    fileSize: req.file?.size,
+    fileName: req.file?.originalname,
+    fileMimeType: req.file?.mimetype,
+    params: req.params,
+    user: req.user?._id,
+  });
+
+  if (!req.file) {
+    return res.status(400).json({
+      success: false,
+      message: 'No receipt file uploaded. Please select a file to upload.',
+    });
+  }
+
+  if (!applicationId) {
+    return res.status(400).json({
+      success: false,
+      message: 'Application ID is required. Please refresh and try again.',
+    });
+  }
+
+  const application = await VisaApplication.findById(applicationId);
+  if (!application) {
+    return res.status(404).json({
+      success: false,
+      message: 'Application not found. Please check the application ID.',
+    });
+  }
+
+  const receipt = {
+    _id: new Types.ObjectId(),
+    filename: req.file.filename,
+    originalName: req.file.originalname,
+    path: req.file.path,
+    size: req.file.size,
+    mimeType: req.file.mimetype,
+    uploadedAt: new Date(),
+    uploadedBy: req.user?._id || req.user?.userId,
+    uploadedByRole: req.user?.role || 'user',
+    status: 'pending_verification',
+  };
+
+  if (!application.receipts) {
+    application.receipts = [];
+  }
+  application.receipts.push(receipt);
+
+  // ─── ✅ REMOVED status update – application status stays unchanged ────
+  // No more: application.status = 'payment_received';
+
+  if (!application.history) {
+    application.history = [];
+  }
+  application.history.push({
+    action: 'receipt_uploaded',
+    by: req.user?._id || req.user?.userId,
+    byRole: req.user?.role || 'user',
+    note: `Receipt uploaded: ${req.file.originalname}`,
+    at: new Date(),
+  });
+
+  await application.save();
+
+  // ─── Non‑blocking notifications (unchanged) ──────────────────────────
+  try {
+    const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
+    let wsServer = null;
+    try {
+      const app = require('../../index');
+      wsServer = app.get('wsServer');
+    } catch (e) { /* ignore */ }
+    if (wsServer && sponsorId) {
+      wsServer.sendToUser(sponsorId, 'notification', {
+        type: 'success',
+        message: 'Payment receipt uploaded successfully!',
+        applicationId: application._id.toString(),
+        timestamp: new Date(),
+        metadata: { receiptId: receipt._id },
+      });
+    }
+    try {
+      await Notification.create({
+        userId: sponsorId,
+        applicationId: application._id,
+        type: 'receipt_uploaded',
+        title: 'Receipt Uploaded',
+        message: 'Your payment receipt has been uploaded and is being verified.',
+        metadata: { receiptId: receipt._id, filename: req.file.originalname },
+      });
+    } catch (notifErr) {
+      console.warn('⚠️ Failed to create notification (non-blocking):', notifErr.message);
+    }
+  } catch (e) {
+    console.warn('⚠️ Notification error (non-blocking):', e.message);
+  }
+
+  res.status(200).json({
+    success: true,
+    message: 'Receipt uploaded successfully',
+    data: { receipt, application },
+  });
 });
 
 // ─── Get Receipts ──────────────────────────────────────────────────────────
 exports.getReceipts = catchAsync(async (req, res, next) => {
   try {
     const applicationId = req.params.applicationId || req.params.id;
-    
     if (!applicationId) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        message: 'Application ID is required' 
+        message: 'Application ID is required',
       });
     }
 
     const application = await VisaApplication.findById(applicationId);
     if (!application) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: 'Application not found' 
+        message: 'Application not found',
       });
     }
 
@@ -1475,15 +1461,15 @@ exports.getReceipts = catchAsync(async (req, res, next) => {
       data: {
         receipts: application.receipts || [],
         applicationId: application._id,
-        total: application.receipts?.length || 0
-      }
+        total: application.receipts?.length || 0,
+      },
     });
   } catch (err) {
     console.error('❌ Get receipts error:', err);
-    return res.status(500).json({ 
+    return res.status(500).json({
       success: false,
       message: 'Failed to fetch receipts',
-      error: err.message 
+      error: err.message,
     });
   }
 });
@@ -1494,44 +1480,43 @@ exports.deleteReceipt = catchAsync(async (req, res, next) => {
     const applicationId = req.params.applicationId || req.params.id;
     const receiptId = req.params.receiptId;
 
-    // Validate IDs
     if (!applicationId || !receiptId) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         success: false,
-        message: 'Application ID and Receipt ID are required' 
+        message: 'Application ID and Receipt ID are required',
       });
     }
 
     // Only admin or amer can delete receipts
     if (req.user.role !== 'amer' && req.user.role !== 'admin') {
-      return res.status(403).json({ 
+      return res.status(403).json({
         success: false,
-        message: 'You are not authorized to delete receipts' 
+        message: 'You are not authorized to delete receipts',
       });
     }
 
     const application = await VisaApplication.findById(applicationId);
     if (!application) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: 'Application not found' 
+        message: 'Application not found',
       });
     }
 
-    // Find the receipt
-    const receiptIndex = application.receipts.findIndex(r => r._id.toString() === receiptId);
+    const receiptIndex = application.receipts.findIndex(
+      (r) => r._id.toString() === receiptId
+    );
     if (receiptIndex === -1) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         success: false,
-        message: 'Receipt not found' 
+        message: 'Receipt not found',
       });
     }
 
-    // Remove receipt from array
     const removedReceipt = application.receipts[receiptIndex];
     application.receipts.splice(receiptIndex, 1);
 
-    // Delete the file from disk
+    // Delete file from disk
     try {
       if (removedReceipt.path && fsSync.existsSync(removedReceipt.path)) {
         fsSync.unlinkSync(removedReceipt.path);
@@ -1541,13 +1526,12 @@ exports.deleteReceipt = catchAsync(async (req, res, next) => {
       console.warn('⚠️ Failed to delete receipt file (non-blocking):', fileErr.message);
     }
 
-    // Add to history
     application.history.push({
       action: 'receipt_deleted',
       by: req.user._id || req.user.userId,
       byRole: req.user.role || 'admin',
       note: `Receipt deleted: ${removedReceipt.originalName}`,
-      at: new Date()
+      at: new Date(),
     });
 
     await application.save();
@@ -1555,65 +1539,53 @@ exports.deleteReceipt = catchAsync(async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: 'Receipt deleted successfully',
-      data: { 
+      data: {
         receipts: application.receipts,
-        deleted: true 
-      }
+        deleted: true,
+      },
     });
-
+    
   } catch (err) {
     console.error('❌ Delete receipt error:', err);
-    return res.status(500).json({ 
+    return res.status(500).json({
       success: false,
       message: 'Failed to delete receipt',
-      error: err.message 
+      error: err.message,
     });
   }
 });
-// ─── END RECEIPT FUNCTIONS ──────────────────────────────────────────────────
-exports.deleteApplication = catchAsync(async (req, res, next) => {
-  // 1. Get the ID from params (matches route ':id')
-  const applicationId = req.params.id;   // <-- change from applicationId to id
 
-  // 2. Find the application
+// ─── END RECEIPT FUNCTIONS ──────────────────────────────────────────────────
+
+// ─── Delete Application ─────────────────────────────────────────────────────
+exports.deleteApplication = catchAsync(async (req, res, next) => {
+  const applicationId = req.params.id;
   const application = await VisaApplication.findById(applicationId);
   if (!application) {
     return next(new AppError('No application found with that ID', 404));
   }
 
-  // 3. Authorization: check if user is admin/amer OR the application owner
   const isAdminOrAmer = req.user && (req.user.role === 'admin' || req.user.role === 'amer');
-  
-  // Get the sponsor's userId from the application
   const sponsorId = application.sponsor?.userId?.toString?.() || application.sponsor?.userId;
   const userId = req.user._id?.toString?.() || req.user.userId;
-
   const isOwner = userId && sponsorId && userId === sponsorId;
 
   if (!isAdminOrAmer && !isOwner) {
     return next(new AppError('You are not authorized to delete this application', 403));
   }
 
-  // 4. Optional: prevent deletion of completed/approved applications
-  // if (application.status === 'approved' || application.status === 'completed') {
-  //   return next(new AppError('Cannot delete a completed application', 400));
-  // }
-
-  // 5. Delete the application
   await application.deleteOne();
 
-  // 6. Audit log (non-blocking)
   try {
     await AuditLog.createEntry({
       action: 'DELETE',
       actor: { type: req.user.role || 'user', id: String(req.user._id) },
       entity: { type: 'visa_application', id: String(applicationId), description: 'Delete application' },
       request_id: req.headers['x-request-id'] || Date.now().toString(),
-      result: 'success'
+      result: 'success',
     });
   } catch (e) {}
 
-  // 7. WebSocket notification (non-blocking)
   try {
     const app = require('../../index');
     const wsServer = app.get('wsServer');
@@ -1622,14 +1594,13 @@ exports.deleteApplication = catchAsync(async (req, res, next) => {
         type: 'info',
         message: 'Your application has been deleted.',
         applicationId: applicationId,
-        timestamp: new Date()
+        timestamp: new Date(),
       });
     }
   } catch (e) {}
 
-  // 8. Send success response
   res.status(200).json({
     status: 'success',
-    message: 'Application deleted successfully'
+    message: 'Application deleted successfully',
   });
 });

@@ -43,12 +43,13 @@ router.post('/:applicationId/attachments/upload', visaApplicationController.uplo
 
 // ✅ RECEIPT ROUTES
 // Upload receipt
-router.post('/:applicationId/receipt', 
-  auth, 
-  visaApplicationController.uploadReceiptMiddleware, 
+router.post(
+  '/:applicationId/receipt',
+  auth,
+  visaApplicationController.uploadReceiptMiddleware,
+  visaApplicationController.handleMulterError,   // <── ADD THIS
   visaApplicationController.uploadReceipt
 );
-
 
 // Get receipts
 router.get('/:applicationId/receipts', 
