@@ -113,27 +113,31 @@ function normalizeDocType(fieldName) {
   };
   return map[fieldName] || "other";
 }
-
 exports.uploadDocuments = catchAsync(async (req, res, next) => {
   const application = await VisaApplication.findById(req.params.applicationId);
   if (!application) {
     return next(new AppError('No application found with that ID', 404));
   }
   console.log(req.user, "here is req.user");
-  // Check if user is the sponsor
-  if (application.sponsor.userId.toString() !== req.user._id.toString()) {
+  
+  // ─── ✅ FIX: Allow Amer officers AND the sponsor ──────────────────
+  const userId = req.user._id?.toString() || req.user.userId?.toString();
+  const sponsorId = application.sponsor.userId?.toString?.() || application.sponsor.userId;
+  const isSponsor = userId === sponsorId;
+  const isAmer = req.user.role === 'amer' || req.user.role === 'admin';
+  
+  // Allow if: user is the sponsor OR user is an Amer officer
+  if (!isSponsor && !isAmer) {
     return next(new AppError('You are not authorized to upload documents for this application', 403));
   }
 
   const attachments = [];
 
   for (const file of req.files) {
-    // Use the fieldname dynamically as type
     const fieldName = file.fieldname;
 
     let extractedData;
     try {
-      // OCR from local disk path (only available when using disk fallback storage)
       const localPath = file.path;
       if (localPath) {
         const axios = require("axios");
@@ -152,7 +156,7 @@ exports.uploadDocuments = catchAsync(async (req, res, next) => {
         }
       }
     } catch (e) {
-      // non-blocking — OCR failure does not block upload
+      // non-blocking
     }
 
     const fileUrl = getFileUrl(req, file);
@@ -163,12 +167,24 @@ exports.uploadDocuments = catchAsync(async (req, res, next) => {
       fileSize: file.size,
       mimeType: file.mimetype,
       uploadedAt: new Date(),
+      uploadedBy: req.user._id,
+      uploadedByRole: req.user.role || 'user',
       status: "pending",
       extractedData,
     });
   }
 
   application.attachments.push(...attachments);
+  
+  // Add to history
+  application.history.push({
+    action: 'documents_uploaded',
+    by: req.user._id,
+    byRole: req.user.role || 'user',
+    note: `Uploaded ${attachments.length} document(s)`,
+    at: new Date()
+  });
+  
   await application.save();
 
   res.status(200).json({

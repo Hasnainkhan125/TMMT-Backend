@@ -1,4 +1,3 @@
-// controllers/checks/checkController.js
 const catchAsync = require('../../utills/catchAsync');
 const AppError = require('../../utills/appError');
 const Check = require('../../model/schema/check');
@@ -503,6 +502,185 @@ exports.fulfillDocument = catchAsync(async (req, res, next) => {
     data: {
       check: updatedCheck,
       requestedDocuments: updatedCheck.requestedDocuments
+    }
+  });
+});
+
+// ─── ✅ NEW: Upload a document (user uploads for a check) ──────────────────
+exports.uploadDocument = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.user._id;
+  const file = req.file; // single file
+
+  if (!file) {
+    return next(new AppError('No file uploaded', 400));
+  }
+
+  const check = await Check.findById(id);
+  if (!check) {
+    return next(new AppError('Check not found', 404));
+  }
+
+  // Check ownership: only the user who created the check can upload
+  if (check.userId.toString() !== userId.toString()) {
+    return next(new AppError('You are not authorized to upload to this check', 403));
+  }
+
+  // Initialize documents array if needed
+  if (!check.documents) {
+    check.documents = [];
+  }
+
+  // Add the new document
+  const newDoc = {
+    filename: file.filename,
+    originalName: file.originalname,
+    size: file.size,
+    mimeType: file.mimetype,
+    path: `/uploads/checks/${file.filename}`,
+  };
+  check.documents.push(newDoc);
+
+  // Optionally, if a documentLabel was provided, mark a requested document as fulfilled
+  const documentLabel = req.body.documentLabel;
+  if (documentLabel && check.requestedDocuments && check.requestedDocuments.length > 0) {
+    const requestedDoc = check.requestedDocuments.find(
+      d => d.label === documentLabel && d.status === 'pending'
+    );
+    if (requestedDoc) {
+      requestedDoc.status = 'fulfilled';
+      requestedDoc.fulfilledAt = new Date();
+    }
+  }
+
+  // Add to history
+  if (!check.history) {
+    check.history = [];
+  }
+  check.history.push({
+    action: 'DOCUMENT_UPLOADED',
+    note: `User uploaded document: ${file.originalname}`,
+    at: new Date(),
+    by: userId,
+    byRole: 'user',
+  });
+
+  // If the check status is 'requires_documents' and all requested docs are fulfilled, update status
+  if (check.status === 'requires_documents' && check.requestedDocuments && check.requestedDocuments.length > 0) {
+    const allFulfilled = check.requestedDocuments.every(d => d.status === 'fulfilled');
+    if (allFulfilled) {
+      check.status = 'processing';
+      check.history.push({
+        action: 'STATUS_UPDATED',
+        note: 'All requested documents fulfilled, moving to processing',
+        at: new Date(),
+        by: userId,
+        byRole: 'user',
+      });
+    }
+  }
+
+  check.updatedAt = new Date();
+  await check.save();
+
+  // Fetch updated check
+  const updatedCheck = await Check.findById(id).lean();
+
+  console.log('📎 Document uploaded:', {
+    checkId: id,
+    filename: file.filename,
+    originalName: file.originalname,
+    documentLabel: documentLabel || 'none',
+  });
+
+  res.status(200).json({
+    success: true,
+    message: 'Document uploaded successfully',
+    data: {
+      check: updatedCheck,
+      document: newDoc,
+    },
+  });
+});
+
+// ─── ✅ UPDATE check (update entire check document) ──────────────────────────
+exports.updateCheck = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const updates = req.body;
+  const userId = req.user._id;
+  
+  console.log('🔄 Updating check:', { id, updates });
+  
+  const check = await Check.findById(id);
+  if (!check) {
+    return next(new AppError('Check not found', 404));
+  }
+  
+  // Check if user owns this check or is an admin/officer
+  const isOwner = check.userId.toString() === userId.toString();
+  const isOfficer = req.user.role === 'officer' || req.user.role === 'admin';
+  
+  if (!isOwner && !isOfficer) {
+    return next(new AppError('You do not have permission to update this check', 403));
+  }
+  
+  // Apply updates
+  if (updates.requestedDocuments !== undefined) {
+    check.requestedDocuments = updates.requestedDocuments;
+  }
+  if (updates.comments !== undefined) {
+    check.comments = updates.comments;
+  }
+  if (updates.status) {
+    check.status = updates.status;
+  }
+  if (updates.resultSummary !== undefined) {
+    check.resultSummary = updates.resultSummary;
+  }
+  if (updates.resultStatus !== undefined) {
+    check.resultStatus = updates.resultStatus;
+  }
+  if (updates.resultDocuments !== undefined) {
+    check.resultDocuments = updates.resultDocuments;
+  }
+  if (updates.documents !== undefined) {
+    check.documents = updates.documents;
+  }
+  if (updates.identifiers !== undefined) {
+    check.identifiers = updates.identifiers;
+  }
+  if (updates.serviceType !== undefined) {
+    check.serviceType = updates.serviceType;
+  }
+  if (updates.speedTier !== undefined) {
+    check.speedTier = updates.speedTier;
+  }
+  
+  // Add to history for any update
+  if (!check.history) {
+    check.history = [];
+  }
+  check.history.push({
+    action: 'CHECK_UPDATED',
+    note: 'Check information was updated',
+    at: new Date(),
+    by: userId,
+    byRole: req.user.role || 'officer'
+  });
+  
+  check.updatedAt = new Date();
+  await check.save();
+  
+  // Fetch updated check
+  const updatedCheck = await Check.findById(id).lean();
+  
+  console.log('✅ Check updated successfully:', { id });
+  
+  res.status(200).json({
+    success: true,
+    message: 'Check updated successfully',
+    data: {
+      check: updatedCheck
     }
   });
 });

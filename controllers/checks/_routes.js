@@ -1,4 +1,3 @@
-// controllers/checks/_routes.js
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middelwares/auth');
@@ -45,6 +44,9 @@ router.get('/', auth, checkController.getChecks);
 // GET /api/v1/checks/:id - Get a specific check
 router.get('/:id', auth, checkController.getCheck);
 
+// ✅ PUT /api/v1/checks/:id - Update entire check (for deleting comments/docs)
+router.put('/:id', auth, checkController.updateCheck);
+
 // ✅ PUT /api/v1/checks/:id/status - Update check status
 router.put('/:id/status', auth, checkController.updateCheckStatus);
 
@@ -60,8 +62,13 @@ router.post('/:id/result', auth, upload.array('resultFiles', 5), checkController
 // ✅ POST /api/v1/checks/:id/fulfill-document - Mark document as fulfilled
 router.post('/:id/fulfill-document', auth, checkController.fulfillDocument);
 
+// ✅ POST /api/v1/checks/:id/documents - Upload a document (user)
+router.post('/:id/documents', auth, upload.single('file'), checkController.uploadDocument);
+
 // DELETE /api/v1/checks/:id - Delete a check
 router.delete('/:id', auth, checkController.deleteCheck);
+
+// GET /api/v1/checks/:id/debug - Debug endpoint
 router.get('/:id/debug', auth, checkController.debugCheck);
 
 module.exports = router;
