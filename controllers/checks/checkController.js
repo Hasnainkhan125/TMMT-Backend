@@ -25,6 +25,7 @@ exports.createCheck = catchAsync(async (req, res, next) => {
     fileCount: files.length 
   });
 
+  // Parse identifiers
   let parsedIdentifiers = {};
   try {
     parsedIdentifiers = typeof identifiers === 'string' 
@@ -34,6 +35,7 @@ exports.createCheck = catchAsync(async (req, res, next) => {
     parsedIdentifiers = {};
   }
 
+  // ─── ✅ SUBSCRIPTION CHECK ──────────────────────────────────────────────
   const isFreeService = FREE_SERVICES.includes(serviceId);
 
   if (!isFreeService) {
@@ -58,6 +60,7 @@ exports.createCheck = catchAsync(async (req, res, next) => {
     console.log(`✅ Free service "${serviceId}" - no subscription required`);
   }
 
+  // ─── Save to database ─────────────────────────────────────────────────────
   const check = await Check.create({
     userId: userId,
     serviceId: serviceId,
@@ -85,6 +88,16 @@ exports.createCheck = catchAsync(async (req, res, next) => {
     }]
   });
 
+  // Log the uploaded files
+  if (files.length > 0) {
+    console.log('📎 Uploaded files:', files.map(f => ({
+      filename: f.filename,
+      originalName: f.originalname,
+      webPath: `/uploads/checks/${f.filename}`
+    })));
+  }
+
+  // Return success response
   res.status(201).json({
     success: true,
     message: 'Check submitted successfully',
@@ -109,10 +122,22 @@ exports.createCheck = catchAsync(async (req, res, next) => {
 exports.getChecks = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   
+  // Use lean() to get plain JavaScript objects
   const checks = await Check.find({ userId })
     .sort({ createdAt: -1 })
     .lean();
 
+  // Log to verify data
+  console.log('📊 Total checks found:', checks.length);
+  if (checks.length > 0) {
+    console.log('📄 First check keys:', Object.keys(checks[0]));
+    console.log('📄 requestedDocuments:', checks[0].requestedDocuments);
+    console.log('📄 requestedDocuments type:', typeof checks[0].requestedDocuments);
+    console.log('📄 resultDocuments:', checks[0].resultDocuments);
+    console.log('📄 comments:', checks[0].comments);
+    console.log('📄 history:', checks[0].history);
+  }
+  
   res.status(200).json({
     success: true,
     data: {
@@ -133,6 +158,9 @@ exports.getCheck = catchAsync(async (req, res, next) => {
     return next(new AppError('Check not found', 404));
   }
   
+  console.log('🔍 Single check keys:', Object.keys(check));
+  console.log('📄 requestedDocuments:', check.requestedDocuments);
+  
   res.status(200).json({
     success: true,
     data: {
@@ -151,10 +179,12 @@ exports.updateCheckStatus = catchAsync(async (req, res, next) => {
     return next(new AppError('Check not found', 404));
   }
   
+  // Initialize history if it doesn't exist
   if (!check.history) {
     check.history = [];
   }
   
+  // Add to history
   check.history.push({
     action: 'STATUS_UPDATED',
     note: note || `Status changed to ${status}`,
@@ -163,6 +193,7 @@ exports.updateCheckStatus = catchAsync(async (req, res, next) => {
     byRole: req.user.role || 'officer'
   });
   
+  // Update status and result
   check.status = status;
   if (result) {
     check.result = result;
@@ -171,6 +202,7 @@ exports.updateCheckStatus = catchAsync(async (req, res, next) => {
   
   await check.save();
   
+  // Fetch updated check with all fields
   const updatedCheck = await Check.findById(id).lean();
   
   res.status(200).json({
@@ -193,6 +225,7 @@ exports.deleteCheck = catchAsync(async (req, res, next) => {
     return next(new AppError('Check not found', 404));
   }
   
+  // Delete associated files
   for (const doc of check.documents) {
     try {
       const filePath = path.join(__dirname, '../../', doc.path);
@@ -208,10 +241,10 @@ exports.deleteCheck = catchAsync(async (req, res, next) => {
   });
 });
 
-// ─── ADD COMMENT ──────────────────────────────────────────────────────────
+// ─── ✅ Add comment ──────────────────────────────────────────────────────────
 exports.addComment = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const { text, message, by } = req.body;
+  const { text, message } = req.body;
   const userId = req.user._id;
   const userRole = req.user.role || 'customer';
 
@@ -245,7 +278,7 @@ exports.addComment = catchAsync(async (req, res, next) => {
   }
 
   const isAdmin = isOfficer;
-  const commentBy = by || (isAdmin ? 'admin' : 'customer');
+  const commentBy = isAdmin ? 'admin' : 'customer';
   const authorName = req.user.firstName || req.user.email || (isAdmin ? 'Admin' : 'You');
 
   const comment = {
@@ -273,7 +306,13 @@ exports.addComment = catchAsync(async (req, res, next) => {
   check.updatedAt = new Date();
   await check.save();
 
+  // Fetch updated check with all fields
   const updatedCheck = await Check.findById(id).lean();
+
+  console.log('✅ Comment added:', {
+    checkId: id,
+    commentCount: updatedCheck.comments?.length || 0
+  });
 
   res.status(200).json({
     success: true,
@@ -300,10 +339,7 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
     return next(new AppError('No comments found', 404));
   }
 
-  let commentIndex = -1;
-  let comment = null;
-
-  commentIndex = check.comments.findIndex(c => 
+  const commentIndex = check.comments.findIndex(c => 
     c._id && c._id.toString() === commentId
   );
 
@@ -311,8 +347,7 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
     return next(new AppError('Comment not found', 404));
   }
 
-  comment = check.comments[commentIndex];
-
+  const comment = check.comments[commentIndex];
   const isOwner = check.userId.toString() === userId.toString();
   const isAdmin = req.user.role === 'admin' || req.user.role === 'officer';
   const isCommentAuthor = comment.author && comment.author.toString() === userId.toString();
@@ -349,24 +384,18 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
   });
 });
 
-// ─── REQUEST DOCUMENTS ────────────────────────────────────────────────────
+// ─── ✅ Request documents ────────────────────────────────────────────────────
 exports.requestDocuments = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const { documents } = req.body;
   const userId = req.user._id;
-  const userRole = req.user.role || 'customer';
-
-  console.log('📤 Requesting documents for check:', { 
-    id, 
-    documentsCount: documents?.length || 0, 
-    userId,
-    userRole,
-    documents: documents 
-  });
+  const userRole = req.user.role || 'officer';
 
   if (!documents || documents.length === 0) {
     return next(new AppError('At least one document request is required', 400));
   }
+
+  console.log('📤 Requesting documents for check:', { id, documentsCount: documents.length, userId });
 
   const check = await Check.findById(id);
   if (!check) {
@@ -431,7 +460,8 @@ exports.requestDocuments = catchAsync(async (req, res, next) => {
     checkId: id,
     requestedDocuments: updatedCheck.requestedDocuments,
     requestedCount: updatedCheck.requestedDocuments?.length || 0,
-    status: updatedCheck.status
+    status: updatedCheck.status,
+    history: updatedCheck.history
   });
 
   res.status(200).json({
@@ -443,16 +473,19 @@ exports.requestDocuments = catchAsync(async (req, res, next) => {
     }
   });
 });
-// ─── DEBUG: Check requested documents for a specific check ──────────────
+
+// ─── ✅ DEBUG: Check requested documents for a specific check ──────────────
 exports.debugCheck = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const userId = req.user._id;
   
+  // Check if the user owns this check or is an admin
   const check = await Check.findById(id);
   if (!check) {
     return next(new AppError('Check not found', 404));
   }
   
+  // Allow if user owns the check or is admin/officer
   const isOwner = check.userId.toString() === userId.toString();
   const isOfficer = req.user.role === 'officer' || req.user.role === 'admin';
   
@@ -460,6 +493,7 @@ exports.debugCheck = catchAsync(async (req, res, next) => {
     return next(new AppError('You do not have permission to view this check', 403));
   }
   
+  // Get the raw document from MongoDB
   const rawCheck = await Check.findById(id).lean();
   
   res.status(200).json({
@@ -476,7 +510,8 @@ exports.debugCheck = catchAsync(async (req, res, next) => {
     }
   });
 });
-// ─── Upload result ────────────────────────────────────────────────────────
+
+// ─── ✅ Upload result ────────────────────────────────────────────────────────
 exports.uploadResult = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const { resultSummary, resultStatus } = req.body;
@@ -547,6 +582,7 @@ exports.uploadResult = catchAsync(async (req, res, next) => {
     check.resultStatus = resultStatus;
   }
 
+  // Add to history
   check.history.push({
     action: 'RESULT_UPLOADED',
     note: `Result uploaded with ${files.length} file(s)`,
@@ -559,6 +595,7 @@ exports.uploadResult = catchAsync(async (req, res, next) => {
   check.updatedAt = new Date();
   await check.save();
 
+  // Fetch updated check with all fields
   const updatedCheck = await Check.findById(id).lean();
 
   res.status(200).json({
@@ -571,10 +608,12 @@ exports.uploadResult = catchAsync(async (req, res, next) => {
       resultStatus: updatedCheck.resultStatus
     }
   });
-});// ─── Mark document as fulfilled ──────────────────────────────────────────
+});
+
+// ─── ✅ Mark document as fulfilled ──────────────────────────────────────────
 exports.fulfillDocument = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const { documentId } = req.body; // Use documentId instead of documentIndex
+  const { documentId } = req.body;
   const userId = req.user._id;
 
   if (!documentId) {
@@ -611,11 +650,12 @@ exports.fulfillDocument = catchAsync(async (req, res, next) => {
     }
   });
 });
-// ─── Upload a document (user uploads for a check) ──────────────────────────
+
+// ─── ✅ NEW: Upload a document (user uploads for a check) ──────────────────
 exports.uploadDocument = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const userId = req.user._id;
-  const file = req.file;
+  const file = req.file; // single file
 
   if (!file) {
     return next(new AppError('No file uploaded', 400));
@@ -626,14 +666,17 @@ exports.uploadDocument = catchAsync(async (req, res, next) => {
     return next(new AppError('Check not found', 404));
   }
 
+  // Check ownership: only the user who created the check can upload
   if (check.userId.toString() !== userId.toString()) {
     return next(new AppError('You are not authorized to upload to this check', 403));
   }
 
+  // Initialize documents array if needed
   if (!check.documents) {
     check.documents = [];
   }
 
+  // Add the new document
   const newDoc = {
     filename: file.filename,
     originalName: file.originalname,
@@ -643,6 +686,7 @@ exports.uploadDocument = catchAsync(async (req, res, next) => {
   };
   check.documents.push(newDoc);
 
+  // Optionally, if a documentLabel was provided, mark a requested document as fulfilled
   const documentLabel = req.body.documentLabel;
   if (documentLabel && check.requestedDocuments && check.requestedDocuments.length > 0) {
     const requestedDoc = check.requestedDocuments.find(
@@ -654,6 +698,7 @@ exports.uploadDocument = catchAsync(async (req, res, next) => {
     }
   }
 
+  // Add to history
   if (!check.history) {
     check.history = [];
   }
@@ -665,6 +710,7 @@ exports.uploadDocument = catchAsync(async (req, res, next) => {
     byRole: 'user',
   });
 
+  // If the check status is 'requires_documents' and all requested docs are fulfilled, update status
   if (check.status === 'requires_documents' && check.requestedDocuments && check.requestedDocuments.length > 0) {
     const allFulfilled = check.requestedDocuments.every(d => d.status === 'fulfilled');
     if (allFulfilled) {
@@ -682,7 +728,15 @@ exports.uploadDocument = catchAsync(async (req, res, next) => {
   check.updatedAt = new Date();
   await check.save();
 
+  // Fetch updated check
   const updatedCheck = await Check.findById(id).lean();
+
+  console.log('📎 Document uploaded:', {
+    checkId: id,
+    filename: file.filename,
+    originalName: file.originalname,
+    documentLabel: documentLabel || 'none',
+  });
 
   res.status(200).json({
     success: true,
@@ -694,17 +748,20 @@ exports.uploadDocument = catchAsync(async (req, res, next) => {
   });
 });
 
-// ─── UPDATE check (update entire check document) ──────────────────────────
+// ─── ✅ UPDATE check (update entire check document) ──────────────────────────
 exports.updateCheck = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const updates = req.body;
   const userId = req.user._id;
+  
+  console.log('🔄 Updating check:', { id, updates });
   
   const check = await Check.findById(id);
   if (!check) {
     return next(new AppError('Check not found', 404));
   }
   
+  // Check if user owns this check or is an admin/officer
   const isOwner = check.userId.toString() === userId.toString();
   const isOfficer = req.user.role === 'officer' || req.user.role === 'admin';
   
@@ -712,6 +769,7 @@ exports.updateCheck = catchAsync(async (req, res, next) => {
     return next(new AppError('You do not have permission to update this check', 403));
   }
   
+  // Apply updates
   if (updates.requestedDocuments !== undefined) {
     check.requestedDocuments = updates.requestedDocuments;
   }
@@ -742,7 +800,9 @@ exports.updateCheck = catchAsync(async (req, res, next) => {
   if (updates.speedTier !== undefined) {
     check.speedTier = updates.speedTier;
   }
+    
   
+  // Add to history for any update
   if (!check.history) {
     check.history = [];
   }
@@ -757,7 +817,10 @@ exports.updateCheck = catchAsync(async (req, res, next) => {
   check.updatedAt = new Date();
   await check.save();
   
+  // Fetch updated check
   const updatedCheck = await Check.findById(id).lean();
+  
+  console.log('✅ Check updated successfully:', { id });
   
   res.status(200).json({
     success: true,

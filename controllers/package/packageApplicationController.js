@@ -10,8 +10,6 @@ const path = require('path');
 const fs = require('fs');
 
 // ================================================================
-// CONFIG
-// ================================================================
 
 const UPLOAD_DIR = path.join(__dirname, '../../uploads/documents');
 

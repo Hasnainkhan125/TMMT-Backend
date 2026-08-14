@@ -46,6 +46,7 @@ const allowedOrigins = [
   "https://qumak.io",
   "https://www.qumak.io",
   "https://tammat.netlify.app",
+  "https://tmmtae.netlify.app",
 ];
 
 //Setup Express App

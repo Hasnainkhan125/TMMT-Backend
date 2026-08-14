@@ -76,6 +76,27 @@ router.post('/:id/result', auth, upload.fields([
 // POST /api/v1/checks/:id/fulfill-document - Mark document as fulfilled
 router.post('/:id/fulfill-document', auth, checkController.fulfillDocument);
 
+// ✅ PUT /api/v1/checks/:id - Update entire check (for deleting comments/docs)
+router.put('/:id', auth, checkController.updateCheck);
+
+// ✅ PUT /api/v1/checks/:id/status - Update check status
+router.put('/:id/status', auth, checkController.updateCheckStatus);
+
+// ✅ POST /api/v1/checks/:id/comment - Add comment
+router.post('/:id/comment', auth, checkController.addComment);
+
+// ✅ POST /api/v1/checks/:id/request-docs - Request documents
+router.post('/:id/request-docs', auth, checkController.requestDocuments);
+
+// ✅ POST /api/v1/checks/:id/result - Upload result
+router.post('/:id/result', auth, upload.array('resultFiles', 5), checkController.uploadResult);
+
+// ✅ POST /api/v1/checks/:id/fulfill-document - Mark document as fulfilled
+router.post('/:id/fulfill-document', auth, checkController.fulfillDocument);
+
+// ✅ POST /api/v1/checks/:id/documents - Upload a document (user)
+router.post('/:id/documents', auth, upload.single('file'), checkController.uploadDocument);
+
 // DELETE /api/v1/checks/:id - Delete a check
 router.delete('/:id', auth, checkController.deleteCheck);
 
