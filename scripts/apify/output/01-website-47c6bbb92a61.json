@@ -1,0 +1,139 @@
+{
+  "url": "https://www.lifepharmacy.com",
+  "rootDomain": "lifepharmacy.com",
+  "brandName": "Life Pharmacy UAE",
+  "siteName": "Life Pharmacy | We are Online | Order Now",
+  "title": "Life Pharmacy UAE - Online Pharmacy Delivery in 30 minutes",
+  "description": "Life Pharmacy is a trusted UAE online pharmacy. Order prescription/OTC medicines online. Explore a wide range of vitamins, medicines, beauty brands, baby care products, and sports supplements. Delivery in 30 minutes, Order Now!",
+  "headlines": [
+    "Live Healthy with Life Pharmacy – First Omni-Channel Pharmacy & Healthcare Retailer in Middle East.",
+    "USPs of Life Pharmacy",
+    "Achievements & Awards",
+    "Vitamin & Nutrition:",
+    "Beauty care:",
+    "K-Beauty:",
+    "Home Health care:",
+    "Mother & Baby care:",
+    "Sports Nutrition:",
+    "Need Assistance? We're Here to Help!"
+  ],
+  "favicon": "https://www.lifepharmacy.com/_assets/icons/logo/apple-touch-icon.png",
+  "socialHandles": {
+    "facebookHandle": "lifepharmacyme",
+    "facebookUrl": "https://www.facebook.com/lifepharmacyme",
+    "facebookSource": "anchor_href",
+    "instagramHandle": "lifepharmacyme",
+    "instagramUrl": "https://www.instagram.com/lifepharmacyme",
+    "instagramSource": "anchor_href",
+    "tiktokHandle": null,
+    "tiktokUrl": null,
+    "tiktokSource": null,
+    "youtubeHandle": null,
+    "youtubeUrl": null,
+    "youtubeSource": null,
+    "twitterHandle": "lifepharmacyme",
+    "twitterUrl": "https://twitter.com/lifepharmacyme",
+    "twitterSource": "anchor_href",
+    "linkedinHandle": null,
+    "linkedinUrl": null,
+    "linkedinSource": null,
+    "whatsappHandle": null,
+    "whatsappUrl": "https://wa.me/971043441122",
+    "whatsappSource": "tel_link_promoted",
+    "facebookPageUrl": "https://www.facebook.com/lifepharmacyme",
+    "whatsappNumber": "+971043441122",
+    "phoneNumber": "+971043441122"
+  },
+  "palette": {
+    "palette": [
+      {
+        "hex": "#e6f2ff",
+        "rgb": {
+          "r": 230,
+          "g": 242,
+          "b": 255
+        },
+        "role": "background",
+        "weight": 983,
+        "sourceCount": 455
+      },
+      {
+        "hex": "#3b82f6",
+        "rgb": {
+          "r": 59,
+          "g": 130,
+          "b": 246
+        },
+        "role": "accent",
+        "weight": 330,
+        "sourceCount": 66
+      },
+      {
+        "hex": "#f3f9e6",
+        "rgb": {
+          "r": 243,
+          "g": 249,
+          "b": 230
+        },
+        "role": "background",
+        "weight": 319,
+        "sourceCount": 121
+      },
+      {
+        "hex": "#1f8fff",
+        "rgb": {
+          "r": 31,
+          "g": 143,
+          "b": 255
+        },
+        "role": "accent",
+        "weight": 242,
+        "sourceCount": 22
+      },
+      {
+        "hex": "#bddeff",
+        "rgb": {
+          "r": 189,
+          "g": 222,
+          "b": 255
+        },
+        "role": "accent",
+        "weight": 209,
+        "sourceCount": 33
+      }
+    ],
+    "primary": "#e6f2ff",
+    "secondary": "#3b82f6",
+    "accent": "#1f8fff",
+    "raw": {
+      "totalReferences": 4435,
+      "uniqueColors": 191,
+      "clusterCount": 94
+    }
+  },
+  "fonts": [
+    "system-ui",
+    "Inter",
+    "Inter Fallback: Arial",
+    "Cairo",
+    "Cairo Fallback: Arial"
+  ],
+  "team": [],
+  "services": [],
+  "productCatalog": null,
+  "images": [
+    "https://www.lifepharmacy.com/_assets/icons/logo/favicon-16x16.png",
+    "https://cdn.lifepharmacy.com/images/04-26/tGpc92CTdHXuIt3uYXL4m1q6vG8fSGnmKP2qhcqj.png",
+    "https://cdn.lifepharmacy.com/images/04-26/E5cbn432qL9wRzDYntNarZWasaE1lpSMnM0DCF1X.png",
+    "https://cdn.lifepharmacy.com/images/04-26/BV4Xl0FJbrK2WHGZDDEasSdCBDoGyp2836mZBhhG.png",
+    "https://cdn.lifepharmacy.com/images/04-26/0DllYi89KeWgu7rosSLZabkdlN8sNCWGBIUJgrQ0.png",
+    "https://cdn.lifepharmacy.com/images/04-26/YCHo7aeg2UV9YMcDZGJBrJOhqB6fRVTQ3lcKLCu7.png",
+    "https://cdn.lifepharmacy.com/images/04-26/tmLXYyka9FkQwQU4uSmNPuMG9dudYjsepxi7jXBI.png",
+    "https://cdn.lifepharmacy.com/images/04-26/N6X9Io2Ftrpf673jMdlwzcvECch7OkWoFYWzKcBx.png",
+    "https://cdn.lifepharmacy.com/images/04-26/kc4GpcvQdwOENqZaO0chh7YScCR9Ef3ltTRrC1Kx.png",
+    "https://cdn.lifepharmacy.com/images/04-26/PVfojf9gqOxqnQOmYx33In9OQZTu341hWzgOa1DW.jpg",
+    "https://cdn.lifepharmacy.com/images/04-26/HXDz4NQWOI4izSIDv3tqUXbX1vSDofEVdJ1EoSLT.jpg",
+    "https://cdn.lifepharmacy.com/images/04-26/hsxRQCl4sGCldR77UnvEessyoODULqG325sBM4Ve.jpg"
+  ],
+  "pagesCrawled": 1
+}

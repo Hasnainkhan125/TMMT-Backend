@@ -1,0 +1,5024 @@
+[{
+  "_id": {
+    "$oid": "69e42232df66c739effdd7b9"
+  },
+  "id": "flux_schnell",
+  "label": "Flux Schnell",
+  "shortLabel": "Flux",
+  "description": "Fast, cinematic photoreal images. Great for static ads.",
+  "provider": "fal",
+  "falModelId": "fal-ai/flux/schnell",
+  "kind": "image",
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "creditsPerImage": 1,
+  "minPlan": "free",
+  "logoUrl": "https://tjzk.replicate.delivery/models_organizations_avatar/01ed70be-0d47-4a4a-85fb-32c02cdd4ab5/bfl.png",
+  "badge": "Fast",
+  "sortOrder": 10,
+  "isDefault": true,
+  "isActive": true,
+  "maxResolution": 1024,
+  "supportsReferenceImage": false,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.121Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9"
+        ],
+        "default": "square_hd",
+        "uiLabel": "Image size",
+        "uiOrder": 1
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 2
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 3
+      }
+    ],
+    "uiVariant": "t2i_simple"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e42232df66c739effdd7ba"
+  },
+  "id": "flux_pro",
+  "label": "Flux Pro",
+  "shortLabel": "Flux Pro",
+  "description": "Higher fidelity, lifestyle-grade product photography.",
+  "provider": "fal",
+  "falModelId": "fal-ai/flux-pro",
+  "kind": "image",
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "creditsPerImage": 5,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "badge": "HD",
+  "sortOrder": 20,
+  "isActive": false,
+  "isDefault": false,
+  "maxResolution": 2048,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.126Z"
+  },
+  "capabilities": {
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9"
+        ],
+        "default": "square_hd",
+        "uiLabel": "Image size",
+        "uiOrder": 1
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 2
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 3
+      }
+    ],
+    "uiVariant": "t2i_simple"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e42232df66c739effdd7bb"
+  },
+  "id": "nano_banana_2",
+  "label": "Nano Banana 2",
+  "shortLabel": "Nano 2",
+  "description": "Google's newest fast text-to-image. Sharper, faster than the original.",
+  "provider": "fal",
+  "falModelId": "fal-ai/nano-banana-2",
+  "kind": "image",
+  "supportsReferenceImage": false,
+  "supportsCharacterLock": true,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "creditsPerImage": 3,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_nano_banana.png",
+  "badge": "New",
+  "sortOrder": 32,
+  "isActive": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.131Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "3:2",
+          "4:3",
+          "5:4",
+          "1:1",
+          "4:5",
+          "3:4",
+          "2:3",
+          "9:16",
+          "4:1",
+          "1:4",
+          "8:1",
+          "1:8"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 1
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "480p",
+          "720p",
+          "1080p",
+          "4k"
+        ],
+        "default": "480p",
+        "uiLabel": "Resolution",
+        "uiOrder": 2
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 3
+      },
+      {
+        "key": "outputFormat",
+        "providerKey": "output_format",
+        "type": "enum",
+        "options": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "default": "png",
+        "uiLabel": "Format",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "uiVariant": "t2i_simple"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e42232df66c739effdd7bc"
+  },
+  "id": "nano_banana_pro",
+  "label": "Nano Banana Pro",
+  "shortLabel": "Nano Pro",
+  "tagline": "Editorial brand campaigns",
+  "description": "Google's flagship image model. Strong typography, photoreal, brand-safe.",
+  "provider": "fal",
+  "falModelId": "fal-ai/nano-banana-pro",
+  "kind": "image",
+  "supportsReferenceImage": false,
+  "supportsCharacterLock": true,
+  "supportsBrandKit": true,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "creditsPerImage": 4,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_nano_banana.png",
+  "badge": "Pro",
+  "sortOrder": 28,
+  "isActive": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.129Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "3:2",
+          "4:3",
+          "5:4",
+          "1:1",
+          "4:5",
+          "3:4",
+          "2:3",
+          "9:16",
+          "4:1",
+          "1:4",
+          "8:1",
+          "1:8"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 1
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 2
+      },
+      {
+        "key": "outputFormat",
+        "providerKey": "output_format",
+        "type": "enum",
+        "options": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "default": "png",
+        "uiLabel": "Format",
+        "uiOrder": 3
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 4
+      }
+    ],
+    "uiVariant": "t2i_simple"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e42232df66c739effdd7bd"
+  },
+  "id": "gpt_image_1",
+  "label": "GPT Image 1",
+  "shortLabel": "GPT Image",
+  "description": "OpenAI flagship image model. Strong text rendering, complex scenes.",
+  "provider": "openai",
+  "falModelId": "fal-ai/gpt-image-1",
+  "kind": "image",
+  "supportsReferenceImage": true,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9"
+  ],
+  "creditsPerImage": 6,
+  "minPlan": "pro",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "badge": "Pro",
+  "sortOrder": 30,
+  "isActive": true,
+  "updatedAt": {
+    "$date": "2026-04-22T13:53:54.695Z"
+  },
+  "isDefault": false,
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": []
+  }
+},
+{
+  "_id": {
+    "$oid": "69e42232df66c739effdd7be"
+  },
+  "id": "seedream_5_0",
+  "label": "Seedream 5.0",
+  "shortLabel": "Seedream",
+  "description": "Aesthetic + character control.",
+  "provider": "fal",
+  "falModelId": "fal-ai/bytedance/seedream/v4/text-to-image",
+  "kind": "image",
+  "supportsReferenceImage": true,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4"
+  ],
+  "creditsPerImage": 3,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "sortOrder": 41,
+  "isActive": false,
+  "updatedAt": {
+    "$date": "2026-04-22T13:53:54.676Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": []
+  }
+},
+{
+  "_id": {
+    "$oid": "69e42232df66c739effdd7bf"
+  },
+  "id": "qumak_upscale",
+  "label": "Qumak Upscale",
+  "shortLabel": "Upscale",
+  "description": "Sharpen any Qumak image to 4K.",
+  "provider": "fal",
+  "falModelId": "fal-ai/clarity-upscaler",
+  "kind": "image",
+  "requiresReferenceImage": true,
+  "supportedAspectRatios": [
+    "*"
+  ],
+  "creditsPerImage": 2,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "sortOrder": 50,
+  "isActive": true,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.135Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "referenceImageUrl"
+    ],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "startFrame",
+        "providerKey": "image_url",
+        "type": "image",
+        "required": true,
+        "uiLabel": "Start frame",
+        "uiOrder": 0
+      },
+      {
+        "key": "upscaleFactor",
+        "providerKey": "upscale_factor",
+        "type": "number",
+        "default": 2,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Upscale factor",
+        "uiOrder": 1
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": false,
+        "uiLabel": "Prompt",
+        "uiOrder": 2
+      },
+      {
+        "key": "creativity",
+        "providerKey": "creativity",
+        "type": "number",
+        "default": 0.35,
+        "min": 0,
+        "max": 1,
+        "uiLabel": "Creativity",
+        "uiHint": "Higher = more deviation from prompt",
+        "uiOrder": 3
+      },
+      {
+        "key": "resemblance",
+        "providerKey": "resemblance",
+        "type": "number",
+        "default": 0.6,
+        "min": 0,
+        "max": 1,
+        "uiLabel": "Resemblance",
+        "uiHint": "Higher = closer to original",
+        "uiOrder": 4
+      },
+      {
+        "key": "guidanceScale",
+        "providerKey": "guidance_scale",
+        "type": "number",
+        "default": 4,
+        "min": 0,
+        "max": 20,
+        "uiLabel": "Guidance scale",
+        "uiOrder": 5
+      },
+      {
+        "key": "numInferenceSteps",
+        "providerKey": "num_inference_steps",
+        "type": "integer",
+        "default": 18,
+        "min": 4,
+        "max": 50,
+        "uiLabel": "Inference steps",
+        "uiOrder": 6
+      },
+      {
+        "key": "negativePrompt",
+        "providerKey": "negative_prompt",
+        "type": "string",
+        "required": false,
+        "uiLabel": "Negative prompt",
+        "uiOrder": 7
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 8
+      }
+    ],
+    "uiVariant": "i2i_edit"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e42232df66c739effdd7c1"
+  },
+  "id": "kling_3.0",
+  "label": "Kling 3.0 (legacy alias)",
+  "shortLabel": "Kling",
+  "description": "Legacy alias — routes to Kling 2.5 standard.",
+  "provider": "fal",
+  "falModelId": "fal-ai/kling-video/v2.5-turbo/standard/text-to-video",
+  "kind": "video",
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "creditsPerSecondVideo": 4,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "badge": "Pro",
+  "sortOrder": 90,
+  "isActive": true,
+  "baseCreditsForVideo": 0,
+  "falVideoModelId": "fal-ai/kling-video/v2.5-turbo/standard/text-to-video",
+  "updatedAt": {
+    "$date": "2026-04-22T13:53:54.691Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": true,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": []
+  }
+},
+{
+  "_id": {
+    "$oid": "69e55118086aa5e1b06a611f"
+  },
+  "id": "kling_v2_standard",
+  "__v": 0,
+  "badge": "Default",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-19T22:03:04.160Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 4,
+  "description": "Cinematic text-to-video, 5–10s. Free-tier default.",
+  "falModelId": "fal-ai/kling-video/v1.6/standard/text-to-video",
+  "falVideoModelId": "fal-ai/kling-video/v1.6/standard/text-to-video",
+  "isActive": true,
+  "isDefault": true,
+  "kind": "video",
+  "label": "Kling 1.6 Standard",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Kling",
+  "sortOrder": 50,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": false,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.139Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": true,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "negativePrompt",
+        "providerKey": "negative_prompt",
+        "type": "string",
+        "required": false,
+        "uiLabel": "Negative prompt",
+        "uiOrder": 1
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 2
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "5",
+          "10"
+        ],
+        "default": "5",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 3
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 4
+      }
+    ],
+    "uiVariant": "t2v_simple"
+  },
+  "i2vSibling": "kling_v2_6_pro",
+  "videoVariant": "t2v"
+},
+{
+  "_id": {
+    "$oid": "69e55118086aa5e1b06a6120"
+  },
+  "id": "kling_v2_pro",
+  "__v": 0,
+  "badge": "Pro",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-19T22:03:04.161Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 6,
+  "description": "Higher motion fidelity, better adherence to constraints.",
+  "falModelId": "fal-ai/kling-video/v2.5-turbo/pro/text-to-video",
+  "falVideoModelId": "fal-ai/kling-video/v2.5-turbo/pro/text-to-video",
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Kling 2.5 Pro",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Kling Pro",
+  "sortOrder": 65,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.140Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": true,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "negativePrompt",
+        "providerKey": "negative_prompt",
+        "type": "string",
+        "required": false,
+        "uiLabel": "Negative prompt",
+        "uiOrder": 1
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 2
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "5",
+          "10"
+        ],
+        "default": "5",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 3
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 4
+      }
+    ],
+    "uiVariant": "t2v_simple"
+  },
+  "i2vSibling": "kling_v2_6_pro",
+  "videoVariant": "t2v"
+},
+{
+  "_id": {
+    "$oid": "69e55118086aa5e1b06a6121"
+  },
+  "id": "seedance_2_0",
+  "__v": 0,
+  "badge": "Pro",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-19T22:03:04.162Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 8,
+  "description": "ByteDance Seedance 2.0. Director-level camera control, native audio. Requires Fal credits.",
+  "falModelId": "fal-ai/bytedance/seedance-2.0/text-to-video",
+  "falVideoModelId": "fal-ai/bytedance/seedance-2.0/text-to-video",
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Seedance 2.0",
+  "logoUrl": "https://fal.media/files/bytedance/seedance-logo.png",
+  "maxResolution": 1024,
+  "minPlan": "starter",
+  "provider": "fal",
+  "shortLabel": "Seedance",
+  "sortOrder": 57,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": false,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.138Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": true,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": true,
+    "supportsMultiShot": true,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "default": "1080p",
+        "uiLabel": "Resolution",
+        "uiOrder": 1
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "auto",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "default": "auto",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 2
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 3
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "uiVariant": "t2v_simple"
+  },
+  "i2vSibling": "seedance_2_0_i2v",
+  "videoVariant": "t2v"
+},
+{
+  "_id": {
+    "$oid": "69e574f4086aa5e1b06a6266"
+  },
+  "id": "gpt_image_2",
+  "__v": 0,
+  "badge": "OpenAI",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-20T00:36:04.871Z"
+  },
+  "creditsPerImage": 4,
+  "creditsPerSecondVideo": 1,
+  "description": "OpenAI's high-fidelity image edit model. Strong adherence + composition.",
+  "falModelId": "openai/gpt-image-2/edit",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "GPT Image 2",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_gpt_image.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "GPT Image",
+  "sortOrder": 35,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.133Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_urls",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "refImages",
+        "providerKey": "image_urls",
+        "type": "image_array",
+        "required": true,
+        "minItems": 1,
+        "uiLabel": "Reference images",
+        "uiOrder": 0
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 1
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "auto",
+          "1024x1024",
+          "1536x1024",
+          "1024x1536"
+        ],
+        "default": "auto",
+        "uiLabel": "Image size",
+        "uiOrder": 2
+      },
+      {
+        "key": "background",
+        "providerKey": "background",
+        "type": "enum",
+        "options": [
+          "auto",
+          "transparent",
+          "opaque"
+        ],
+        "default": "auto",
+        "uiLabel": "Background",
+        "uiOrder": 3
+      },
+      {
+        "key": "quality",
+        "providerKey": "quality",
+        "type": "enum",
+        "options": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "high",
+        "uiLabel": "Quality",
+        "uiOrder": 4
+      },
+      {
+        "key": "inputFidelity",
+        "providerKey": "input_fidelity",
+        "type": "enum",
+        "options": [
+          "low",
+          "high"
+        ],
+        "default": "high",
+        "uiLabel": "Input fidelity",
+        "uiOrder": 5
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 6
+      },
+      {
+        "key": "outputFormat",
+        "providerKey": "output_format",
+        "type": "enum",
+        "options": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "default": "png",
+        "uiLabel": "Format",
+        "uiOrder": 7
+      },
+      {
+        "key": "maskImage",
+        "providerKey": "mask_image_url",
+        "type": "image",
+        "required": false,
+        "uiLabel": "Mask (optional)",
+        "uiHint": "White = edit area, black = preserve",
+        "uiOrder": 8
+      }
+    ],
+    "uiVariant": "i2i_edit"
+  },
+  "modelId": "openai/gpt-image-2/edit"
+},
+{
+  "_id": {
+    "$oid": "69e574f4086aa5e1b06a6267"
+  },
+  "id": "seedream_v4",
+  "__v": 0,
+  "badge": null,
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-20T00:36:04.873Z"
+  },
+  "creditsPerImage": 3,
+  "creditsPerSecondVideo": 1,
+  "description": "Aesthetic + character control. Great for cinematic stills.",
+  "falModelId": "fal-ai/bytedance/seedream/v4/text-to-image",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "Seedream 4",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_seedream.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Seedream",
+  "sortOrder": 40,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.134Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9",
+          "auto",
+          "auto_2K",
+          "auto_4K"
+        ],
+        "default": "auto_2K",
+        "uiLabel": "Image size",
+        "uiOrder": 1
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 6,
+        "uiLabel": "Count",
+        "uiOrder": 2
+      },
+      {
+        "key": "maxImages",
+        "providerKey": "max_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 6,
+        "uiLabel": "Max per gen",
+        "uiHint": "Multi-image cap (1–6)",
+        "uiOrder": 3
+      },
+      {
+        "key": "enhancePromptMode",
+        "providerKey": "enhance_prompt_mode",
+        "type": "enum",
+        "options": [
+          "standard",
+          "fast"
+        ],
+        "default": "standard",
+        "uiLabel": "Prompt enhancement",
+        "uiHint": "Standard = higher quality. Fast = quicker.",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "uiVariant": "t2i_simple"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab76"
+  },
+  "id": "flux_dev",
+  "__v": 0,
+  "badge": "Dev",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.596Z"
+  },
+  "creditsPerImage": 3,
+  "creditsPerSecondVideo": 1,
+  "description": "Higher fidelity general-purpose photoreal model.",
+  "falModelId": "fal-ai/flux/dev",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "Flux Dev",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "maxResolution": 1536,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Flux Dev",
+  "sortOrder": 15,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": false,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.122Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9"
+        ],
+        "default": "square_hd",
+        "uiLabel": "Image size",
+        "uiOrder": 1
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 2
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 3
+      }
+    ],
+    "uiVariant": "t2i_simple"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab77"
+  },
+  "id": "flux_pro_v11",
+  "__v": 0,
+  "badge": "HD",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.604Z"
+  },
+  "creditsPerImage": 5,
+  "creditsPerSecondVideo": 1,
+  "description": "Top-tier composition + detail. Lifestyle/product photography grade.",
+  "falModelId": "fal-ai/flux-pro/v1.1",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "Flux Pro 1.1",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "maxResolution": 2048,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Flux Pro",
+  "sortOrder": 20,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": false,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.123Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9"
+        ],
+        "default": "square_hd",
+        "uiLabel": "Image size",
+        "uiOrder": 1
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 2
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 3
+      }
+    ],
+    "uiVariant": "t2i_simple"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab78"
+  },
+  "id": "flux_2_pro",
+  "__v": 0,
+  "badge": "New",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.606Z"
+  },
+  "creditsPerImage": 6,
+  "creditsPerSecondVideo": 1,
+  "description": "Newest BFL release. Maximum photorealism, very strong text rendering.",
+  "falModelId": "fal-ai/flux-2-pro",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "Flux 2 Pro",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "maxResolution": 2048,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Flux 2",
+  "sortOrder": 22,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": false,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.124Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9"
+        ],
+        "default": "square_hd",
+        "uiLabel": "Image size",
+        "uiOrder": 1
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 2
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 3
+      }
+    ],
+    "uiVariant": "t2i_simple"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab79"
+  },
+  "id": "flux_kontext_pro",
+  "__v": 0,
+  "badge": "Edit",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.607Z"
+  },
+  "creditsPerImage": 5,
+  "creditsPerSecondVideo": 1,
+  "description": "Reference-aware edits. Send a photo + instruction, get a targeted change.",
+  "falModelId": "fal-ai/flux-pro/kontext",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "Flux Kontext Pro",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Kontext",
+  "sortOrder": 24,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.128Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "referenceImageUrl"
+    ],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "startFrame",
+        "providerKey": "image_url",
+        "type": "image",
+        "required": true,
+        "uiLabel": "Start frame",
+        "uiOrder": 0
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 1
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9"
+        ],
+        "default": "square_hd",
+        "uiLabel": "Image size",
+        "uiOrder": 2
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 3
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 4
+      }
+    ],
+    "uiVariant": "i2i_edit"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab7a"
+  },
+  "id": "nano_banana_pro_edit",
+  "__v": 0,
+  "badge": "Edit",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.609Z"
+  },
+  "creditsPerImage": 4,
+  "creditsPerSecondVideo": 1,
+  "description": "Reference-driven edits — backgrounds, props, style swaps.",
+  "falModelId": "fal-ai/nano-banana-pro/edit",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "Nano Banana Pro · Edit",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_nano_banana.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Nano Edit",
+  "sortOrder": 29,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.130Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_urls",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "refImages",
+        "providerKey": "image_urls",
+        "type": "image_array",
+        "required": true,
+        "minItems": 1,
+        "maxItems": 10,
+        "uiLabel": "Reference images",
+        "uiOrder": 0
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 1
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "3:2",
+          "4:3",
+          "5:4",
+          "1:1",
+          "4:5",
+          "3:4",
+          "2:3",
+          "9:16",
+          "4:1",
+          "1:4",
+          "8:1",
+          "1:8"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 2
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 3
+      },
+      {
+        "key": "outputFormat",
+        "providerKey": "output_format",
+        "type": "enum",
+        "options": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "default": "png",
+        "uiLabel": "Format",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "uiVariant": "i2i_edit"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab7b"
+  },
+  "id": "nano_banana_2_edit",
+  "__v": 0,
+  "badge": "Edit",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.612Z"
+  },
+  "creditsPerImage": 3,
+  "creditsPerSecondVideo": 1,
+  "description": "Fast natural-language image edits via Google Nano Banana 2.",
+  "falModelId": "fal-ai/nano-banana-2/edit",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "Nano Banana 2 · Edit",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_nano_banana.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Nano 2 Edit",
+  "sortOrder": 33,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4",
+    "4:3"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.132Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "refImages"
+    ],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "refImages",
+        "providerKey": "image_urls",
+        "type": "image_array",
+        "required": true,
+        "minItems": 1,
+        "maxItems": 10,
+        "uiLabel": "Reference images",
+        "uiHint": "Up to 10 images.",
+        "uiOrder": 0
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 1
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "3:2",
+          "4:3",
+          "5:4",
+          "1:1",
+          "4:5",
+          "3:4",
+          "2:3",
+          "9:16",
+          "4:1",
+          "1:4",
+          "8:1",
+          "1:8"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 2
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "0.5K",
+          "1K",
+          "2K",
+          "4K"
+        ],
+        "default": "1K",
+        "uiLabel": "Resolution",
+        "uiOrder": 3
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Count",
+        "uiOrder": 4
+      },
+      {
+        "key": "outputFormat",
+        "providerKey": "output_format",
+        "type": "enum",
+        "options": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "default": "png",
+        "uiLabel": "Format",
+        "uiOrder": 5
+      },
+      {
+        "key": "safetyTolerance",
+        "providerKey": "safety_tolerance",
+        "type": "enum",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "default": "4",
+        "coerceToString": true,
+        "uiLabel": "Safety tolerance",
+        "uiHint": "1 = strictest, 6 = least strict",
+        "uiOrder": 6
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 7
+      }
+    ],
+    "uiVariant": "i2i_edit"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab7c"
+  },
+  "id": "seedream_v45_edit",
+  "__v": 0,
+  "badge": "Edit",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.613Z"
+  },
+  "creditsPerImage": 3,
+  "creditsPerSecondVideo": 1,
+  "description": "ByteDance Seedream 4.5 — unified gen + edit, character-consistent.",
+  "falModelId": "fal-ai/bytedance/seedream/v4.5/edit",
+  "falVideoModelId": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "image",
+  "label": "Seedream 4.5 · Edit",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_seedream.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Seedream 4.5",
+  "sortOrder": 38,
+  "supportedAspectRatios": [
+    "1:1",
+    "9:16",
+    "16:9",
+    "4:5",
+    "3:4"
+  ],
+  "supportedDurations": [],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.133Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_urls",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "refImages"
+    ],
+    "constraints": [
+      {
+        "type": "sum_max",
+        "fields": [
+          "refImages",
+          "numImages"
+        ],
+        "value": 15,
+        "message": "Total images (input + output) cannot exceed 15"
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "refImages",
+        "providerKey": "image_urls",
+        "type": "image_array",
+        "required": true,
+        "minItems": 1,
+        "maxItems": 10,
+        "uiLabel": "Reference images",
+        "uiHint": "Up to 10. First image leads composition.",
+        "uiOrder": 0
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 1
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9",
+          "auto",
+          "auto_2K",
+          "auto_4K"
+        ],
+        "default": "auto_2K",
+        "uiLabel": "Image size",
+        "uiOrder": 2
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 6,
+        "uiLabel": "Count",
+        "uiOrder": 3
+      },
+      {
+        "key": "maxImages",
+        "providerKey": "max_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 6,
+        "uiLabel": "Max per gen",
+        "uiHint": "Multi-image cap (1–6)",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "uiVariant": "i2i_edit"
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab7d"
+  },
+  "id": "seedance_2_0_fast",
+  "__v": 0,
+  "badge": "Fast",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.616Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 5,
+  "description": "ByteDance Seedance 2.0 fast tier. Cinematic, native audio, multi-shot. Requires Fal credits.",
+  "falModelId": "fal-ai/bytedance/seedance-2.0/fast/text-to-video",
+  "falVideoModelId": "fal-ai/bytedance/seedance-2.0/fast/text-to-video",
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Seedance 2.0 · Fast",
+  "logoUrl": "https://fal.media/files/bytedance/seedance-logo.png",
+  "maxResolution": 1024,
+  "minPlan": "starter",
+  "provider": "fal",
+  "shortLabel": "Seedance Fast",
+  "sortOrder": 55,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": false,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.136Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": true,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": true,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "480p",
+          "720p"
+        ],
+        "default": "720p",
+        "uiLabel": "Resolution",
+        "uiOrder": 1
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "auto",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "default": "auto",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 2
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 3
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "uiVariant": "t2v_simple"
+  },
+  "i2vSibling": "seedance_2_0_fast_i2v",
+  "videoVariant": "t2v"
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab7e"
+  },
+  "id": "seedance_2_0_i2v",
+  "__v": 0,
+  "badge": "i2v",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.618Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 7,
+  "description": "Animate stills with start+end frame control and motion prompts.",
+  "falModelId": "fal-ai/bytedance/seedance-2.0/image-to-video",
+  "falVideoModelId": "fal-ai/bytedance/seedance-2.0/image-to-video",
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Seedance 2.0 · Image to Video",
+  "logoUrl": "https://fal.media/files/bytedance/seedance-logo.png",
+  "maxResolution": 1024,
+  "minPlan": "starter",
+  "provider": "fal",
+  "shortLabel": "Seedance i2v",
+  "sortOrder": 58,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.138Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": true,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": true,
+    "supportsMultiShot": true,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "referenceImageUrl"
+    ],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "startFrame",
+        "providerKey": "image_url",
+        "type": "image",
+        "required": true,
+        "uiLabel": "Start frame",
+        "uiOrder": 0
+      },
+      {
+        "key": "endFrame",
+        "providerKey": "end_image_url",
+        "type": "image",
+        "required": false,
+        "uiLabel": "End frame",
+        "uiHint": "Optional last frame for interpolation",
+        "uiOrder": 1
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 2
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "default": "1080p",
+        "uiLabel": "Resolution",
+        "uiOrder": 3
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "auto",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "default": "auto",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 4
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 5
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 6
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 7
+      }
+    ],
+    "uiVariant": "i2v_with_end"
+  },
+  "videoVariant": "i2v"
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab7f"
+  },
+  "id": "kling_v3_pro",
+  "__v": 0,
+  "badge": "Pro",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.618Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 9,
+  "description": "Top-tier cinematic image-to-video with native audio + custom elements.",
+  "falModelId": "fal-ai/kling-video/v3/pro/image-to-video",
+  "falVideoModelId": "fal-ai/kling-video/v3/pro/image-to-video",
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Kling 3.0 Pro",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Kling 3",
+  "sortOrder": 60,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.141Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": true,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "referenceImageUrl"
+    ],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "startFrame",
+        "providerKey": "image_url",
+        "type": "image",
+        "required": true,
+        "uiLabel": "Start frame",
+        "uiOrder": 0
+      },
+      {
+        "key": "endFrame",
+        "providerKey": "tail_image_url",
+        "type": "image",
+        "required": false,
+        "uiLabel": "End frame",
+        "uiHint": "Optional last frame for interpolation",
+        "uiOrder": 1
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 2
+      },
+      {
+        "key": "negativePrompt",
+        "providerKey": "negative_prompt",
+        "type": "string",
+        "required": false,
+        "uiLabel": "Negative prompt",
+        "uiOrder": 3
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 4
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "5",
+          "10"
+        ],
+        "default": "5",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 5
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 6
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 7
+      }
+    ],
+    "uiVariant": "i2v_with_end"
+  },
+  "videoVariant": "i2v"
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab80"
+  },
+  "id": "kling_v2_6_pro",
+  "__v": 0,
+  "badge": null,
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.619Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 7,
+  "description": "Cinematic image-to-video. Excellent motion + native audio.",
+  "falModelId": "fal-ai/kling-video/v2.6/pro/image-to-video",
+  "falVideoModelId": "fal-ai/kling-video/v2.6/pro/image-to-video",
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Kling 2.6 Pro",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "Kling 2.6",
+  "sortOrder": 61,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.140Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": true,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "referenceImageUrl"
+    ],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "startFrame",
+        "providerKey": "image_url",
+        "type": "image",
+        "required": true,
+        "uiLabel": "Start frame",
+        "uiOrder": 0
+      },
+      {
+        "key": "endFrame",
+        "providerKey": "tail_image_url",
+        "type": "image",
+        "required": false,
+        "uiLabel": "End frame",
+        "uiHint": "Optional last frame for interpolation",
+        "uiOrder": 1
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 2
+      },
+      {
+        "key": "negativePrompt",
+        "providerKey": "negative_prompt",
+        "type": "string",
+        "required": false,
+        "uiLabel": "Negative prompt",
+        "uiOrder": 3
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 4
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "5",
+          "10"
+        ],
+        "default": "5",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 5
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": false,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 6
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 7
+      }
+    ],
+    "uiVariant": "i2v_with_end"
+  },
+  "videoVariant": "i2v"
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab81"
+  },
+  "id": "pixverse_c1_t2v",
+  "__v": 0,
+  "badge": "1080p",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.621Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 5,
+  "description": "Film-grade text-to-video with native audio, 1080p, up to 15s.",
+  "falModelId": "fal-ai/pixverse/c1/text-to-video",
+  "falVideoModelId": "fal-ai/pixverse/c1/text-to-video",
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "PixVerse C1",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "PixVerse",
+  "sortOrder": 68,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    8,
+    15
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": false,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.142Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 1
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum_integer",
+        "options": [
+          5,
+          8,
+          15
+        ],
+        "default": 5,
+        "coerceToString": false,
+        "uiLabel": "Duration",
+        "uiOrder": 2
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 3
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 4
+      }
+    ],
+    "uiVariant": "t2v_simple",
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    }
+  },
+  "i2vSibling": "pixverse_c1_i2v",
+  "videoVariant": "t2v"
+},
+{
+  "_id": {
+    "$oid": "69e7addd587185eef927ab82"
+  },
+  "id": "pixverse_c1_i2v",
+  "__v": 0,
+  "badge": "i2v",
+  "baseCreditsForVideo": 0,
+  "createdAt": {
+    "$date": "2026-04-21T17:03:25.621Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 5,
+  "description": "Animate stills cinematically with PixVerse C1, 1080p, native audio.",
+  "falModelId": "fal-ai/pixverse/c1/image-to-video",
+  "falVideoModelId": "fal-ai/pixverse/c1/image-to-video",
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "PixVerse C1 · i2v",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "maxResolution": 1024,
+  "minPlan": "free",
+  "provider": "fal",
+  "shortLabel": "PixVerse i2v",
+  "sortOrder": 69,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    8
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.144Z"
+  },
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "referenceImageUrl"
+    ],
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "startFrame",
+        "providerKey": "image_url",
+        "type": "image",
+        "required": true,
+        "uiLabel": "Start frame",
+        "uiOrder": 0
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 1
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 2
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum_integer",
+        "options": [
+          5,
+          8
+        ],
+        "default": 5,
+        "coerceToString": false,
+        "uiLabel": "Duration",
+        "uiOrder": 3
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "uiVariant": "i2v_simple",
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    }
+  },
+  "videoVariant": "i2v"
+},
+{
+  "_id": {
+    "$oid": "69e7bbf4304ba7de030de92f"
+  },
+  "id": "gpt_image_1_mini",
+  "label": "GPT Image Mini",
+  "shortLabel": null,
+  "description": "OpenAI's cheapest image model. Great for quick iteration.",
+  "provider": "openai",
+  "falModelId": null,
+  "falVideoModelId": null,
+  "kind": "image",
+  "supportsReferenceImage": false,
+  "supportsCharacterLock": false,
+  "supportsAudio": false,
+  "supportedAspectRatios": [],
+  "supportedDurations": [],
+  "maxResolution": 1024,
+  "creditsPerImage": 2,
+  "creditsPerSecondVideo": 1,
+  "baseCreditsForVideo": 0,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "badge": null,
+  "sortOrder": 100,
+  "isDefault": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-04-21T18:03:32.785Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-22T13:53:54.694Z"
+  },
+  "__v": 0,
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": []
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7bbf4304ba7de030de934"
+  },
+  "id": "gpt_image_1_5",
+  "label": "GPT Image 1.5",
+  "shortLabel": null,
+  "description": "Latest OpenAI model. Better text rendering, faster than 1.0.",
+  "provider": "openai",
+  "falModelId": null,
+  "falVideoModelId": null,
+  "kind": "image",
+  "supportsReferenceImage": false,
+  "supportsCharacterLock": false,
+  "supportsAudio": false,
+  "supportedAspectRatios": [],
+  "supportedDurations": [],
+  "maxResolution": 1024,
+  "creditsPerImage": 5,
+  "creditsPerSecondVideo": 1,
+  "baseCreditsForVideo": 0,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "badge": null,
+  "sortOrder": 100,
+  "isDefault": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-04-21T18:03:32.791Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-22T13:53:54.697Z"
+  },
+  "__v": 0,
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": []
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7bc2f5d8bb50cc0f4a4f2"
+  },
+  "id": "gemini_flash_image",
+  "label": "Gemini Nano Banana",
+  "shortLabel": null,
+  "description": "Google's fast multimodal image model. Excellent for multi-image fusion.",
+  "provider": "gemini",
+  "falModelId": null,
+  "falVideoModelId": null,
+  "kind": "image",
+  "supportsReferenceImage": false,
+  "supportsCharacterLock": false,
+  "supportsAudio": false,
+  "supportedAspectRatios": [],
+  "supportedDurations": [],
+  "maxResolution": 1024,
+  "creditsPerImage": 5,
+  "creditsPerSecondVideo": 1,
+  "baseCreditsForVideo": 0,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "badge": null,
+  "sortOrder": 100,
+  "isDefault": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-04-21T18:04:31.155Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-22T13:53:54.698Z"
+  },
+  "__v": 0,
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": []
+  }
+},
+{
+  "_id": {
+    "$oid": "69e7bc2f5d8bb50cc0f4a4f5"
+  },
+  "id": "gemini_nano_banana_pro",
+  "label": "Nano Banana Pro",
+  "shortLabel": null,
+  "description": "Gemini 3 Pro Image. Best quality, advanced reasoning, renders text cleanly.",
+  "provider": "gemini",
+  "falModelId": null,
+  "falVideoModelId": null,
+  "kind": "image",
+  "supportsReferenceImage": false,
+  "supportsCharacterLock": false,
+  "supportsAudio": false,
+  "supportedAspectRatios": [],
+  "supportedDurations": [],
+  "maxResolution": 1024,
+  "creditsPerImage": 15,
+  "creditsPerSecondVideo": 1,
+  "baseCreditsForVideo": 0,
+  "minPlan": "free",
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "badge": null,
+  "sortOrder": 100,
+  "isDefault": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-04-21T18:04:31.159Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-22T13:53:54.699Z"
+  },
+  "__v": 0,
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": true,
+    "supportsMotionControl": false,
+    "supportsMultiShot": false,
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": []
+  }
+},
+{
+  "_id": {
+    "$oid": "69e833f0f4695a9989c87473"
+  },
+  "id": "seedance_2_0_fast_i2v",
+  "label": "Seedance 2.0 · Fast i2v",
+  "shortLabel": "Seedance Fast i2v",
+  "description": "Fast-tier image-to-video: start + end frame, cinematic motion, native audio.",
+  "provider": "fal",
+  "falModelId": "fal-ai/bytedance/seedance-2.0/fast/image-to-video",
+  "falVideoModelId": "fal-ai/bytedance/seedance-2.0/fast/image-to-video",
+  "kind": "video",
+  "supportsReferenceImage": true,
+  "supportsCharacterLock": false,
+  "supportsAudio": false,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "maxResolution": 1024,
+  "capabilities": {
+    "supportsEndFrame": true,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": true,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [
+      "referenceImageUrl"
+    ],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "startFrame",
+        "providerKey": "image_url",
+        "type": "image",
+        "required": true,
+        "uiLabel": "Start frame",
+        "uiOrder": 0
+      },
+      {
+        "key": "endFrame",
+        "providerKey": "end_image_url",
+        "type": "image",
+        "required": false,
+        "uiLabel": "End frame",
+        "uiHint": "Optional last frame for interpolation",
+        "uiOrder": 1
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 2
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "480p",
+          "720p"
+        ],
+        "default": "720p",
+        "uiLabel": "Resolution",
+        "uiOrder": 3
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "auto",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "default": "auto",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 4
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 5
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 6
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 7
+      }
+    ],
+    "uiVariant": "i2v_with_end"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 5,
+  "baseCreditsForVideo": 0,
+  "minPlan": "starter",
+  "logoUrl": "https://fal.media/files/bytedance/seedance-logo.png",
+  "badge": "Fast i2v",
+  "sortOrder": 56,
+  "isDefault": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-04-22T02:35:28.026Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.137Z"
+  },
+  "__v": 0,
+  "videoVariant": "i2v"
+},
+{
+  "_id": {
+    "$oid": "69f4f767c8649c46323d62da"
+  },
+  "id": "seedance_2_i2v",
+  "__v": 0,
+  "badge": null,
+  "baseCreditsForVideo": 0,
+  "capabilities": {
+    "uiVariant": "i2v_with_end",
+    "supportsEndFrame": true,
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "inputSlots": [
+      {
+        "key": "startFrame",
+        "type": "image",
+        "providerKey": "image_url",
+        "required": true,
+        "minItems": null,
+        "maxItems": null,
+        "options": [],
+        "elementShape": {
+          "fields": [],
+          "oneOfGroups": []
+        },
+        "uiLabel": "Start frame",
+        "uiOrder": 0,
+        "_id": {
+          "$oid": "69f4f76740d1c28ebe686b59"
+        }
+      },
+      {
+        "key": "endFrame",
+        "type": "image",
+        "providerKey": "end_image_url",
+        "required": false,
+        "minItems": null,
+        "maxItems": null,
+        "options": [],
+        "elementShape": {
+          "fields": [],
+          "oneOfGroups": []
+        },
+        "uiLabel": "End frame",
+        "uiHint": "Optional last frame for interpolation",
+        "uiOrder": 1,
+        "_id": {
+          "$oid": "69f4f76740d1c28ebe686b5a"
+        }
+      },
+      {
+        "key": "prompt",
+        "type": "string",
+        "providerKey": "prompt",
+        "required": true,
+        "minItems": null,
+        "maxItems": null,
+        "options": [],
+        "elementShape": {
+          "fields": [],
+          "oneOfGroups": []
+        },
+        "uiLabel": "Prompt",
+        "uiOrder": 2,
+        "_id": {
+          "$oid": "69f4f76740d1c28ebe686b5b"
+        }
+      },
+      {
+        "key": "aspectRatio",
+        "type": "enum",
+        "providerKey": "aspect_ratio",
+        "required": false,
+        "minItems": null,
+        "maxItems": null,
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "elementShape": {
+          "fields": [],
+          "oneOfGroups": []
+        },
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 3,
+        "_id": {
+          "$oid": "69f4f76740d1c28ebe686b5c"
+        }
+      },
+      {
+        "key": "durationSec",
+        "type": "enum",
+        "providerKey": "duration",
+        "required": false,
+        "minItems": null,
+        "maxItems": null,
+        "options": [
+          "auto",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "elementShape": {
+          "fields": [],
+          "oneOfGroups": []
+        },
+        "uiLabel": "Duration",
+        "uiOrder": 4,
+        "_id": {
+          "$oid": "69f4f76740d1c28ebe686b5d"
+        }
+      },
+      {
+        "key": "resolution",
+        "type": "enum",
+        "providerKey": "resolution",
+        "required": false,
+        "minItems": null,
+        "maxItems": null,
+        "options": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "elementShape": {
+          "fields": [],
+          "oneOfGroups": []
+        },
+        "uiLabel": "Resolution",
+        "uiOrder": 5,
+        "_id": {
+          "$oid": "69f4f76740d1c28ebe686b5e"
+        }
+      },
+      {
+        "key": "generateAudio",
+        "type": "boolean",
+        "providerKey": "generate_audio",
+        "required": false,
+        "minItems": null,
+        "maxItems": null,
+        "options": [],
+        "elementShape": {
+          "fields": [],
+          "oneOfGroups": []
+        },
+        "uiLabel": "Generate audio",
+        "uiOrder": 6,
+        "_id": {
+          "$oid": "69f4f76740d1c28ebe686b5f"
+        }
+      }
+    ],
+    "constraints": []
+  },
+  "createdAt": {
+    "$date": "2026-05-01T18:56:39.174Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 4,
+  "description": "Premium image-to-video with start/end frame and native audio.",
+  "falModelId": "bytedance/seedance-2.0/image-to-video",
+  "falVideoModelId": "bytedance/seedance-2.0/image-to-video",
+  "i2vSibling": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Seedance 2.0 (image-to-video)",
+  "lastCostRefreshAt": null,
+  "logoUrl": "https://seedance2.ai/logo.png",
+  "maxResolution": 1080,
+  "minPlan": "starter",
+  "provider": "fal",
+  "providerCostUsdEstimate": null,
+  "shortLabel": "Seedance 2 I2V",
+  "sortOrder": 10,
+  "supportedAspectRatios": [
+    "auto",
+    "21:9",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16"
+  ],
+  "supportedDurations": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "supportsAudio": true,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T18:56:39.174Z"
+  },
+  "videoVariant": "i2v"
+},
+{
+  "_id": {
+    "$oid": "69f4f767c8649c46323d62db"
+  },
+  "id": "seedance_2_ref2vid",
+  "__v": 0,
+  "badge": "New",
+  "baseCreditsForVideo": 0,
+  "capabilities": {
+    "uiVariant": "ref2v_with_video_refs",
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "inputSlots": [
+      {
+        "key": "refImages",
+        "providerKey": "image_urls",
+        "type": "image_array",
+        "required": false,
+        "maxItems": 9,
+        "uiLabel": "Reference images",
+        "uiHint": "@Image1 in prompt. Max 30MB each.",
+        "uiOrder": 0
+      },
+      {
+        "key": "refVideos",
+        "providerKey": "video_urls",
+        "type": "video_array",
+        "required": false,
+        "maxItems": 3,
+        "uiLabel": "Reference videos",
+        "uiHint": "@Video1 in prompt. Combined 2–15s, 50MB total.",
+        "uiOrder": 1
+      },
+      {
+        "key": "refAudios",
+        "providerKey": "audio_urls",
+        "type": "audio_array",
+        "required": false,
+        "maxItems": 3,
+        "uiLabel": "Reference audio",
+        "uiHint": "@Audio1 in prompt. MP3/WAV, ≤15s combined.",
+        "uiOrder": 2
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 3
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 4
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "auto",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "default": "auto",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 5
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "default": "1080p",
+        "uiLabel": "Resolution",
+        "uiOrder": 6
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 7
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 8
+      }
+    ],
+    "constraints": [
+      {
+        "type": "sum_max",
+        "fields": [
+          "refImages",
+          "refVideos",
+          "refAudios"
+        ],
+        "value": 12,
+        "message": "Total files (images + videos + audio) cannot exceed 12"
+      }
+    ]
+  },
+  "createdAt": {
+    "$date": "2026-05-01T18:56:39.190Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 5,
+  "description": "Mixed-reference video — combine images, videos, and audio in one prompt.",
+  "falModelId": "bytedance/seedance-2.0/reference-to-video",
+  "falVideoModelId": "bytedance/seedance-2.0/reference-to-video",
+  "i2vSibling": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Seedance 2.0 (ref-to-video)",
+  "lastCostRefreshAt": null,
+  "logoUrl": "https://seedance2.ai/logo.png",
+  "maxResolution": 1080,
+  "minPlan": "pro",
+  "provider": "fal",
+  "providerCostUsdEstimate": null,
+  "shortLabel": "Seedance 2 R2V",
+  "sortOrder": 11,
+  "supportedAspectRatios": [
+    "auto",
+    "21:9",
+    "16:9",
+    "4:3",
+    "1:1",
+    "3:4",
+    "9:16"
+  ],
+  "supportedDurations": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "supportsAudio": true,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.112Z"
+  },
+  "videoVariant": "r2v"
+},
+{
+  "_id": {
+    "$oid": "69f4f767c8649c46323d62dc"
+  },
+  "id": "happy_horse_ref2vid",
+  "__v": 0,
+  "badge": null,
+  "baseCreditsForVideo": 0,
+  "capabilities": {
+    "uiVariant": "ref2v_multi_image",
+    "inputSlots": [
+      {
+        "key": "refImages",
+        "providerKey": "image_urls",
+        "type": "image_array",
+        "required": true,
+        "minItems": 1,
+        "maxItems": 9,
+        "uiLabel": "Subject images",
+        "uiHint": "Order matters: 1st = character1, 2nd = character2. Min 400px, ≤10MB each.",
+        "uiOrder": 0
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiHint": "Reference subjects as character1, character2... Max 2500 chars.",
+        "uiOrder": 1
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 2
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "720p",
+          "1080p"
+        ],
+        "default": "1080p",
+        "uiLabel": "Resolution",
+        "uiOrder": 3
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum_integer",
+        "options": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "default": 5,
+        "coerceToString": false,
+        "uiLabel": "Duration",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "constraints": [],
+    "requiredFields": [
+      "refImages"
+    ]
+  },
+  "createdAt": {
+    "$date": "2026-05-01T18:56:39.193Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 4,
+  "description": "Multi-character video. Reference your subjects as character1, character2, etc.",
+  "falModelId": "alibaba/happy-horse/reference-to-video",
+  "falVideoModelId": "alibaba/happy-horse/reference-to-video",
+  "i2vSibling": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Happy Horse (multi-character)",
+  "lastCostRefreshAt": null,
+  "logoUrl": "https://tryhappyhorse.com/logo.png",
+  "maxResolution": 1080,
+  "minPlan": "starter",
+  "provider": "fal",
+  "providerCostUsdEstimate": null,
+  "shortLabel": "Happy Horse",
+  "sortOrder": 12,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1",
+    "4:3",
+    "3:4"
+  ],
+  "supportedDurations": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": true,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.116Z"
+  },
+  "videoVariant": "r2v"
+},
+{
+  "_id": {
+    "$oid": "69f4f767c8649c46323d62dd"
+  },
+  "id": "wan_v27_ref2vid",
+  "__v": 0,
+  "badge": "New",
+  "baseCreditsForVideo": 0,
+  "capabilities": {
+    "uiVariant": "ref2v_with_video_refs",
+    "supportsNegativePrompt": true,
+    "supportsMultiShot": true,
+    "providerParamMap": {
+      "referenceImageUrl": "reference_image_urls",
+      "negativePrompt": "negative_prompt"
+    },
+    "inputSlots": [
+      {
+        "key": "refImages",
+        "providerKey": "reference_image_urls",
+        "type": "image_array",
+        "required": false,
+        "uiLabel": "Reference images",
+        "uiHint": "Character/object refs. Max 20MB each.",
+        "uiOrder": 0
+      },
+      {
+        "key": "refVideos",
+        "providerKey": "reference_video_urls",
+        "type": "video_array",
+        "required": false,
+        "uiLabel": "Reference videos",
+        "uiHint": "Motion/appearance ref. Max 100MB, 30s each.",
+        "uiOrder": 1
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 2
+      },
+      {
+        "key": "negativePrompt",
+        "providerKey": "negative_prompt",
+        "type": "string",
+        "required": false,
+        "uiLabel": "Negative prompt",
+        "uiOrder": 3
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 4
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "720p",
+          "1080p"
+        ],
+        "default": "1080p",
+        "uiLabel": "Resolution",
+        "uiOrder": 5
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum_integer",
+        "options": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "default": 5,
+        "coerceToString": false,
+        "uiLabel": "Duration",
+        "uiHint": "Max 10s",
+        "uiOrder": 6
+      },
+      {
+        "key": "multiShots",
+        "providerKey": "multi_shots",
+        "type": "boolean",
+        "default": false,
+        "uiLabel": "Auto multi-shot",
+        "uiHint": "Let the model intelligently segment into multiple shots.",
+        "uiOrder": 7
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 8
+      }
+    ],
+    "constraints": []
+  },
+  "createdAt": {
+    "$date": "2026-05-01T18:56:39.196Z"
+  },
+  "creditsPerImage": 1,
+  "creditsPerSecondVideo": 4,
+  "description": "Multi-subject reference-to-video with optional auto multi-shot segmentation.",
+  "falModelId": "fal-ai/wan/v2.7/reference-to-video",
+  "falVideoModelId": "fal-ai/wan/v2.7/reference-to-video",
+  "i2vSibling": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Wan 2.7",
+  "lastCostRefreshAt": null,
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/pic_flux.png",
+  "maxResolution": 1080,
+  "minPlan": "starter",
+  "provider": "fal",
+  "providerCostUsdEstimate": null,
+  "shortLabel": "Wan 2.7",
+  "sortOrder": 13,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1",
+    "4:3",
+    "3:4"
+  ],
+  "supportedDurations": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "supportsAudio": false,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.118Z"
+  },
+  "videoVariant": "r2v"
+},
+{
+  "_id": {
+    "$oid": "69f5141bc8649c46323d62de"
+  },
+  "id": "kling_o3_4k_ref2v",
+  "__v": 0,
+  "badge": "Premium",
+  "baseCreditsForVideo": 0,
+  "capabilities": {
+    "uiVariant": "ref2v_elements",
+    "supportsEndFrame": true,
+    "supportsMultiShot": true,
+    "supportsSeed": true,
+    "supportedResolutions": [
+      "4k"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "start_image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "inputSlots": [
+      {
+        "key": "elements",
+        "providerKey": "elements",
+        "type": "element_array",
+        "required": false,
+        "minItems": 0,
+        "maxItems": 7,
+        "uiLabel": "Elements (characters / objects)",
+        "uiHint": "Reference as @Element1, @Element2. Each: frontal photo + 1–3 references, OR one video clip.",
+        "uiOrder": 0,
+        "elementShape": {
+          "fields": [
+            {
+              "key": "frontal",
+              "providerKey": "frontal_image_url",
+              "type": "image",
+              "required": false
+            },
+            {
+              "key": "references",
+              "providerKey": "reference_image_urls",
+              "type": "image_array",
+              "required": false,
+              "maxItems": 3
+            },
+            {
+              "key": "video",
+              "providerKey": "video_url",
+              "type": "video",
+              "required": false
+            },
+            {
+              "key": "voiceId",
+              "providerKey": "voice_id",
+              "type": "string",
+              "required": false
+            }
+          ],
+          "oneOfGroups": [
+            [
+              "frontal",
+              "references"
+            ],
+            [
+              "video"
+            ]
+          ]
+        }
+      },
+      {
+        "key": "refImages",
+        "providerKey": "image_urls",
+        "type": "image_array",
+        "required": false,
+        "maxItems": 7,
+        "uiLabel": "Reference images",
+        "uiHint": "Style/appearance refs. @Image1 in prompt. Combined with elements ≤ 7.",
+        "uiOrder": 1
+      },
+      {
+        "key": "startFrame",
+        "providerKey": "start_image_url",
+        "type": "image",
+        "required": false,
+        "uiLabel": "Start frame",
+        "uiOrder": 2
+      },
+      {
+        "key": "endFrame",
+        "providerKey": "end_image_url",
+        "type": "image",
+        "required": false,
+        "uiLabel": "End frame",
+        "uiHint": "Optional last frame for interpolation",
+        "uiOrder": 3
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiHint": "Use @Element1, @Image1 in your prompt. Max 2500 chars.",
+        "uiOrder": 4
+      },
+      {
+        "key": "multiPrompt",
+        "providerKey": "multi_prompt",
+        "type": "string_array_with_duration",
+        "required": false,
+        "uiLabel": "Multi-shot prompts",
+        "uiHint": "One row per shot. Elements & images apply to all shots.",
+        "uiOrder": 5
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 6
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "default": "5",
+        "coerceToString": true,
+        "uiLabel": "Duration (single shot)",
+        "uiOrder": 7
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": false,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 8
+      }
+    ],
+    "constraints": [
+      {
+        "type": "sum_max",
+        "fields": [
+          "elements",
+          "refImages"
+        ],
+        "value": 7,
+        "message": "Elements + reference images cannot exceed 7 combined"
+      },
+      {
+        "type": "requires_one_of",
+        "fields": [
+          "prompt",
+          "multiPrompt",
+          "elements",
+          "refImages",
+          "startFrame"
+        ],
+        "message": "Provide either a prompt or multi-shot prompts"
+      },
+      {
+        "type": "mutual_exclusive",
+        "fields": [
+          "prompt",
+          "multiPrompt"
+        ],
+        "message": "Cannot use both prompt and multi-shot prompts"
+      }
+    ]
+  },
+  "createdAt": {
+    "$date": "2026-05-01T20:59:07.099Z"
+  },
+  "creditsPerImage": 0,
+  "creditsPerSecondVideo": 6,
+  "description": "Premium 4K video with character elements and multi-shot narration.",
+  "falModelId": "fal-ai/kling-video/o3/4k/reference-to-video",
+  "falVideoModelId": "fal-ai/kling-video/o3/4k/reference-to-video",
+  "i2vSibling": null,
+  "isActive": true,
+  "isDefault": false,
+  "kind": "video",
+  "label": "Kling O3 4K",
+  "lastCostRefreshAt": null,
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png",
+  "maxResolution": 2160,
+  "minPlan": "pro",
+  "provider": "fal",
+  "providerCostUsdEstimate": null,
+  "shortLabel": "Kling O3",
+  "sortOrder": 5,
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "supportsAudio": true,
+  "supportsCharacterLock": true,
+  "supportsReferenceImage": true,
+  "updatedAt": {
+    "$date": "2026-05-01T20:59:07.099Z"
+  },
+  "videoVariant": "r2v"
+},
+{
+  "_id": {
+    "$oid": "69f70cac9c850122eebb6404"
+  },
+  "id": "kling_o3_4k_t2v",
+  "shortLabel": "Kling O3 4K T2V",
+  "description": "Premium 4K video with text to video.",
+  "videoVariant": "t2v",
+  "supportsCharacterLock": true,
+  "kind": "video",
+  "provider": "fal",
+  "falModelId": "fal-ai/kling-video/o3/4k/text-to-video",
+  "falVideoModelId": "fal-ai/kling-video/o3/4k/text-to-video",
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "creditsPerSecondVideo": 6,
+  "supportsAudio": true,
+  "supportsReferenceImage": false,
+  "maxResolution": 2160,
+  "baseCreditsForVideo": 0,
+  "creditsPerImage": 0,
+  "minPlan": "pro",
+  "isActive": true,
+  "isDefault": false,
+  "sortOrder": 5,
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png",
+  "badge": "Premium",
+  "capabilities": {
+    "uiVariant": "t2v",
+    "supportsMultiShot": true,
+    "supportsSeed": true,
+    "supportedResolutions": [
+      "4k"
+    ],
+    "requiredFields": [
+      "prompt"
+    ],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "uiOrder": 0
+      },
+      {
+        "key": "multiPrompt",
+        "providerKey": "multi_prompt",
+        "type": "string_array_with_duration",
+        "uiOrder": 1
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "uiOrder": 2
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "default": "5",
+        "coerceToString": true,
+        "uiOrder": 3
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": false,
+        "uiOrder": 4
+      }
+    ],
+    "constraints": [
+      {
+        "type": "requires_one_of",
+        "fields": [
+          "prompt",
+          "multiPrompt"
+        ],
+        "message": "Provide either a prompt or multi-shot prompts"
+      },
+      {
+        "type": "mutual_exclusive",
+        "fields": [
+          "prompt",
+          "multiPrompt"
+        ],
+        "message": "Cannot use both prompt and multi-shot prompts"
+      }
+    ]
+  },
+  "label": "Kling O3 4K T2V"
+},
+{
+  "_id": {
+    "$oid": "69f75c1e9c850122eebb6406"
+  },
+  "id": "kling_o3_4k_i2v",
+  "shortLabel": "Kling O3 4K I2V",
+  "description": "Premium 4K video with image to video.",
+  "videoVariant": "i2v",
+  "supportsCharacterLock": true,
+  "kind": "video",
+  "family": "kling_o3",
+  "tier": "4k",
+  "mode": "i2v",
+  "provider": "fal",
+  "falModelId": "fal-ai/kling-video/o3/4k/image-to-video",
+  "falVideoModelId": "fal-ai/kling-video/o3/4k/image-to-video",
+  "supportedDurations": [
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "creditsPerSecondVideo": 6,
+  "supportsAudio": true,
+  "supportsReferenceImage": false,
+  "maxResolution": 2160,
+  "baseCreditsForVideo": 0,
+  "creditsPerImage": 0,
+  "minPlan": "pro",
+  "isActive": true,
+  "isDefault": false,
+  "sortOrder": 5,
+  "logoUrl": "https://d1735p3aqhycef.cloudfront.net/aigc-web/public/ai-image-creation/models/kling.png",
+  "badge": "Premium",
+  "capabilities": {
+    "uiVariant": "i2v_with_end",
+    "supportsMultiShot": true,
+    "supportsSeed": true,
+    "supportedResolutions": [
+      "4k"
+    ],
+    "requiredFields": [],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "uiLabel": "Prompt"
+      },
+      {
+        "key": "multiPrompt",
+        "providerKey": "multi_prompt",
+        "type": "string_array_with_duration",
+        "uiLabel": "Multi-shot",
+        "options": [
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      },
+      {
+        "key": "startFrame",
+        "providerKey": "image_url",
+        "type": "image",
+        "required": true,
+        "uiLabel": "Start frame"
+      },
+      {
+        "key": "endFrame",
+        "providerKey": "end_image_url",
+        "type": "image",
+        "uiLabel": "End frame (optional)"
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "coerceToString": true,
+        "options": [
+          "5",
+          "10"
+        ],
+        "default": "5",
+        "uiLabel": "Duration"
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": false,
+        "uiLabel": "Audio"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "requires_one_of",
+        "fields": [
+          "prompt",
+          "multiPrompt"
+        ],
+        "message": "Provide a prompt or multi-shot list"
+      },
+      {
+        "type": "mutual_exclusive",
+        "fields": [
+          "prompt",
+          "multiPrompt"
+        ]
+      }
+    ]
+  },
+  "label": "Kling O3 4k Image to Video"
+},
+{
+  "_id": {
+    "$oid": "69fa6bce9c850122eebb640a"
+  },
+  "id": "seedance_2.0",
+  "label": "Seedance 2.0 (Legacy Alias)",
+  "shortLabel": "Seedance",
+  "description": "Legacy alias — routes to Seedance 2.0 fast with full capabilities.",
+  "provider": "fal",
+  "falModelId": "bytedance/seedance-2.0/fast/text-to-video",
+  "falVideoModelId": "bytedance/seedance-2.0/fast/text-to-video",
+  "kind": "video",
+  "videoVariant": "t2v",
+  "badge": "Legacy",
+  "logoUrl": "https://seedance2.ai/logo.png",
+  "supportedAspectRatios": [
+    "16:9",
+    "9:16",
+    "1:1"
+  ],
+  "supportedDurations": [
+    5,
+    10
+  ],
+  "maxResolution": 1024,
+  "creditsPerSecondVideo": 4,
+  "creditsPerImage": 1,
+  "baseCreditsForVideo": 0,
+  "minPlan": "free",
+  "isDefault": true,
+  "isActive": true,
+  "sortOrder": 91,
+  "supportsAudio": true,
+  "supportsCharacterLock": false,
+  "supportsReferenceImage": false,
+  "capabilities": {
+    "supportsEndFrame": true,
+    "supportsNegativePrompt": true,
+    "supportsSeed": true,
+    "supportsMotionControl": true,
+    "supportsMultiShot": false,
+    "supportedResolutions": [
+      "720p",
+      "1080p"
+    ],
+    "providerParamMap": {
+      "referenceImageUrl": "image_url",
+      "endFrameUrl": "end_image_url",
+      "duration": "duration",
+      "motion": "motion_bucket_id",
+      "negativePrompt": "negative_prompt"
+    },
+    "requiredFields": [],
+    "audio": {
+      "supportsNativeAudio": true,
+      "audioParamKey": "generate_audio"
+    },
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Prompt",
+        "uiOrder": 0
+      },
+      {
+        "key": "resolution",
+        "providerKey": "resolution",
+        "type": "enum",
+        "options": [
+          "480p",
+          "720p"
+        ],
+        "default": "720p",
+        "uiLabel": "Resolution",
+        "uiOrder": 1
+      },
+      {
+        "key": "durationSec",
+        "providerKey": "duration",
+        "type": "enum",
+        "options": [
+          "auto",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "default": "auto",
+        "coerceToString": true,
+        "uiLabel": "Duration",
+        "uiOrder": 2
+      },
+      {
+        "key": "aspectRatio",
+        "providerKey": "aspect_ratio",
+        "type": "enum",
+        "options": [
+          "auto",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "default": "auto",
+        "uiLabel": "Aspect ratio",
+        "uiOrder": 3
+      },
+      {
+        "key": "generateAudio",
+        "providerKey": "generate_audio",
+        "type": "boolean",
+        "default": true,
+        "uiLabel": "Generate audio",
+        "uiHint": "Native audio: lip-sync, ambient, SFX",
+        "uiOrder": 4
+      },
+      {
+        "key": "seed",
+        "providerKey": "seed",
+        "type": "integer",
+        "required": false,
+        "uiLabel": "Seed",
+        "uiHint": "Same seed → same output",
+        "uiOrder": 5
+      }
+    ],
+    "uiVariant": "t2v_simple"
+  },
+  "createdAt": {
+    "$date": "2026-05-06T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-06T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69fb0fa59c850122eebb640e"
+  },
+  "id": "gpt_image_2_edit",
+  "label": "GPT Image 2 · Edit",
+  "shortLabel": "GPT Edit",
+  "description": "Edit existing images with prompts, masks, and multi-image context.",
+  "provider": "fal",
+  "falModelId": "openai/gpt-image-2/edit",
+  "kind": "image",
+  "mode": "i2i",
+  "supportedAspectRatios": [
+    "1:1",
+    "4:3",
+    "3:4",
+    "16:9",
+    "9:16"
+  ],
+  "creditsPerImage": 3,
+  "minPlan": "starter",
+  "logoUrl": "https://openai.com/favicon.ico",
+  "badge": "Edit",
+  "sortOrder": 25,
+  "isDefault": false,
+  "isActive": true,
+  "maxResolution": 3840,
+  "supportsReferenceImage": true,
+  "capabilities": {
+    "supportsEndFrame": false,
+    "supportsNegativePrompt": false,
+    "supportsSeed": false,
+    "supportsMotionControl": false,
+    "supportsMultiShot": true,
+    "supportsMask": true,
+    "providerParamMap": {
+      "imageUrls": "image_urls",
+      "maskUrl": "mask_url",
+      "imageSize": "image_size",
+      "quality": "quality",
+      "numImages": "num_images",
+      "outputFormat": "output_format",
+      "syncMode": "sync_mode"
+    },
+    "constraints": [],
+    "inputSlots": [
+      {
+        "key": "imageUrls",
+        "providerKey": "image_urls",
+        "type": "image_array",
+        "required": true,
+        "maxItems": 4,
+        "uiLabel": "Input Images",
+        "uiHint": "Upload one or more images to edit",
+        "uiOrder": 0
+      },
+      {
+        "key": "prompt",
+        "providerKey": "prompt",
+        "type": "string",
+        "required": true,
+        "uiLabel": "Edit Prompt",
+        "uiHint": "Describe what to change",
+        "uiOrder": 1
+      },
+      {
+        "key": "maskUrl",
+        "providerKey": "mask_url",
+        "type": "image",
+        "required": false,
+        "uiLabel": "Mask",
+        "uiHint": "White = edit area, black = keep",
+        "uiOrder": 2
+      },
+      {
+        "key": "imageSize",
+        "providerKey": "image_size",
+        "type": "enum",
+        "options": [
+          "auto",
+          "square_hd",
+          "square",
+          "portrait_4_3",
+          "portrait_16_9",
+          "landscape_4_3",
+          "landscape_16_9"
+        ],
+        "default": "auto",
+        "uiLabel": "Image size",
+        "uiOrder": 3
+      },
+      {
+        "key": "quality",
+        "providerKey": "quality",
+        "type": "enum",
+        "options": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "high",
+        "uiLabel": "Quality",
+        "uiOrder": 4
+      },
+      {
+        "key": "numImages",
+        "providerKey": "num_images",
+        "type": "integer",
+        "default": 1,
+        "min": 1,
+        "max": 4,
+        "uiLabel": "Outputs",
+        "uiOrder": 5
+      },
+      {
+        "key": "outputFormat",
+        "providerKey": "output_format",
+        "type": "enum",
+        "options": [
+          "png",
+          "jpeg",
+          "webp"
+        ],
+        "default": "png",
+        "uiLabel": "Format",
+        "uiOrder": 6
+      },
+      {
+        "key": "syncMode",
+        "providerKey": "sync_mode",
+        "type": "boolean",
+        "default": false,
+        "uiLabel": "Sync mode",
+        "uiHint": "Return base64 instead of storing",
+        "uiOrder": 7
+      }
+    ],
+    "uiVariant": "i2i_editor"
+  },
+  "createdAt": {
+    "$date": "2026-05-06T00:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-06T00:00:00.000Z"
+  }
+}]

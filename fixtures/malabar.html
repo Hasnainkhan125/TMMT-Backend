@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#228B22">
+<title>Malabar Dental Clinics | Dubai Dental</title>
+<style>
+  :root {
+    --primary-color: #228B22;
+    --accent-color: #196F19;
+    --btn-bg: #228B22;
+    --btn-hover: #196F19;
+  }
+  body { font-family: Arial, sans-serif; background: #ffffff; color: #1a1a1a; }
+  .btn, button.primary { background-color: #228B22; color: #fff; border-radius: 4px; padding: 10px 20px; border: none; cursor: pointer; }
+  .btn:hover, button.primary:hover { background-color: #196F19; }
+  nav, .header { background: #228B22; }
+  nav a { color: #fff; }
+  .logo { border: 2px solid #228B22; }
+  .appointment-btn { background: #228B22; }
+  .book-now { background-color: #228B22; border: 1px solid #196F19; }
+  .menu-item { color: #228B22; }
+  a { color: #228B22; }
+  /* Social media brand colors below — must NOT be picked as brand colors */
+  .facebook-icon { color: #1877F2; }
+  .youtube-icon { color: #FF0000; }
+  .ig-bg { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  /* WhatsApp Chaty widget */
+  .chaty-whatsapp { background: #49e670; }
+</style>
+</head>
+<body>
+
+<!-- Header with social icons (data-network pattern used by Blocksy theme) -->
+<header class="header">
+  <div class="logo"><img src="/images/malabar-logo.png" alt="Malabar Dental" /></div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/doctors">Our Doctors</a>
+    <a href="/contact">Contact</a>
+  </nav>
+  <div class="social-icons">
+    <!-- data-network pattern (Blocksy theme) — pass 2 extraction -->
+    <a href="https://www.facebook.com/MalabarDentalClinics" data-network="facebook" aria-label="Facebook">
+      <i class="fab fa-facebook"></i>
+    </a>
+    <a href="https://www.instagram.com/malabardentalclinics/" data-network="instagram" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.youtube.com/@malabardentalclinic" data-network="youtube" aria-label="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+  </div>
+</header>
+
+<!-- Services navigation menu — "Services" parent with submenu so extractServicesFromMenus fires -->
+<nav class="services-menu">
+  <ul>
+    <li class="menu-item">
+      <a href="/services">Services</a>
+      <ul class="sub-menu">
+        <li><a href="/services/orthodontics">Orthodontics</a></li>
+        <li><a href="/services/implantology">Implantology</a></li>
+        <li><a href="/services/teeth-whitening">Teeth Whitening</a></li>
+        <li><a href="/services/root-canal">Root Canal Treatment</a></li>
+        <li><a href="/services/dental-crowns">Dental Crowns</a></li>
+        <li><a href="/services/pediatric-dentistry">Pediatric Dentistry</a></li>
+        <li><a href="/services/periodontics">Periodontics</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<!-- Main hero -->
+<section class="hero">
+  <h1>Your Smile, Our Priority</h1>
+  <p>Malabar Dental Clinics — 4 branches across Dubai offering specialist dental care.</p>
+  <a href="/appointments" class="btn appointment-btn">Book Appointment</a>
+</section>
+
+<!-- Doctors section (swiper carousel pattern) -->
+<section class="team-section">
+  <h2>Our Specialist Team</h2>
+
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide doctor-card">
+        <a href="https://malabardentalclinics.com/doctor/sumayya-babu">
+          <img src="/images/dr-sumayya.jpg" alt="Dr. Sumayya Babu" />
+          <h3>Dr. Sumayya Babu</h3>
+          <p class="specialty">Specialist Orthodontist</p>
+        </a>
+      </div>
+      <div class="swiper-slide doctor-card">
+        <a href="https://malabardentalclinics.com/doctor/anju-elizabeth-raju">
+          <img src="/images/dr-anju.jpg" alt="Dr. Anju Elizabeth Raju" />
+          <h3>Dr. Anju Elizabeth Raju</h3>
+          <p class="specialty">General Dentist</p>
+        </a>
+      </div>
+      <div class="swiper-slide doctor-card">
+        <a href="https://malabardentalclinics.com/doctor/arun-kumar">
+          <img src="/images/dr-arun.jpg" alt="Dr. Arun Kumar" />
+          <h3>Dr. Arun Kumar</h3>
+          <p class="specialty">Specialist Periodontist</p>
+        </a>
+      </div>
+      <div class="swiper-slide doctor-card">
+        <a href="https://malabardentalclinics.com/doctor/faisal-al-rashidi">
+          <img src="/images/dr-faisal.jpg" alt="Dr. Faisal Al Rashidi" />
+          <h3>Dr. Faisal Al Rashidi</h3>
+          <p class="specialty">Specialist Implantologist</p>
+        </a>
+      </div>
+      <div class="swiper-slide doctor-card">
+        <a href="https://malabardentalclinics.com/doctor/nadia-hassan">
+          <img src="/images/dr-nadia.jpg" alt="Dr. Nadia Hassan" />
+          <h3>Dr. Nadia Hassan</h3>
+          <p class="specialty">Specialist Pediatric Dentist</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer with all social links (including the doubled-URL bug to test dedup) -->
+<footer>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/MalabarDentalClinics/https://www.facebook.com/MalabarDentalClinics" class="facebook-icon">
+      <i class="fab fa-facebook-f"></i> Facebook
+    </a>
+    <a href="https://www.instagram.com/malabardentalclinics/" class="ig-bg">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+    <a href="https://www.youtube.com/@malabardentalclinic">
+      <i class="fab fa-youtube youtube-icon"></i> YouTube
+    </a>
+  </div>
+  <div class="footer-contact">
+    <a href="tel:+97142345678">+971 4 234 5678</a>
+    <p>info@malabardentalclinics.com</p>
+    <p>Dubai, UAE</p>
+  </div>
+  <div class="footer-services">
+    <h4>Our Services</h4>
+    <ul>
+      <li><a href="/services/orthodontics">Orthodontics</a></li>
+      <li><a href="/services/implantology">Implantology</a></li>
+      <li><a href="/services/teeth-whitening">Teeth Whitening</a></li>
+      <li><a href="/services/dental-crowns">Dental Crowns</a></li>
+      <li><a href="/services/root-canal">Root Canal Treatment</a></li>
+      <li><a href="/services/periodontics">Periodontics</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- Chaty WhatsApp config blob (Pass 4 extraction — uses "channel"/"value" keys that match WHATSAPP_CONFIG_PATTERNS[0]) -->
+<script>
+var chaty_settings = {
+  "id": "12345",
+  "items": [
+    {"channel": "Whatsapp", "id": "item_1", "value": "971521514300", "icon": "whatsapp", "color": "#49e670"}
+  ]
+};
+</script>
+
+<!-- Inline style with brand color -->
+<div style="background-color: #228B22; padding: 10px; color: white;">
+  Book your appointment today
+</div>
+
+</body>
+</html>

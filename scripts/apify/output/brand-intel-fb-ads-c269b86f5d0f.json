@@ -1,0 +1,27 @@
+{
+  "step": "brand-intel-fb-ads",
+  "actorId": "curious_coder/facebook-ads-library-scraper",
+  "input": {
+    "count": 40,
+    "scrapeAdDetails": true,
+    "scrapePageAds.activeStatus": "all",
+    "scrapePageAds.countryCode": "US",
+    "scrapePageAds.sortBy": "impressions_desc",
+    "scrapePageAds.period": "",
+    "urls": [
+      {
+        "url": "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=US&is_targeted_country=false&media_type=all&q=Qajeera&search_type=keyword_unordered&sort_data%5Bdirection%5D=desc&sort_data%5Bmode%5D=total_impressions"
+      }
+    ]
+  },
+  "runId": "hTpxKNkBA6qcwgYwH",
+  "durationMs": 11378,
+  "itemCount": 1,
+  "items": [
+    {
+      "error": "Ads not found",
+      "errorCode": "ADS_NOT_FOUND",
+      "url": "https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=US&is_targeted_country=false&media_type=all&q=Qajeera&search_type=keyword_unordered&sort_data%5Bdirection%5D=desc&sort_data%5Bmode%5D=total_impressions"
+    }
+  ]
+}

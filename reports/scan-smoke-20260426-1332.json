@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-04-26T09:39:59.496Z",
+  "env": {
+    "hasApifyToken": true,
+    "hasAnthropic": true,
+    "db": "qumak"
+  },
+  "args": {
+    "limit": 3,
+    "only": null,
+    "concurrency": 1,
+    "threshold": 0.7,
+    "timeout": 150000,
+    "json": "reports/scan-smoke-20260426-1332.json",
+    "dryRun": false
+  },
+  "summary": {
+    "total": 3,
+    "evaluated": 0,
+    "passed": 0,
+    "errored": 3,
+    "passRate": 0,
+    "failureMix": {}
+  },
+  "records": [
+    {
+      "url": "https://hotshay.ae",
+      "category": "qsr_karak",
+      "country": "AE",
+      "durationMs": 150002,
+      "scanId": null,
+      "status": null,
+      "error": "scanUrl timed out after 150000ms",
+      "evalResult": null
+    },
+    {
+      "url": "https://www.afghanpalace.ae",
+      "category": "restaurant",
+      "country": "AE",
+      "durationMs": 150000,
+      "scanId": null,
+      "status": null,
+      "error": "scanUrl timed out after 150000ms",
+      "evalResult": null
+    },
+    {
+      "url": "https://www.albaik.com",
+      "category": "qsr",
+      "country": "SA",
+      "durationMs": 150008,
+      "scanId": null,
+      "status": null,
+      "error": "scanUrl timed out after 150000ms",
+      "evalResult": null
+    }
+  ]
+}

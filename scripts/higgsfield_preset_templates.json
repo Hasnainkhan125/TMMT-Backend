@@ -1,0 +1,1559 @@
+[
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "cb3c54b0-3eb8-4718-a477-9f75f4ca9198",
+    "sourceHash": "b13aeec44342b58f6078efac6a7948cc",
+    "name": "Ugc Virtual Try On — general",
+    "description": "ugc virtual try on template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_virtual_try_on",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 10,
+    "defaultResolution": 720,
+    "promptBlueprint": "dynamic {product_image} {avatar}",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Premium product photography, professional studio lighting, Dubai commercial aesthetic",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "dynamic {product_image} {avatar}"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        10
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "Toothbrush"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "general"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "b7a4e32c-6d09-4d04-95e6-6bcfe3851aef",
+    "sourceHash": "03100929773747b1c67572d7b9ee63e0",
+    "name": "Ugc How To — restaurant",
+    "description": "ugc how to template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_how_to",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "{product_image} A 15-second vertical UGC product review video, iPhone aesthetic. The girl is reviewing and demonstrating the blender — not teaching a recipe. She's excited about the product itself.\n⚡ 0–2s — HOOK: Girl holds the dark charcoal green blender base close to camera with both hands, eyes wide, says straight into lens: \"This blender just changed my morning routine.\"\n2–5s: She runs her finger along the matte dark body, taps the single round green dial knob, then spins it slowly — small copper LED dots light up around it. She tilts her head impressed: \"One knob. That's literally all you need.\"\n5–8s: She lifts the clear glass jar, knocks on it with her knuckle — solid sound — and shows the blade assembly underneath: \"Glass jar, not plastic. You can actually see everything inside.\"\n8–11s: She locks the jar onto the base with a satisfying click, loads fruits in, presses the dial — blender fires up instantly. She steps back and gestures at it like \"look at this thing\": \"Hear how quiet that is?\"\n11–13s: She pours the smoothie, holds the glass up to the light — vibrant color, smooth texture: \"First try. No chunks.\"\n13–15s: Takes a sip, looks at the blender, then back to camera with a nod: \"Yeah. Worth it.\"\nStyle: Raw UGC product review, vertical 9:16, warm natural light, clean kitchen counter, blender always in frame, handheld shaky cam, no text overlays.",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Warm Arabic hospitality aesthetic, golden hour food photography, Emirates dining atmosphere",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "{product_image} A 15-second vertical UGC product review video, iPhone aesthetic. The girl is reviewing and demonstrating the blender — not teaching a recipe. She's excited about the product itself.\n⚡ 0–2s — HOOK: Girl holds the dark charcoal green blender base close to camera with both hands, eyes wide, says straight into lens: \"This blender just changed my morning routine.\"\n2–5s: She runs her finger along the matte dark body, taps the single round green dial knob, then spins it slowly — small copper LED dots light up around it. She tilts her head impressed: \"One knob. That's literally all you need.\"\n5–8s: She lifts the clear glass jar, knocks on it with her knuckle — solid sound — and shows the blade assembly underneath: \"Glass jar, not plastic. You can actually see everything inside.\"\n8–11s: She locks the jar onto the base with a satisfying click, loads fruits in, presses the dial — blender fires up instantly. She steps back and gestures at it like \"look at this thing\": \"Hear how quiet that is?\"\n11–13s: She pours the smoothie, holds the glass up to the light — vibrant color, smooth texture: \"First try. No chunks.\"\n13–15s: Takes a sip, looks at the blender, then back to camera with a nod: \"Yeah. Worth it.\"\nStyle: Raw UGC product review, vertical 9:16, warm natural light, clean kitchen counter, blender always in frame, handheld shaky cam, no text overlays."
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "Blender"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "restaurant",
+      "ecommerce",
+      "tech"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "4202353a-b01a-42bb-85c2-8e4635da1890",
+    "sourceHash": "9fe6e5c491006349d1a0bfffee9c8bdf",
+    "name": "Ugc Unboxing — fashion",
+    "description": "ugc unboxing template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_unboxing",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 12,
+    "defaultResolution": 720,
+    "promptBlueprint": "HOOK (0–2 sec) POV handheld shot, slightly shaky. A bright red shopping bag with gold text \"MAISON BRUNÉ\" gets tossed onto a white unmade bed from above — lands with a satisfying thud, tissue paper rustling. Natural bedroom lighting, warm tones. Authentic, raw, no tripod.\nJUMP CUT 1 (2–4 sec) Close-up hands grabbing the red bag handles, pulling it closer. Camera slightly out of focus then snaps sharp. Nail polish, casual outfit visible at edges. Breathing audible.\nJUMP CUT 2 (4–7 sec) Hands pull out the pink dustbag — \"MAISON BRUNÉ PARIS\" printed in rose. Fabric sliding sound. Slow squeeze of the dustbag, then quick reveal yank.\nJUMP CUT 3 (7–12 sec) Tan pebbled leather tote bag drops onto the bed in full frame. Gold chain strap clinks and settles. Camera circles product quickly — chaotic but intentional. Natural window light catches the gold hardware.\nJUMP CUT 4 (12–18 sec) Extreme close-up: fingers running across the grainy leather texture. Gold lobster clasp swings. Chain strap draped over hand — slow pan up arm.\nOUTRO (18–22 sec) Bag held up toward camera with both hands — full reveal. Slight smile reflected in mirror behind. Red shopping bag and pink dustbag visible on bed in background.",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Gulf modest fashion editorial, clean minimal background, premium fabric emphasis",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "HOOK (0–2 sec) POV handheld shot, slightly shaky. A bright red shopping bag with gold text \"MAISON BRUNÉ\" gets tossed onto a white unmade bed from above — lands with a satisfying thud, tissue paper rustling. Natural bedroom lighting, warm tones. Authentic, raw, no tripod.\nJUMP CUT 1 (2–4 sec) Close-up hands grabbing the red bag handles, pulling it closer. Camera slightly out of focus then snaps sharp. Nail polish, casual outfit visible at edges. Breathing audible.\nJUMP CUT 2 (4–7 sec) Hands pull out the pink dustbag — \"MAISON BRUNÉ PARIS\" printed in rose. Fabric sliding sound. Slow squeeze of the dustbag, then quick reveal yank.\nJUMP CUT 3 (7–12 sec) Tan pebbled leather tote bag drops onto the bed in full frame. Gold chain strap clinks and settles. Camera circles product quickly — chaotic but intentional. Natural window light catches the gold hardware.\nJUMP CUT 4 (12–18 sec) Extreme close-up: fingers running across the grainy leather texture. Gold lobster clasp swings. Chain strap draped over hand — slow pan up arm.\nOUTRO (18–22 sec) Bag held up toward camera with both hands — full reveal. Slight smile reflected in mirror behind. Red shopping bag and pink dustbag visible on bed in background."
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        12
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "Maison Brune"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "fashion"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "147b7b5a-b7c7-4849-9174-8ed8804a3bea",
+    "sourceHash": "f2ae9260eac876f5f207f111c7553750",
+    "name": "Ugc Unboxing — skincare",
+    "description": "ugc unboxing template. Requires product image.",
+    "contentType": "ugc_unboxing",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "A 15-second vertical (9:16) ASMR-style jewelry unboxing video. Top-down overhead camera angle throughout. The surface is draped in soft white silk or satin fabric with gentle folds and creases creating elegant light and shadow. Soft diffused natural daylight, warm tone. No text overlays, no logos, no branding. Silent visual ASMR — slow, theatrical, satisfying.\n0–3s: A striking matte red square gift box sits centered on the white silk. The box has a theatrical design — on the lid, a silver heart-shaped clasp with a keyhole in the center, surrounded by four small decorative square patches with graphic black-and-white optical patterns (stripes, sunbursts). A white satin ribbon trails loosely from under the box across the silk. Her hands (natural nails, no polish, one thin gold ring) enter frame from the bottom and gently touch the sides of the box, fingers tracing the heart clasp. She slowly turns the heart clasp — it clicks open with a satisfying motion.\n3–7s: She opens the box — but it doesn't open like a normal lid. The box unfolds outward like a book or a theater stage, the front panel swinging open on a hinge to reveal an elaborate inner scene. Inside is a miniature diorama: a deep navy blue backdrop painted with gold shooting stars and pink paper-cut clouds at the bottom — like a tiny magical night sky theater. In the center of this scene, suspended on a small hook, hangs a single delicate silver chain necklace with a small silver key pendant. The key has a heart-shaped bow at the top. The diorama catches the light — gold foil stars shimmer, the pendant slowly sways. Her hands pause, letting the viewer take in the reveal.\n7–10s: She carefully unclips the necklace from its display hook inside the diorama. She lifts it out slowly — the thin silver chain catches the light as it rises from the blue backdrop. She drapes the necklace across her open palm over the white silk, the key pendant dangling between her fingers. She turns her hand slightly so the pendant rotates and catches the light from different angles — the silver gleams against her skin.\n10–13s: She lays the necklace down on the white silk in a gentle S-curve. She picks up the open box and tilts it toward camera — showing off the inner diorama scene one more time: the navy sky, gold stars, pink clouds, the tiny text at the bottom reading \"you are the key.\" The box's theatrical pop-up construction is visible — layered paper-cut elements creating depth.\n13–15s: Final flatlay — the open red box sits at the top of frame, its diorama interior visible like a tiny stage. The silver key necklace lies on the white silk below in an elegant curve. The white ribbon trails diagonally across the frame. Her hand gently adjusts the pendant one last time, then slowly pulls away. The silk catches a gentle highlight. Hold. End.\nStyle: Aesthetic jewelry unboxing / visual ASMR. Overhead POV, only hands visible. The star of the video is the packaging — a theatrical, interactive box that opens like a storybook to reveal a miniature paper-cut diorama scene, making the unboxing feel like unlocking a tiny magical world. One single jewelry piece inside — the reveal is slow and dramatic. Color palette: matte red box, navy blue interior, gold foil accents, pink paper clouds, silver jewelry, pure white silk background. The contrast between the white silk and red box is bold and eye-catching. Intimate, luxurious, deeply satisfying, gift-worthy. No brand names visible anywhere. {product_image}",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Gulf luxury beauty aesthetic, warm Dubai premium retail atmosphere, soft diffused light",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "A 15-second vertical (9:16) ASMR-style jewelry unboxing video. Top-down overhead camera angle throughout. The surface is draped in soft white silk or satin fabric with gentle folds and creases creating elegant light and shadow. Soft diffused natural daylight, warm tone. No text overlays, no logos, no branding. Silent visual ASMR — slow, theatrical, satisfying.\n0–3s: A striking matte red square gift box sits centered on the white silk. The box has a theatrical design — on the lid, a silver heart-shaped clasp with a keyhole in the center, surrounded by four small decorative square patches with graphic black-and-white optical patterns (stripes, sunbursts). A white satin ribbon trails loosely from under the box across the silk. Her hands (natural nails, no polish, one thin gold ring) enter frame from the bottom and gently touch the sides of the box, fingers tracing the heart clasp. She slowly turns the heart clasp — it clicks open with a satisfying motion.\n3–7s: She opens the box — but it doesn't open like a normal lid. The box unfolds outward like a book or a theater stage, the front panel swinging open on a hinge to reveal an elaborate inner scene. Inside is a miniature diorama: a deep navy blue backdrop painted with gold shooting stars and pink paper-cut clouds at the bottom — like a tiny magical night sky theater. In the center of this scene, suspended on a small hook, hangs a single delicate silver chain necklace with a small silver key pendant. The key has a heart-shaped bow at the top. The diorama catches the light — gold foil stars shimmer, the pendant slowly sways. Her hands pause, letting the viewer take in the reveal.\n7–10s: She carefully unclips the necklace from its display hook inside the diorama. She lifts it out slowly — the thin silver chain catches the light as it rises from the blue backdrop. She drapes the necklace across her open palm over the white silk, the key pendant dangling between her fingers. She turns her hand slightly so the pendant rotates and catches the light from different angles — the silver gleams against her skin.\n10–13s: She lays the necklace down on the white silk in a gentle S-curve. She picks up the open box and tilts it toward camera — showing off the inner diorama scene one more time: the navy sky, gold stars, pink clouds, the tiny text at the bottom reading \"you are the key.\" The box's theatrical pop-up construction is visible — layered paper-cut elements creating depth.\n13–15s: Final flatlay — the open red box sits at the top of frame, its diorama interior visible like a tiny stage. The silver key necklace lies on the white silk below in an elegant curve. The white ribbon trails diagonally across the frame. Her hand gently adjusts the pendant one last time, then slowly pulls away. The silk catches a gentle highlight. Hold. End.\nStyle: Aesthetic jewelry unboxing / visual ASMR. Overhead POV, only hands visible. The star of the video is the packaging — a theatrical, interactive box that opens like a storybook to reveal a miniature paper-cut diorama scene, making the unboxing feel like unlocking a tiny magical world. One single jewelry piece inside — the reveal is slow and dramatic. Color palette: matte red box, navy blue interior, gold foil accents, pink paper clouds, silver jewelry, pure white silk background. The contrast between the white silk and red box is bold and eye-catching. Intimate, luxurious, deeply satisfying, gift-worthy. No brand names visible anywhere. {product_image}"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "333"
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": false,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "skincare",
+      "beauty",
+      "perfume"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "c460dcc5-4f84-4e7e-90e7-2a786c640d21",
+    "sourceHash": "e82bc00bb26c26e163ac7aca12001d60",
+    "name": "Ugc — skincare",
+    "description": "ugc review template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_review",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "A 15-second vertical (9:16) UGC try-on video filmed on a smartphone. A young East Asian woman with a short black bob haircut stands in front of a full-length mirror in a minimalist bedroom — neutral beige walls, natural daylight from a window. Handheld selfie-style camera, authentic influencer energy, slightly warm tones.\n0–3s: She faces the mirror camera wearing a simple white bathrobe or basic white tee and shorts. She holds up the outfit pieces on hangers — a black fitted top and a black-and-white striped mini skirt — showing them to camera with a \"watch this\" expression, raises an eyebrow playfully.\n3–5s: Quick jump cut — she's now wearing the fitted black short-sleeve top with a mock neckline, slightly structured and tailored at the waist. She adjusts the hem, smoothing it down, turns side to side checking the fit in the mirror. The top has a clean minimal look — matte black fabric, cap sleeves, a subtle peplum-like shape at the waist.\n5–8s: Another jump cut — she pulls on the black-and-white horizontal striped knit mini skirt, tugging it over her hips. The skirt is very short, body-con, sitting low on the waist just below the top's hem. She adjusts the waistband and does a quick spin to show the fit from all angles.\n8–11s: Jump cut — now the full outfit is complete. She's added bright neon yellow opaque tights covering her legs entirely, and matching neon yellow pointed-toe stiletto pumps. She puts on a pair of retro oval sunglasses with yellow-amber tinted lenses. She steps back from the mirror to show the full look head to toe — black top, striped mini, yellow tights, yellow heels, yellow shades. She does a confident slow turn, hand on hip.\n11–15s: She faces the mirror straight on, strikes a final pose — legs slightly apart, arms at her sides, chin slightly up, deadpan editorial expression through the yellow sunglasses. She holds the pose for a beat, then breaks into a small satisfied smile. She reaches toward the phone and the video cuts.\nStyle: Authentic UGC / TikTok try-on haul aesthetic. Quick jump cuts between each stage of getting dressed. Handheld slight camera shake. Natural bedroom lighting, no ring light. The outfit is the star — the contrast between the monochrome black-and-white top half and the bold neon yellow bottom half creates a striking graphic pop-art look. The vibe is effortlessly cool, editorial-meets-street, confident. No music specified. No text, no logos, no filters. {avatar} {product_image}",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Gulf luxury beauty aesthetic, warm Dubai premium retail atmosphere, soft diffused light",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "A 15-second vertical (9:16) UGC try-on video filmed on a smartphone. A young East Asian woman with a short black bob haircut stands in front of a full-length mirror in a minimalist bedroom — neutral beige walls, natural daylight from a window. Handheld selfie-style camera, authentic influencer energy, slightly warm tones.\n0–3s: She faces the mirror camera wearing a simple white bathrobe or basic white tee and shorts. She holds up the outfit pieces on hangers — a black fitted top and a black-and-white striped mini skirt — showing them to camera with a \"watch this\" expression, raises an eyebrow playfully.\n3–5s: Quick jump cut — she's now wearing the fitted black short-sleeve top with a mock neckline, slightly structured and tailored at the waist. She adjusts the hem, smoothing it down, turns side to side checking the fit in the mirror. The top has a clean minimal look — matte black fabric, cap sleeves, a subtle peplum-like shape at the waist.\n5–8s: Another jump cut — she pulls on the black-and-white horizontal striped knit mini skirt, tugging it over her hips. The skirt is very short, body-con, sitting low on the waist just below the top's hem. She adjusts the waistband and does a quick spin to show the fit from all angles.\n8–11s: Jump cut — now the full outfit is complete. She's added bright neon yellow opaque tights covering her legs entirely, and matching neon yellow pointed-toe stiletto pumps. She puts on a pair of retro oval sunglasses with yellow-amber tinted lenses. She steps back from the mirror to show the full look head to toe — black top, striped mini, yellow tights, yellow heels, yellow shades. She does a confident slow turn, hand on hip.\n11–15s: She faces the mirror straight on, strikes a final pose — legs slightly apart, arms at her sides, chin slightly up, deadpan editorial expression through the yellow sunglasses. She holds the pose for a beat, then breaks into a small satisfied smile. She reaches toward the phone and the video cuts.\nStyle: Authentic UGC / TikTok try-on haul aesthetic. Quick jump cuts between each stage of getting dressed. Handheld slight camera shake. Natural bedroom lighting, no ring light. The outfit is the star — the contrast between the monochrome black-and-white top half and the bold neon yellow bottom half creates a striking graphic pop-art look. The vibe is effortlessly cool, editorial-meets-street, confident. No music specified. No text, no logos, no filters. {avatar} {product_image}"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "222"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "skincare",
+      "beauty",
+      "fashion",
+      "tech",
+      "haircare",
+      "beauty"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "a74e9198-2be2-447e-ae6e-00b5fc7907de",
+    "sourceHash": "9888974e1a7fd4695cfe3c09408063c6",
+    "name": "Ugc — skincare",
+    "description": "ugc review template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_review",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "{product_image} \n\nAuthentic amateur-style UGC in a bright bathroom: white tiles, soft natural daylight from a window, real-life details (folded towel, small plant, simple ceramics). Handheld feel with subtle micro-shake, natural smartphone-lens look, no cinematic grading. Feels like a real girl filming a quick clip for friends. The phone, camera, and any mirror reflection of a phone or hands holding a phone must never be visible. No mirrors showing the filming setup at all — if a mirror appears, it only shows her face and the room, never a device.\n0–2s — Visual hook: Extreme close-up of the girl's face, slightly off-center, lit by soft window light. She leans in fast with wide surprised eyes and a half-smile, like she just noticed something amazing on her skin. Natural ambient sound: faint water drip + her soft excited \"okay wait—\". Tiny handheld wobble. No on-screen text.\n2–4s: Quick cut — her hand brings [PRODUCT] up next to her cheek, turning it once so the label catches the light. She says in casual upbeat American English: \"I literally cannot believe how good this is.\"\n4–7s: Tight close-up of her hands applying [PRODUCT] to her skin — real texture, real motion, product visibly going on. Soft bathroom room tone. Voiceover: \"Look how it just melts in — my skin already feels insane.\"\n7–10s: Medium shot of her face and shoulders, soft daylight, she touches the area where she applied it and turns her face gently side to side in the light to show the glow. Small natural giggle. Says: \"Okay, I'm obsessed. I'm not going back.\"\n10–12s: Final close-up: both hands hold [PRODUCT] up near her face, she gives a small playful shrug and a genuine smile, clip ends mid-motion like a real social post.\nAudio: Only her voice + natural bathroom room tone (faint water, soft tile echo). No music, no sound effects, no narrator. Voice: warm, friendly, mid-20s American accent, conversational, natural breaths and pauses, pe",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Gulf luxury beauty aesthetic, warm Dubai premium retail atmosphere, soft diffused light",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "{product_image} \n\nAuthentic amateur-style UGC in a bright bathroom: white tiles, soft natural daylight from a window, real-life details (folded towel, small plant, simple ceramics). Handheld feel with subtle micro-shake, natural smartphone-lens look, no cinematic grading. Feels like a real girl filming a quick clip for friends. The phone, camera, and any mirror reflection of a phone or hands holding a phone must never be visible. No mirrors showing the filming setup at all — if a mirror appears, it only shows her face and the room, never a device.\n0–2s — Visual hook: Extreme close-up of the girl's face, slightly off-center, lit by soft window light. She leans in fast with wide surprised eyes and a half-smile, like she just noticed something amazing on her skin. Natural ambient sound: faint water drip + her soft excited \"okay wait—\". Tiny handheld wobble. No on-screen text.\n2–4s: Quick cut — her hand brings [PRODUCT] up next to her cheek, turning it once so the label catches the light. She says in casual upbeat American English: \"I literally cannot believe how good this is.\"\n4–7s: Tight close-up of her hands applying [PRODUCT] to her skin — real texture, real motion, product visibly going on. Soft bathroom room tone. Voiceover: \"Look how it just melts in — my skin already feels insane.\"\n7–10s: Medium shot of her face and shoulders, soft daylight, she touches the area where she applied it and turns her face gently side to side in the light to show the glow. Small natural giggle. Says: \"Okay, I'm obsessed. I'm not going back.\"\n10–12s: Final close-up: both hands hold [PRODUCT] up near her face, she gives a small playful shrug and a genuine smile, clip ends mid-motion like a real social post.\nAudio: Only her voice + natural bathroom room tone (faint water, soft tile echo). No music, no sound effects, no narrator. Voice: warm, friendly, mid-20s American accent, conversational, natural breaths and pauses, pe"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "Nude lab"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "skincare",
+      "beauty",
+      "tech"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "d583f9aa-f200-4ead-8aec-aa20c2ece44d",
+    "sourceHash": "b7c743dbaca3baeee6221f4e419cc4a5",
+    "name": "Ugc — skincare",
+    "description": "ugc review template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_review",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "{avatar}:\nA 15-second vertical (9:16) UGC try-on video filmed on a smartphone. A young East Asian woman with a short black bob haircut stands in front of a full-length mirror in a minimalist bedroom — neutral beige walls, natural daylight from a window. Handheld selfie-style camera, authentic influencer energy, slightly warm tones.\n0–3s: She faces the mirror camera wearing a simple white bathrobe or basic white tee and shorts. She holds up the outfit pieces on hangers — a black fitted top and a black-and-white striped mini skirt — showing them to camera with a \"watch this\" expression, raises an eyebrow playfully.\n3–5s: Quick jump cut — she's now wearing the fitted black short-sleeve top with a mock neckline, slightly structured and tailored at the waist. She adjusts the hem, smoothing it down, turns side to side checking the fit in the mirror. The top has a clean minimal look — matte black fabric, cap sleeves, a subtle peplum-like shape at the waist.\n5–8s: Another jump cut — she pulls on the black-and-white horizontal striped knit mini skirt, tugging it over her hips. The skirt is very short, body-con, sitting low on the waist just below the top's hem. She adjusts the waistband and does a quick spin to show the fit from all angles.\n8–11s: Jump cut — now the full outfit is complete. She's added bright neon yellow opaque tights covering her legs entirely, and matching neon yellow pointed-toe stiletto pumps. She puts on a pair of retro oval sunglasses with yellow-amber tinted lenses. She steps back from the mirror to show the full look head to toe — black top, striped mini, yellow tights, yellow heels, yellow shades. She does a confident slow turn, hand on hip.\n11–15s: She faces the mirror straight on, strikes a final pose — legs slightly apart, arms at her sides, chin slightly up, deadpan editorial expression through the yellow sunglasses. She holds the pose for a beat, then breaks into a small satisfied smile. She reaches toward the phone and the video cuts.\nStyle: Authentic UGC / TikTok try-on haul aesthetic. Quick jump cuts between each stage of getting dressed. Handheld slight camera shake. Natural bedroom lighting, no ring light. The outfit is the star — the contrast between the monochrome black-and-white top half and the bold neon yellow bottom half creates a striking graphic pop-art look. The vibe is effortlessly cool, editorial-meets-street, confident. No music specified. No text, no logos, no filters. {product_image}",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Gulf luxury beauty aesthetic, warm Dubai premium retail atmosphere, soft diffused light",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "{avatar}:\nA 15-second vertical (9:16) UGC try-on video filmed on a smartphone. A young East Asian woman with a short black bob haircut stands in front of a full-length mirror in a minimalist bedroom — neutral beige walls, natural daylight from a window. Handheld selfie-style camera, authentic influencer energy, slightly warm tones.\n0–3s: She faces the mirror camera wearing a simple white bathrobe or basic white tee and shorts. She holds up the outfit pieces on hangers — a black fitted top and a black-and-white striped mini skirt — showing them to camera with a \"watch this\" expression, raises an eyebrow playfully.\n3–5s: Quick jump cut — she's now wearing the fitted black short-sleeve top with a mock neckline, slightly structured and tailored at the waist. She adjusts the hem, smoothing it down, turns side to side checking the fit in the mirror. The top has a clean minimal look — matte black fabric, cap sleeves, a subtle peplum-like shape at the waist.\n5–8s: Another jump cut — she pulls on the black-and-white horizontal striped knit mini skirt, tugging it over her hips. The skirt is very short, body-con, sitting low on the waist just below the top's hem. She adjusts the waistband and does a quick spin to show the fit from all angles.\n8–11s: Jump cut — now the full outfit is complete. She's added bright neon yellow opaque tights covering her legs entirely, and matching neon yellow pointed-toe stiletto pumps. She puts on a pair of retro oval sunglasses with yellow-amber tinted lenses. She steps back from the mirror to show the full look head to toe — black top, striped mini, yellow tights, yellow heels, yellow shades. She does a confident slow turn, hand on hip.\n11–15s: She faces the mirror straight on, strikes a final pose — legs slightly apart, arms at her sides, chin slightly up, deadpan editorial expression through the yellow sunglasses. She holds the pose for a beat, then breaks into a small satisfied smile. She reaches toward the phone and the video cuts.\nStyle: Authentic UGC / TikTok try-on haul aesthetic. Quick jump cuts between each stage of getting dressed. Handheld slight camera shake. Natural bedroom lighting, no ring light. The outfit is the star — the contrast between the monochrome black-and-white top half and the bold neon yellow bottom half creates a striking graphic pop-art look. The vibe is effortlessly cool, editorial-meets-street, confident. No music specified. No text, no logos, no filters. {product_image}"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "222"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "skincare",
+      "beauty",
+      "fashion",
+      "tech",
+      "haircare",
+      "beauty"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "50b6f2e9-7b3b-41fd-9a6e-0c237de4a96f",
+    "sourceHash": "dbf63ca7174f6cab9461733b6592a732",
+    "name": "Product Showcase — general",
+    "description": "product showcase template. Requires product image.",
+    "contentType": "product_showcase",
+    "contentGroup": "general",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 10,
+    "defaultResolution": 720,
+    "promptBlueprint": "dynamic {product_image}",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Premium product photography, professional studio lighting, Dubai commercial aesthetic",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "dynamic {product_image}"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        10
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "Vazu"
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": false,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "general"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "70de35cc-8a02-43d3-be72-27547d78ff94",
+    "sourceHash": "d2d53f216d15a14861cf282322d5dde1",
+    "name": "Talking Head — tech",
+    "description": "ugc talking head template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_talking_head",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "A young stylish female influencer {avatar} s in a cozy modern apartment with soft natural daylight. She records herself using the front camera of her phone (selfie mode), holding the phone in one hand and the AURA {product_image} Tumbler 40oz in the other. The camera has slight natural hand movement, casual framing, and feels real and unpolished.\nShe looks directly into the camera, relaxed and natural, like talking to a friend. While speaking, she casually rotates the tumbler, shows the handle and lid, lightly taps it, and takes a small sip.\nDialogue (natural, calm, ~15 sec):\n\"I’ve been using this tumbler every day lately, and I didn’t expect to like it this much.\nMy drinks stay cold literally all day, which is kind of crazy.\nIt doesn’t leak, it fits in my car, and the handle is actually super comfortable.\nI just end up taking it with me everywhere now.\"",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Precision product photography, minimal background, sharp edge detail",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "A young stylish female influencer {avatar} s in a cozy modern apartment with soft natural daylight. She records herself using the front camera of her phone (selfie mode), holding the phone in one hand and the AURA {product_image} Tumbler 40oz in the other. The camera has slight natural hand movement, casual framing, and feels real and unpolished.\nShe looks directly into the camera, relaxed and natural, like talking to a friend. While speaking, she casually rotates the tumbler, shows the handle and lid, lightly taps it, and takes a small sip.\nDialogue (natural, calm, ~15 sec):\n\"I’ve been using this tumbler every day lately, and I didn’t expect to like it this much.\nMy drinks stay cold literally all day, which is kind of crazy.\nIt doesn’t leak, it fits in my car, and the handle is actually super comfortable.\nI just end up taking it with me everywhere now.\""
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "AURA"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "tech"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "c196813a-1d3e-4ee3-8bb4-40518e1f44bc",
+    "sourceHash": "de95641e510729aab1d9816ba59ad3fe",
+    "name": "Virtual Try On — general",
+    "description": "ugc review template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_review",
+    "contentGroup": "brand",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "{product_image} use this location   {avatar}",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Premium product photography, professional studio lighting, Dubai commercial aesthetic",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "{product_image} use this location   {avatar}"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "Clothes"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "general"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "87bc0d8f-d885-439b-8274-7f16b4d69910",
+    "sourceHash": "93c7a2632d155f152a9ae0edea314e65",
+    "name": "Ugc — skincare",
+    "description": "ugc review template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_review",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 13,
+    "defaultResolution": 720,
+    "promptBlueprint": "A trendy 13-second vertical (3:4) street style fashion video filmed on a European cobblestone street with grey stone building facades. Shot on a smartphone in a raw, authentic influencer/TikTok style with fast dynamic cuts, varied camera angles, and natural daylight. The model is a stylish young Asian woman with dark hair pulled into a sleek bun, wearing retro cat-eye glasses, pearl drop earrings, and red nail polish.\nOutfit: A burgundy-wine leather blazer with structured shoulders over a black corset top layered on a white collared shirt with a thin black tie. A short black bubble skirt (puffball mini). Sheer wine-red tinted tights. Black pointed-toe ankle-strap heels. A compact elongated burgundy leather bowling bag with silver chain detail and star-shaped charms hanging across the front.\nScene 1 — Accessory Tease (0–1.5s): Opens with a first-person POV shot from behind the camera — someone's hand extends into frame from the left, holding the burgundy bowling bag by its straps toward the model who stands a few meters away on the sidewalk in front of a stone building entrance with a dark glass door. The model reacts with an excited, surprised expression — mouth open, hands gesturing \"give it to me.\" Camera is slightly low angle, handheld, casual. The bag is sharp in the foreground, the model slightly soft in the background.\nScene 2 — Detail Flatlay (1.5–3.5s): Cut to a top-down POV shot looking down at the ground. The model is sitting on the cobblestones — we see her legs in sheer wine tights and black pointed heels from above. The burgundy bag sits on the ground to the left. She holds a phone in her hand between her feet, scrolling through a photo of herself in the same outfit (a mirror-selfie style shot visible on the phone screen). Her other hand with burgundy nails rests near the phone. The composition is a casual \"what's in my feed\" moment. Camera is steady, overhead angle.\nScene 3 — Bag Pickup (3.5–5s): Close-up side angle shot at ground level. The model crouches down to pick up the bag from the cobblestones — we see her burgundy leather sleeve with white shirt cuff peeking out, her hand gripping the bag handles, the silver chain detail catching light. Her legs in tights and heels are visible in the background. Intimate detail shot emphasizing the bag texture and craftsmanship.\nScene 4 — Low Angle Power Shot (5–6.5s): Ultra-low angle shot from the ground looking up at the model. She towers over the camera confidently, the burgundy blazer and black corset framing the shot. The sky, building facade, and tree branches are visible behind her. Strong backlighting creates a slight lens flare. She has a confident, editorial expression, looking slightly down at camera.\nScene 5 — Walking Detail (6.5–7.5s): Side-angle close-up at knee height. The model bends down or walks, picking up / adjusting the bag. Focus on the leather blazer sleeve, bag handles, her hands, and the silver chain swinging. The stone wall provides a neutral textured backdrop. Natural motion blur.\nScene 6 — Portrait with Bag (7.5–9s): Medium close-up selfie-style angle. The model faces the camera, slightly turned, showing off the bag hanging from her arm. She holds the bag strap with one hand near her face, showing off her red nails and pearl earrings. Confident, slightly playful expression. The glass entrance door and stone columns are behind her. Natural daylight, warm tones.\nScene 7 — Walking Shot Profile (9–10.5s): Side profile tracking shot. The model walks past the stone building wall, bag on her shoulder. Her full outfit is visible — the burgundy blazer, black corset, bubble skirt, wine tights, pointed heels. The bag hangs perfectly at her side with the chain catching light. A green potted plant is visible near the entrance. She walks with purpose, slightly looking down. Cinematic, editorial feel.\nScene 8 — Full Body Pose (10.5–12s): Full body frontal shot. The model stands between stone columns, facing the camera directly. She raises both hands near her chin in a cute, playful gesture. The entire outfit is visible head to toe — glasses, blazer, corset, skirt, tights, heels, bag on shoulder. She shifts her weight slightly, posing naturally.\nScene 9 — Final Walk Away (12–13s): Three-quarter back/side tracking shot. The model walks away along the building, looking over her shoulder toward camera with a knowing glance. The bag is tucked under her arm. Sunlight catches the leather blazer. She moves with effortless cool energy. The video ends mid-stride.\nOverall style: Raw, authentic street style content shot on smartphone. Fast cuts (1–2 seconds each). Mix of POV, close-up detail, low angle, and full body shots. Natural handheld camera movement with slight shake. Warm European daylight. Color palette dominated by burgundy/wine, black, and cool grey stone. Monochromatic outfit coordination — bag, blazer, tights, and nails all matching in wine tones. No text overlays, no filters. Upbeat background music (not generated). Fashion influencer energy — confident, playful, editorial yet casual. {avatar} {product_image}",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Gulf luxury beauty aesthetic, warm Dubai premium retail atmosphere, soft diffused light",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "A trendy 13-second vertical (3:4) street style fashion video filmed on a European cobblestone street with grey stone building facades. Shot on a smartphone in a raw, authentic influencer/TikTok style with fast dynamic cuts, varied camera angles, and natural daylight. The model is a stylish young Asian woman with dark hair pulled into a sleek bun, wearing retro cat-eye glasses, pearl drop earrings, and red nail polish.\nOutfit: A burgundy-wine leather blazer with structured shoulders over a black corset top layered on a white collared shirt with a thin black tie. A short black bubble skirt (puffball mini). Sheer wine-red tinted tights. Black pointed-toe ankle-strap heels. A compact elongated burgundy leather bowling bag with silver chain detail and star-shaped charms hanging across the front.\nScene 1 — Accessory Tease (0–1.5s): Opens with a first-person POV shot from behind the camera — someone's hand extends into frame from the left, holding the burgundy bowling bag by its straps toward the model who stands a few meters away on the sidewalk in front of a stone building entrance with a dark glass door. The model reacts with an excited, surprised expression — mouth open, hands gesturing \"give it to me.\" Camera is slightly low angle, handheld, casual. The bag is sharp in the foreground, the model slightly soft in the background.\nScene 2 — Detail Flatlay (1.5–3.5s): Cut to a top-down POV shot looking down at the ground. The model is sitting on the cobblestones — we see her legs in sheer wine tights and black pointed heels from above. The burgundy bag sits on the ground to the left. She holds a phone in her hand between her feet, scrolling through a photo of herself in the same outfit (a mirror-selfie style shot visible on the phone screen). Her other hand with burgundy nails rests near the phone. The composition is a casual \"what's in my feed\" moment. Camera is steady, overhead angle.\nScene 3 — Bag Pickup (3.5–5s): Close-up side angle shot at ground level. The model crouches down to pick up the bag from the cobblestones — we see her burgundy leather sleeve with white shirt cuff peeking out, her hand gripping the bag handles, the silver chain detail catching light. Her legs in tights and heels are visible in the background. Intimate detail shot emphasizing the bag texture and craftsmanship.\nScene 4 — Low Angle Power Shot (5–6.5s): Ultra-low angle shot from the ground looking up at the model. She towers over the camera confidently, the burgundy blazer and black corset framing the shot. The sky, building facade, and tree branches are visible behind her. Strong backlighting creates a slight lens flare. She has a confident, editorial expression, looking slightly down at camera.\nScene 5 — Walking Detail (6.5–7.5s): Side-angle close-up at knee height. The model bends down or walks, picking up / adjusting the bag. Focus on the leather blazer sleeve, bag handles, her hands, and the silver chain swinging. The stone wall provides a neutral textured backdrop. Natural motion blur.\nScene 6 — Portrait with Bag (7.5–9s): Medium close-up selfie-style angle. The model faces the camera, slightly turned, showing off the bag hanging from her arm. She holds the bag strap with one hand near her face, showing off her red nails and pearl earrings. Confident, slightly playful expression. The glass entrance door and stone columns are behind her. Natural daylight, warm tones.\nScene 7 — Walking Shot Profile (9–10.5s): Side profile tracking shot. The model walks past the stone building wall, bag on her shoulder. Her full outfit is visible — the burgundy blazer, black corset, bubble skirt, wine tights, pointed heels. The bag hangs perfectly at her side with the chain catching light. A green potted plant is visible near the entrance. She walks with purpose, slightly looking down. Cinematic, editorial feel.\nScene 8 — Full Body Pose (10.5–12s): Full body frontal shot. The model stands between stone columns, facing the camera directly. She raises both hands near her chin in a cute, playful gesture. The entire outfit is visible head to toe — glasses, blazer, corset, skirt, tights, heels, bag on shoulder. She shifts her weight slightly, posing naturally.\nScene 9 — Final Walk Away (12–13s): Three-quarter back/side tracking shot. The model walks away along the building, looking over her shoulder toward camera with a knowing glance. The bag is tucked under her arm. Sunlight catches the leather blazer. She moves with effortless cool energy. The video ends mid-stride.\nOverall style: Raw, authentic street style content shot on smartphone. Fast cuts (1–2 seconds each). Mix of POV, close-up detail, low angle, and full body shots. Natural handheld camera movement with slight shake. Warm European daylight. Color palette dominated by burgundy/wine, black, and cool grey stone. Monochromatic outfit coordination — bag, blazer, tights, and nails all matching in wine tones. No text overlays, no filters. Upbeat background music (not generated). Fashion influencer energy — confident, playful, editorial yet casual. {avatar} {product_image}"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        13
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "bag"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "skincare",
+      "beauty",
+      "fashion",
+      "tech",
+      "haircare",
+      "beauty"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  },
+  {
+    "source": "higgsfield_preset",
+    "sourceId": "85fdb56a-fdaa-4c53-85d2-7ea079ba38ab",
+    "sourceHash": "036bb545f3cc01cbc81748a5f16859e7",
+    "name": "Ugc Unboxing — general",
+    "description": "ugc unboxing template. Requires product image. Requires avatar selection.",
+    "contentType": "ugc_unboxing",
+    "contentGroup": "ugc",
+    "outputType": "video",
+    "aspectRatio": "3:4",
+    "defaultDuration": 15,
+    "defaultResolution": 720,
+    "promptBlueprint": "Man influencer {avatar}\nсначала вскрывает коробку <<<image_1>>> потом достает из коробки товар с упаковкой {product_image}\nDialogue (quiet, impressed, natural):\n\"Okay… wow.\nThis is actually beautiful.\nIt feels… really refined.\nLike, nothing extra — just clean, perfect details.\"\n\nNO MUSIC, ONLY SFX",
+    "promptBlueprintAr": null,
+    "gulfContextModifier": "Premium product photography, professional studio lighting, Dubai commercial aesthetic",
+    "negativePrompt": "text overlay, watermark, logo, blurry, low quality, distorted",
+    "i18nPrompts": {
+      "en": "Man influencer {avatar}\nсначала вскрывает коробку <<<image_1>>> потом достает из коробки товар с упаковкой {product_image}\nDialogue (quiet, impressed, natural):\n\"Okay… wow.\nThis is actually beautiful.\nIt feels… really refined.\nLike, nothing extra — just clean, perfect details.\"\n\nNO MUSIC, ONLY SFX"
+    },
+    "supportedModels": [
+      "higgsfield_marketing_studio"
+    ],
+    "recommendedModel": "higgsfield_marketing_studio",
+    "modelParameters": {
+      "inputImageMode": "product",
+      "nativeAudio": true,
+      "promptSupport": [
+        "positive"
+      ],
+      "durations": [
+        15
+      ],
+      "resolutions": [
+        720
+      ],
+      "maxPromptLength": 5000,
+      "multiShotSupport": false,
+      "maxShots": 1,
+      "minShotDuration": 3,
+      "imageSpecLimits": {
+        "minHeight": 300,
+        "maxHeight": 4096,
+        "minWidth": 300,
+        "maxWidth": 4096,
+        "maxFileSizeBytes": 15728640,
+        "requireSameAspect": false
+      }
+    },
+    "modelPricing": [
+      {
+        "modelId": "higgsfield_marketing_studio",
+        "creditsPer720s": 2,
+        "creditsWithAudio": 1
+      }
+    ],
+    "inputSlots": [
+      {
+        "key": "product_image",
+        "type": "image",
+        "title": "Product Image",
+        "required": true,
+        "allowedFormats": [
+          "jpeg",
+          "png",
+          "webp"
+        ],
+        "maxFileSizeMB": 15
+      },
+      {
+        "key": "product_name",
+        "type": "text",
+        "title": "Product Name",
+        "required": true,
+        "maxLength": 100,
+        "default": "ÉMERA"
+      },
+      {
+        "key": "avatar",
+        "type": "avatar",
+        "title": "Presenter Avatar",
+        "required": true
+      },
+      {
+        "key": "hook_line",
+        "type": "text",
+        "title": "Opening Hook (optional — auto-generated if empty)",
+        "required": false,
+        "maxLength": 150
+      },
+      {
+        "key": "cta_line",
+        "type": "text",
+        "title": "Call to Action (optional)",
+        "required": false,
+        "maxLength": 100,
+        "default": "Shop now"
+      }
+    ],
+    "requiresProductImage": true,
+    "requiresAvatar": true,
+    "requiresBrandKit": false,
+    "bestCategories": [
+      "general"
+    ],
+    "bestPlatforms": [
+      "instagram",
+      "facebook"
+    ],
+    "locale": "both",
+    "media": {
+      "coverUrl": null,
+      "previewVideo": null,
+      "referenceImage": null,
+      "showcases": []
+    },
+    "engagement": {
+      "viewsCount": 0,
+      "likesCount": 0,
+      "renderCount": 0,
+      "downloadRatio": 0,
+      "finalScore": 0,
+      "qualityTier": "standard"
+    },
+    "isFeatured": false,
+    "isActive": true,
+    "isNewArrival": false,
+    "planLevel": "free",
+    "seasonalPacks": []
+  }
+]

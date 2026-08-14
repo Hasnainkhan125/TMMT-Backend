@@ -1,0 +1,41 @@
+
+
+services:
+  document-extraction:
+    build: .
+    container_name: qumak-document-extraction
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      - TESSERACT_CMD=/usr/bin/tesseract
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - qumak-network
+
+  # Optional: Add Redis for caching if needed
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: qumak-redis
+  #   ports:
+  #     - "6379:6379"
+  #   restart: unless-stopped
+  #   networks:
+  #     - qumak-network
+
+networks:
+  qumak-network:
+    driver: bridge
+
+volumes:
+  uploads:
+  logs:

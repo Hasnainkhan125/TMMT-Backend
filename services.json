@@ -1,0 +1,532 @@
+{
+    "title": {
+        "en": "Send Money",
+        " لاسرإ لاوملأا ": "ar "
+    },
+    "services": [
+        {
+            "name": "ABC Bank",
+            "id": "101",
+            "required_fields": [
+                {
+                    "label": {
+                        "en": "Amount (AED)",
+                        "( غلبملا ( مھرد ": "ar "
+                    },
+                    "name": "amount",
+                    "placeholder": {
+                        "en": "Enter amount",
+                        " لخدأ غلبملا ": "ar "
+                    },
+                    "type": "number",
+                    "validation": "\\d+",
+                    "max_length": 0,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Amount is required",
+                        " غلبملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Bank Account Number",
+                        " مقر باسحلا يفرصملا ": "ar "
+                    },
+                    "name": "bank_account_number",
+                    "placeholder": {
+                        "en": "Enter account number",
+                        " لخدأ مقر باسحلا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[A-Za-z0-9 ]{1,64}$",
+                    "max_length": 64,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Bank account number is required",
+                        " مقر باسحلا يفرصملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "First name",
+                        " مسلاا لولأا ": "ar "
+                    },
+                    "name": "firstname",
+                    "placeholder": {
+                        "en": "Enter first name",
+                        " لخدأ مسلاا لولأا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 250,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "First name is required",
+                        " مسلاا لولأا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Last name",
+                        " مسا ةلئاعلا ": "ar "
+                    },
+                    "name": "lastname",
+                    "placeholder": {
+                        "en": "Enter last name",
+                        " لخدأ مسا ةلئاعلا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 250,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Last name is required",
+                        " مسا ةلئاعلا بولطم ": "ar "
+                    }
+                }
+            ]
+        },
+        {
+            "name": "XYZ Bank",
+            "id": "102",
+            "required_fields": [
+                {
+                    "label": {
+                        "en": "Amount (AED)",
+                        "( غلبملا ( مھرد ": "ar "
+                    },
+                    "name": "amount",
+                    "placeholder": {
+                        "en": "Enter amount",
+                        " لخدأ غلبملا ": "ar "
+                    },
+                    "type": "number",
+                    "validation": "\\d+",
+                    "max_length": 0,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Amount is required",
+                        " غلبملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Bank Account Number",
+                        " مقر باسحلا يفرصملا ": "ar "
+                    },
+                    "name": "bank_account_number",
+                    "placeholder": {
+                        "en": "Enter account number",
+                        " لخدأ مقر باسحلا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[A-Za-z0-9 ]{1,64}$",
+                    "max_length": 64,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Bank account number is required",
+                        " مقر باسحلا يفرصملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Full Name",
+                        " مسلاا لماكلا ": "ar "
+                    },
+                    "name": "full_name",
+                    "placeholder": {
+                        "en": "Enter full name",
+                        " لخدأ مسلاا لماكلا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 250,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Full name is required",
+                        " مسلاا لماكلا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Province State",
+                        " ةراملإا ": "ar "
+                    },
+                    "name": "province_state",
+                    "placeholder": {
+                        "en": "Select province",
+                        " رتخا ةراملإا ": "ar "
+                    },
+                    "type": "option",
+                    "options": [
+                        {
+                            "label": "Abu Dhabi",
+                            "name": "abu_dhabi"
+                        },
+                        {
+                            "label": "Dubai",
+                            "name": "dubai"
+                        }
+                    ],
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 0,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Please select a province",
+                        " ىجری رایتخا ةراملإا ": "ar "
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Global Bank",
+            "id": "103",
+            "required_fields": [
+                {
+                    "label": {
+                        "en": "Amount (AED)",
+                        "( غلبملا ( مھرد ": "ar "
+                    },
+                    "name": "amount",
+                    "placeholder": {
+                        "en": "Enter amount",
+                        " لخدأ غلبملا ": "ar "
+                    },
+                    "type": "number",
+                    "validation": "\\d+",
+                    "max_length": 0,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Amount is required",
+                        " غلبملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Bank Account Number",
+                        " مقر باسحلا يفرصملا ": "ar "
+                    },
+                    "name": "bank_account_number",
+                    "placeholder": {
+                        "en": "Enter account number",
+                        " لخدأ مقر باسحلا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[A-Za-z0-9 ]{1,64}$",
+                    "max_length": 64,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Bank account number is required",
+                        " مقر باسحلا يفرصملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Date of Birth (YYYY-MM-DD)",
+                        "( خیرات دلایملا ( موی - رھش - ةنس ": "ar "
+                    },
+                    "name": "date_of_birth",
+                    "placeholder": {
+                        "en": "Enter date of birth",
+                        " لخدأ خیرات دلایملا ": "ar "
+                    },
+                    "type": "date",
+                    "validation": "^(?:19|20)\\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",
+                    "max_length": 0,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Date of birth is required",
+                        " خیرات دلایملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Gender",
+                        " سنجلا ": "ar "
+                    },
+                    "name": "gender",
+                    "placeholder": {
+                        "en": "Select gender",
+                        " رتخا سنجلا ": "ar "
+                    },
+                    "type": "option",
+                    "options": [
+                        {
+                            "label": "Male",
+                            "name": "M"
+                        },
+                        {
+                            "label": "Female",
+                            "name": "F"
+                        }
+                    ],
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 0,
+                    "default_value": "",
+                    "validation_error_message": {
+                        "en": "Gender is required",
+                        " سنجلا بولطم ": "ar "
+                    }
+                }
+            ]
+        },
+        {
+            "name": "ABC Wallet",
+            "id": "501",
+            "required_fields": [
+                {
+                    "label": {
+                        "en": "Amount (AED)",
+                        "( غلبملا ( مھرد ": "ar "
+                    },
+                    "name": "amount",
+                    "placeholder": {
+                        "en": "Enter amount",
+                        " لخدأ غلبملا ": "ar "
+                    },
+                    "type": "number",
+                    "validation": "\\d+",
+                    "max_length": 0,
+                    "validation_error_message": {
+                        "en": "Amount is required",
+                        " غلبملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Mobile Number",
+                        " مقر فتاھلا كرحتملا ": "ar "
+                    },
+                    "name": "msisdn",
+                    "placeholder": {
+                        "en": "Enter mobile number",
+                        " لخدأ مقر فتاھلا كرحتملا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^\\+?[1-9][0-9]{6,14}$",
+                    "max_length": 14,
+                    "validation_error_message": {
+                        "en": "Mobile number is required",
+                        " مقر فتاھلا كرحتملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "First name",
+                        " مسلاا لولأا ": "ar "
+                    },
+                    "name": "firstname",
+                    "placeholder": {
+                        "en": "Enter first name",
+                        " لخدأ مسلاا لولأا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 250,
+                    "validation_error_message": {
+                        "en": "First name is required",
+                        " مسلاا لولأا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Last name",
+                        " مسا ةلئاعلا ": "ar "
+                    },
+                    "name": "lastname",
+                    "placeholder": {
+                        "en": "Enter last name",
+                        " لخدأ مسا ةلئاعلا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 250,
+                    "validation_error_message": {
+                        "en": "Last name is required",
+                        " مسا ةلئاعلا بولطم ": "ar "
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Quick Pay",
+            "id": "502",
+            "required_fields": [
+                {
+                    "label": {
+                        "en": "Amount (AED)",
+                        "( غلبملا ( مھرد ": "ar "
+                    },
+                    "name": "amount",
+                    "placeholder": {
+                        "en": "Enter amount",
+                        " لخدأ غلبملا ": "ar "
+                    },
+                    "type": "number",
+                    "validation": "\\d+",
+                    "max_length": 0,
+                    "validation_error_message": {
+                        "en": "Amount is required",
+                        " غلبملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Mobile Number",
+                        " مقر فتاھلا كرحتملا ": "ar "
+                    },
+                    "name": "msisdn",
+                    "placeholder": {
+                        "en": "Enter mobile number",
+                        " لخدأ مقر فتاھلا كرحتملا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^\\+?[1-9][0-9]{6,14}$",
+                    "max_length": 14,
+                    "validation_error_message": {
+                        "en": "Mobile number is required",
+                        " مقر فتاھلا كرحتملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Full Name",
+                        " مسلاا لماكلا ": "ar "
+                    },
+                    "name": "full_name",
+                    "placeholder": {
+                        "en": "Enter full name",
+                        " لخدأ مسلاا لماكلا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 250,
+                    "validation_error_message": {
+                        "en": "Full name is required",
+                        " مسلاا لماكلا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Gender",
+                        " سنجلا ": "ar "
+                    },
+                    "name": "gender",
+                    "placeholder": {
+                        "en": "Select gender",
+                        " رتخا سنجلا ": "ar "
+                    },
+                    "type": "option",
+                    "options": [
+                        {
+                            "label": "Male",
+                            "name": "M"
+                        },
+                        {
+                            "label": "Female",
+                            "name": "F"
+                        }
+                    ],
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 0,
+                    "validation_error_message": {
+                        "en": "Gender is required",
+                        " سنجلا بولطم ": "ar "
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Flash Wallet",
+            "id": "503",
+            "required_fields": [
+                {
+                    "label": {
+                        "en": "Amount (AED)",
+                        "( غلبملا ( مھرد ": "ar "
+                    },
+                    "name": "amount",
+                    "placeholder": {
+                        "en": "Enter amount",
+                        " لخدأ غلبملا ": "ar "
+                    },
+                    "type": "number",
+                    "validation": "\\d+",
+                    "max_length": 0,
+                    "validation_error_message": {
+                        "en": "Amount is required",
+                        " غلبملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Mobile Number",
+                        " مقر فتاھلا كرحتملا ": "ar "
+                    },
+                    "name": "msisdn",
+                    "placeholder": {
+                        "en": "Enter mobile number",
+                        " لخدأ مقر فتاھلا كرحتملا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^\\+?[1-9][0-9]{6,14}$",
+                    "max_length": 14,
+                    "validation_error_message": {
+                        "en": "Mobile number is required",
+                        " مقر فتاھلا كرحتملا بولطم ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Province State",
+                        " ةراملإا ": "ar "
+                    },
+                    "name": "province_state",
+                    "placeholder": {
+                        "en": "Select province",
+                        " رتخا ةراملإا ": "ar "
+                    },
+                    "type": "option",
+                    "options": [
+                        {
+                            "label": "Abu Dhabi",
+                            "name": "abu_dhabi"
+                        },
+                        {
+                            "label": "Dubai",
+                            "name": "dubai"
+                        },
+                        {
+                            "label": "Sharjah",
+                            "name": "sharjah"
+                        }
+                    ],
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 0,
+                    "validation_error_message": {
+                        "en": "Please select a province",
+                        " ىجری رایتخا ةراملإا ": "ar "
+                    }
+                },
+                {
+                    "label": {
+                        "en": "Full Name",
+                        " مسلاا لماكلا ": "ar "
+                    },
+                    "name": "full_name",
+                    "placeholder": {
+                        "en": "Enter full name",
+                        " لخدأ مسلاا لماكلا ": "ar "
+                    },
+                    "type": "text",
+                    "validation": "^[\\s\\S]*",
+                    "max_length": 250,
+                    "validation_error_message": {
+                        "en": "Full name is required",
+                        " مسلاا لماكلا بولطم ": "ar "
+                    }
+                }
+            ]
+        }
+    ]
+}

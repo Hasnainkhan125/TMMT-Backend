@@ -1,0 +1,71 @@
+networks:
+    qumak-network:
+      driver: bridge
+volumes:
+  mongo_data:
+    driver: local
+  uploads:
+    driver: local
+services:
+  mongo:
+    image: mongo:6
+    container_name: qumak-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - qumak-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  qumak-backend:
+    image: qumak-backend:latest   # Use pre-built image
+    container_name: qumak-backend
+    ports:
+      - "5001:5001"
+    env_file:
+      - .env
+    networks:
+      - qumak-network
+    depends_on:
+      - mongo
+    volumes:
+      - ./uploads:/app/uploads
+    environment:
+      NODE_ENV: production
+      PORT: 5001
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      DB_URL: ${DB_URL}
+      DB: ${DB}
+      STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      SENDGRID_TEMPLATE_ID_FORGOT_PASSWORD: ${SENDGRID_TEMPLATE_ID_FORGOT_PASSWORD}
+      SENDGRID_FROM_EMAIL: ${SENDGRID_FROM_EMAIL}
+      FRONTEND_URL: ${FRONTEND_URL}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
+      VITE_SERVER_URL: ${VITE_SERVER_URL}
+      VITE_GATEWAY_URL: ${VITE_GATEWAY_URL}
+      MONGODB_URI: ${MONGODB_URI}
+      SUPABASE_URL: ${SUPABASE_URL}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
+      TWILIO_ACCOUNT_SID: ACasjdasjdkbasj
+      TWILIO_AUTH_TOKEN: ACsadjasdjasdjaskdjas
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
