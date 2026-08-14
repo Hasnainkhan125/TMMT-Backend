@@ -46,7 +46,7 @@ const allowedOrigins = [
   "https://qumak.io",
   "https://www.qumak.io",
   "https://tammat.netlify.app",
-  "https://tmmtae.netlify.app",
+  /\.netlify\.app$/,
 ];
 
 //Setup Express App
@@ -82,19 +82,37 @@ app.use(session({
 const requestContext = require('./middelwares/requestContext');
 app.use(requestContext);
 
-// CORS
+// ============================================
+// 🛠️ FIXED CORS LOGIC (Works for ALL Netlify domains)
+// ============================================
 const corsOptions = {
   origin: function (origin, callback) {
+    // 1. Allow requests with no origin (like mobile apps, Postman, or curl)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.warn(`CORS blocked origin: ${origin}`);
-      callback(new Error("Not allowed by CORS"));
+
+    // 2. Check if it's in your specific allowed list (Exact match)
+    if (allowedOrigins.some(allowed => {
+      // If the allowed item is a string, do an exact match
+      if (typeof allowed === 'string') {
+        return origin === allowed;
+      }
+      // If the allowed item is a regular expression (like /\.netlify\.app$/), test it
+      if (allowed instanceof RegExp) {
+        return allowed.test(origin);
+      }
+      return false;
+    })) {
+      return callback(null, true);
     }
+
+    // 3. If none of the above match, log it and block it
+    console.warn(`CORS blocked origin: ${origin}`);
+    callback(new Error("Not allowed by CORS"));
   },
   credentials: true,
 };
+// ============================================
+
 app.use(cors(corsOptions));
 
 // Static files
