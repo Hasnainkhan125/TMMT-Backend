@@ -10,15 +10,25 @@
  * Connections come from services/redis.js so we share a pool with BullMQ.
  */
 
-const { getRedis, getPubSubClients } = require('../services/redis');
-
 const CHANNEL = 'qumak:job-updates';
 
+// ⚠️ SAFE IMPORT: Try to load Redis, but don't crash if it fails
+let getRedis, getPubSubClients;
+let redisAvailable = false;
+
+try {
+  const redisModule = require('../services/redis');
+  getRedis = redisModule.getRedis;
+  getPubSubClients = redisModule.getPubSubClients;
+  redisAvailable = true;
+  console.log('[socketEmitter] Redis module loaded successfully');
+} catch (err) {
+  console.warn('[socketEmitter] Redis not available (running in degraded mode):', err.message);
+}
+
 async function emitJobUpdate(sessionId, payload) {
-  if (!sessionId) return;
+  if (!sessionId || !redisAvailable) return;
   try {
-    // The "main" client is fine for PUBLISH (only SUBSCRIBE puts a connection
-    // into a state where it can't issue regular commands).
     const pub = getRedis();
     await pub.publish(CHANNEL, JSON.stringify({ sessionId, payload }));
   } catch (err) {
@@ -27,6 +37,11 @@ async function emitJobUpdate(sessionId, payload) {
 }
 
 function setupJobUpdateSubscriber(io) {
+  if (!redisAvailable) {
+    console.warn('[socketEmitter] Redis unavailable - job updates disabled');
+    return null;
+  }
+
   const { subClient } = getPubSubClients();
 
   subClient.subscribe(CHANNEL, (err) => {
