@@ -11,7 +11,7 @@ class WebSocketServer {
           "http://127.0.0.1:5173",
           "http://localhost:3000",
           "http://127.0.0.1:3000",
-             /\.netlify\.app$/, // 👈 This allows ANY Netlify domain automatically!
+          "https://tmmtae.netlify.app" // 👈 ADD YOUR LIVE DOMAIN HERE
         ],
         methods: ["GET", "POST"],
         credentials: true
