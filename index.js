@@ -119,17 +119,26 @@ try {
   console.warn('⚠️ GenerationTemplate model not available:', err.message);
 }
 
-// ✅ UPDATED CORS ORIGINS (Includes all Netlify & Railway)
+// ============================================
+// ✅ UPDATED CORS ORIGINS (Fixed your frontend domains)
+// ============================================
 const allowedOrigins = [
+  // Local development
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:3000",
+  
+  // Production (Custom domains)
   "https://qumak.io",
   "https://www.qumak.io",
-  "https://tammat.netlify.app",
-  "https://www.tammat.netlify.app",
+  "https://tmmet.netlify.app",      // Added based on your screenshot
+  "https://www.tmmet.netlify.app",  // Added based on your screenshot
+  
+  // Backend domains (for internal API calls)
   "https://tmmt-backend-production.up.railway.app",
-  /\.netlify\.app$/,
+  
+  // Regex matchers for subdomains
+  /^https?:\/\/.*\.netlify\.app$/,  // Catches ANY netlify subdomain
   /\.up\.railway\.app$/,
 ];
 
@@ -156,7 +165,6 @@ const sessionSecret = process.env.SESSION_SECRET || process.env.JWT_SECRET;
 
 if (isProduction && !sessionSecret) {
   console.error('[index] FATAL: SESSION_SECRET (or JWT_SECRET) must be set in production.');
-  // Don't exit, just warn and continue
   console.warn('⚠️ Running without session secret - sessions will not persist');
 }
 
@@ -194,11 +202,14 @@ try {
 }
 
 // ============================================
-// 🛠️ FIXED CORS LOGIC
+// 🛠️ FIXED CORS LOGIC (Removed dangerous global allow)
 // ============================================
 const corsOptions = {
   origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
+
+    // Check if origin matches allowed list
     if (allowedOrigins.some(allowed => {
       if (typeof allowed === 'string') return origin === allowed;
       if (allowed instanceof RegExp) return allowed.test(origin);
@@ -206,9 +217,7 @@ const corsOptions = {
     })) {
       return callback(null, true);
     }
-    if (process.env.NODE_ENV === 'development') {
-      return callback(null, true);
-    }
+
     console.warn(`⚠️ CORS blocked origin: ${origin}`);
     callback(new Error("Not allowed by CORS"));
   },
