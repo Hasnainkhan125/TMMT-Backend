@@ -8,9 +8,11 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const cors = require("cors");
-const port = 5001;
 const fs = require("fs");
 const path = require("path");
+
+// ✅ RAILWAY: Use PORT from environment
+const PORT = process.env.PORT || 5001;
 
 require('./services/resolver/enrichment/enrichmentQueue');
 const visaRoutes = require('./controllers/visa/_routes');
@@ -40,20 +42,33 @@ const creditsRoutes = require('./routes/credits');
 const billingRoutes = require('./routes/billing.routes');
 
 const { GenerationTemplate } = require('./model/schema/GenerationTemplate');
+
+// ✅ UPDATED CORS ORIGINS (Includes all Netlify & Railway)
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
+  "http://localhost:3000",
   "https://qumak.io",
   "https://www.qumak.io",
   "https://tammat.netlify.app",
+  "https://www.tammat.netlify.app",
+  "https://tmmt-backend-production.up.railway.app",
   /\.netlify\.app$/,
+  /\.up\.railway\.app$/,
 ];
 
-//Setup Express App
+// Setup Express App
 const app = express();
+
+// ✅ REQUEST LOGGER (Helps debug)
+app.use((req, res, next) => {
+  console.log(`📝 ${req.method} ${req.url}`);
+  next();
+});
 
 // Middleware
 app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
 
@@ -75,7 +90,8 @@ app.use(session({
     maxAge: 10 * 60 * 1000,
     sameSite: isProduction ? 'none' : 'lax'
   },
-  name: 'qumak.sid'
+  name: 'qumak.sid',
+  proxy: true // ✅ Important for Railway
 }));
 
 // Request-id + per-request logger
@@ -83,20 +99,18 @@ const requestContext = require('./middelwares/requestContext');
 app.use(requestContext);
 
 // ============================================
-// 🛠️ FIXED CORS LOGIC (Works for ALL Netlify domains)
+// 🛠️ FIXED CORS LOGIC (Works for ALL Netlify & Railway domains)
 // ============================================
 const corsOptions = {
   origin: function (origin, callback) {
-    // 1. Allow requests with no origin (like mobile apps, Postman, or curl)
+    // Allow requests with no origin (like mobile apps, Postman, or curl)
     if (!origin) return callback(null, true);
 
-    // 2. Check if it's in your specific allowed list (Exact match)
+    // Check if it's in your specific allowed list
     if (allowedOrigins.some(allowed => {
-      // If the allowed item is a string, do an exact match
       if (typeof allowed === 'string') {
         return origin === allowed;
       }
-      // If the allowed item is a regular expression (like /\.netlify\.app$/), test it
       if (allowed instanceof RegExp) {
         return allowed.test(origin);
       }
@@ -105,18 +119,86 @@ const corsOptions = {
       return callback(null, true);
     }
 
-    // 3. If none of the above match, log it and block it
-    console.warn(`CORS blocked origin: ${origin}`);
+    // In development, allow all
+    if (process.env.NODE_ENV === 'development') {
+      return callback(null, true);
+    }
+
+    // Block others
+    console.warn(`⚠️ CORS blocked origin: ${origin}`);
     callback(new Error("Not allowed by CORS"));
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Cookie'],
+  optionsSuccessStatus: 200
 };
-// ============================================
 
 app.use(cors(corsOptions));
 
 // Static files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// ============================================
+// ✅ NEW: SIMPLE HEALTH CHECK (NO DB REQUIRED)
+// ============================================
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    service: "qumak-api",
+    message: "Qumak API is healthy",
+    version: process.env.APP_VERSION || "1.0.0",
+    env: process.env.NODE_ENV || "development",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    memory: {
+      rss: Math.round(process.memoryUsage().rss / 1024 / 1024) + 'MB',
+      heapTotal: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + 'MB',
+      heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB'
+    }
+  });
+});
+
+// ============================================
+// ✅ NEW: API TEST ENDPOINT
+// ============================================
+app.get("/api/test", (req, res) => {
+  res.json({
+    success: true,
+    message: "✅ API test endpoint working!",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+    origin: req.headers.origin || 'No origin'
+  });
+});
+
+app.post("/api/test", (req, res) => {
+  res.json({
+    success: true,
+    message: "✅ POST test received!",
+    received: req.body,
+    timestamp: new Date().toISOString()
+  });
+});
+
+// ============================================
+// ✅ ROOT ENDPOINT
+// ============================================
+app.get("/", async (req, res) => {
+  res.json({
+    service: "qumak-api",
+    message: "Welcome to Qumak — the Arabic-first AI ad agency for GCC SMEs.",
+    description: "Paste your Instagram handle, get Arabic+English ads in 60 seconds, launch to Snap/Meta/TikTok MENA.",
+    docs: "https://qumak.ae/docs",
+    version: process.env.APP_VERSION || "1.0.0",
+    environment: process.env.NODE_ENV || "development",
+    endpoints: {
+      health: "/health",
+      test: "/api/test",
+      api: "/api/v1"
+    }
+  });
+});
 
 // ─── Routes ─────────────────────────────────────────────────────────────
 app.use("/api", route);
@@ -141,31 +223,6 @@ app.use('/api/v1/package-applications', packageRoutes);
 
 const metrics = require('./utils/metrics');
 app.get('/metrics', metrics.handler);
-
-app.get("/health", async (req, res) => {
-  const templates = await GenerationTemplate.find({});
-  const templateUrls = templates.map(template => template.media.previewVideo);
-  console.log(templateUrls);
-  fs.writeFileSync('templatesUrls.json', JSON.stringify(templateUrls, null, 2));
-  res.status(200).json({
-    success: true,
-    service: "qumak-api",
-    message: "Qumak API is healthy",
-    version: process.env.APP_VERSION || "1.0.0",
-    env: process.env.NODE_ENV || "development",
-    timestamp: new Date().toISOString(),
-  });
-});
-
-app.get("/", async (req, res) => {
-  res.json({
-    service: "qumak-api",
-    message: "Welcome to Qumak — the Arabic-first AI ad agency for GCC SMEs.",
-    description: "Paste your Instagram handle, get Arabic+English ads in 60 seconds, launch to Snap/Meta/TikTok MENA.",
-    docs: "https://qumak.ae/docs",
-    version: process.env.APP_VERSION || "1.0.0"
-  });
-});
 
 // ─── Stripe webhooks ────────────────────────────────────────────────────
 app.post(
@@ -288,16 +345,22 @@ if (process.env.NODE_ENV !== 'test') {
 app.use('/api', (req, res) => {
   res.status(404).json({
     status: 'fail',
-    message: 'API endpoint not found'
+    message: 'API endpoint not found',
+    path: req.path,
+    method: req.method
   });
 });
 
 app.use((err, req, res, next) => {
+  console.error('💥 Error:', err.message);
+  console.error('Stack:', err.stack);
+  
   if (req.path.startsWith('/api')) {
     const status = err.statusCode || 500;
     res.status(status).json({
       status: 'fail',
-      message: err.message || 'Internal server error'
+      message: err.message || 'Internal server error',
+      ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
     });
   } else {
     res.status(err.status || 500).send('<h1>Something went wrong</h1>');
@@ -330,14 +393,18 @@ if (require.main === module) {
       handleWebSocket(wsServer.io);
       app.set('wsServer', wsServer);
 
-      server.listen(port, () => {
+      // ✅ Listen on all interfaces (0.0.0.0) for Railway
+      server.listen(PORT, '0.0.0.0', () => {
         const protocol = process.env.HTTPS === "true" || process.env.NODE_ENV === "production" ? "https" : "http";
-        const { address, port } = server.address();
-        const host = address === "::" ? "127.0.0.1" : address;
-        console.log(`🚀 QUMAK Visa Services Platform listening at ${protocol}://${host}:${port}`);
-        console.log(`🔌 WebSocket server available at ws://${host}:${port}`);
-        console.log(`🤖 AI Features: ${require('./services/openaiService').isAvailable() ? 'Enabled' : 'Disabled'}`);
-        console.log(`📋 Services Catalog: ${require('./services/catalogLoader').getStats().totalServices} services available`);
+        const host = process.env.RAILWAY_PUBLIC_DOMAIN || 'localhost';
+        
+        console.log(`🚀 Qumak API running!`);
+        console.log(`🌐 URL: ${protocol}://${host}:${PORT}`);
+        console.log(`❤️  Health: ${protocol}://${host}:${PORT}/health`);
+        console.log(`🧪 Test: ${protocol}://${host}:${PORT}/api/test`);
+        console.log(`🔌 WebSocket: ws://${host}:${PORT}`);
+        console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+        console.log(`📡 CORS Origins: ${allowedOrigins.filter(o => typeof o === 'string').length} origins allowed`);
         
         // Bridge Redis pub/sub → socket.io
         const { setupJobUpdateSubscriber } = require('./utils/socketEmitter');
@@ -395,20 +462,39 @@ if (require.main === module) {
         if (!process.env.FAL_API_KEY && !process.env.FAL_KEY) {
           console.warn('');
           console.warn('⚠️  ───────────────────────────────────────────────────────────');
-          console.warn('⚠️   FAL_API_KEY is NOT set in qumak-backend/.env');
-          console.warn('⚠️   Image / video generation will fail with "Unauthorized".');
-          console.warn('⚠️   Get a key at https://fal.ai/dashboard/keys and add:');
-          console.warn('⚠️       FAL_API_KEY=-************');
-          console.warn('⚠️   Then restart the API.');
+          console.warn('⚠️   FAL_API_KEY is NOT set');
+          console.warn('⚠️   Image / video generation will fail');
+          console.warn('⚠️   Get key at https://fal.ai/dashboard/keys');
           console.warn('⚠️  ───────────────────────────────────────────────────────────');
           console.warn('');
         }
+
+        console.log('✅ Server ready!');
       });
+
+      // ✅ Graceful shutdown for Railway
+      process.on('SIGTERM', () => {
+        console.log('🔴 SIGTERM received, shutting down gracefully...');
+        server.close(() => {
+          console.log('✅ Server closed');
+          process.exit(0);
+        });
+      });
+
+      process.on('SIGINT', () => {
+        console.log('🔴 SIGINT received, shutting down gracefully...');
+        server.close(() => {
+          console.log('✅ Server closed');
+          process.exit(0);
+        });
+      });
+
     })
     .catch((err) => {
       console.error('❌ Failed to connect to MongoDB:', err.message);
-      console.error('Please make sure MongoDB is running:');
-      console.error('  sudo systemctl start mongod');
+      console.error('Stack:', err.stack);
+      console.error('Please check your MongoDB connection string:');
+      console.error(`  DB_URL: ${DATABASE_URL}`);
       process.exit(1);
     });
 }
