@@ -10,6 +10,60 @@ const session = require("express-session");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+const mongoose = require('mongoose');
+
+// ============================================
+// ✅ REDIS OPTIONAL - DISABLE IF NOT CONFIGURED
+// ============================================
+const isRedisConfigured = process.env.REDIS_URL && 
+                         process.env.REDIS_URL !== 'false' && 
+                         process.env.REDIS_URL !== 'undefined' &&
+                         process.env.REDIS_URL !== '';
+
+let redisClient = null;
+let redisStore = null;
+
+if (isRedisConfigured) {
+  try {
+    const Redis = require('ioredis');
+    const RedisStore = require('connect-redis')(session);
+    
+    redisClient = new Redis(process.env.REDIS_URL, {
+      retryStrategy: (times) => {
+        if (times > 3) {
+          console.warn('⚠️ Redis connection failed after 3 retries, disabling Redis');
+          return null; // Stop retrying
+        }
+        return Math.min(times * 100, 3000);
+      }
+    });
+    
+    redisStore = new RedisStore({ 
+      client: redisClient,
+      prefix: 'qumak:session:',
+      ttl: 600 // 10 minutes
+    });
+    
+    redisClient.on('connect', () => {
+      console.log('✅ Redis connected successfully');
+    });
+    
+    redisClient.on('error', (err) => {
+      console.warn('⚠️ Redis connection warning:', err.message);
+      console.log('ℹ️ Falling back to memory session store');
+      redisStore = null;
+    });
+    
+    console.log('📦 Redis session store configured');
+  } catch (err) {
+    console.warn('⚠️ Redis initialization failed:', err.message);
+    console.log('ℹ️ Falling back to memory session store');
+    redisStore = null;
+    redisClient = null;
+  }
+} else {
+  console.log('ℹ️ Redis not configured, using memory session store');
+}
 
 // ✅ RAILWAY: Use PORT from environment
 const PORT = process.env.PORT || 5001;
@@ -94,27 +148,42 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
 app.use(express.json({ limit: "50mb" }));
 
-// Session middleware
+// ============================================
+// ✅ SESSION CONFIGURATION - WITH REDIS OPTIONAL
+// ============================================
 const isProduction = process.env.NODE_ENV === 'production';
 const sessionSecret = process.env.SESSION_SECRET || process.env.JWT_SECRET;
+
 if (isProduction && !sessionSecret) {
   console.error('[index] FATAL: SESSION_SECRET (or JWT_SECRET) must be set in production.');
-  process.exit(1);
+  // Don't exit, just warn and continue
+  console.warn('⚠️ Running without session secret - sessions will not persist');
 }
 
-app.use(session({
+// Build session config
+const sessionConfig = {
   secret: sessionSecret || 'qumak-dev-only-session-secret-do-not-use-in-prod',
   resave: false,
   saveUninitialized: false,
   cookie: {
     secure: isProduction,
     httpOnly: true,
-    maxAge: 10 * 60 * 1000,
+    maxAge: 10 * 60 * 1000, // 10 minutes
     sameSite: isProduction ? 'none' : 'lax'
   },
   name: 'qumak.sid',
   proxy: true // ✅ Important for Railway
-}));
+};
+
+// ✅ Only add store if Redis is configured
+if (redisStore) {
+  sessionConfig.store = redisStore;
+  console.log('📦 Using Redis session store');
+} else {
+  console.log('📦 Using memory session store (not persistent across restarts)');
+}
+
+app.use(session(sessionConfig));
 
 // Request-id + per-request logger
 try {
@@ -166,12 +235,31 @@ app.get("/health", (req, res) => {
     env: process.env.NODE_ENV || "development",
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
+    redis: {
+      configured: isRedisConfigured,
+      connected: redisClient ? redisClient.status === 'ready' : false,
+      storeType: redisStore ? 'redis' : 'memory'
+    },
     memory: {
       rss: Math.round(process.memoryUsage().rss / 1024 / 1024) + 'MB',
       heapTotal: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + 'MB',
       heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB'
     }
   });
+});
+
+// ============================================
+// ✅ REDIS STATUS ENDPOINT
+// ============================================
+app.get('/api/redis-status', (req, res) => {
+  const status = {
+    redisConfigured: isRedisConfigured,
+    redisConnected: redisClient ? redisClient.status === 'ready' : false,
+    usingStore: !!redisStore,
+    sessionStoreType: redisStore ? 'redis' : 'memory',
+    redisUrl: process.env.REDIS_URL ? '******' : 'not set'
+  };
+  res.json(status);
 });
 
 // ============================================
@@ -210,7 +298,8 @@ app.get("/", (req, res) => {
     endpoints: {
       health: "/health",
       test: "/api/test",
-      api: "/api/v1"
+      api: "/api/v1",
+      redisStatus: "/api/redis-status"
     }
   });
 });
@@ -446,7 +535,9 @@ if (require.main === module) {
     console.log(`🌐 URL: ${protocol}://${host}:${PORT}`);
     console.log(`❤️  Health: ${protocol}://${host}:${PORT}/health`);
     console.log(`🧪 Test: ${protocol}://${host}:${PORT}/api/test`);
+    console.log(`🔴 Redis Status: ${protocol}://${host}:${PORT}/api/redis-status`);
     console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`📦 Session Store: ${redisStore ? 'Redis' : 'Memory'}`);
     
     // ✅ THEN try to connect to DB (don't crash if it fails)
     const DATABASE_URL = process.env.DB_URL || "mongodb://127.0.0.1:27017";
@@ -529,6 +620,12 @@ if (require.main === module) {
   // ✅ Graceful shutdown for Railway
   process.on('SIGTERM', () => {
     console.log('🔴 SIGTERM received, shutting down gracefully...');
+    
+    // Close Redis connection
+    if (redisClient) {
+      redisClient.quit();
+    }
+    
     server.close(() => {
       console.log('✅ Server closed');
       process.exit(0);
@@ -537,6 +634,12 @@ if (require.main === module) {
 
   process.on('SIGINT', () => {
     console.log('🔴 SIGINT received, shutting down gracefully...');
+    
+    // Close Redis connection
+    if (redisClient) {
+      redisClient.quit();
+    }
+    
     server.close(() => {
       console.log('✅ Server closed');
       process.exit(0);
